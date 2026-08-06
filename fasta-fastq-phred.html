@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FASTA, FASTQ &amp; the Secret Code in Your DNA Files — Aathma M. Bejoy</title>
+<meta name="description" content="A beginner-friendly guide to FASTA, FASTQ, and Phred+33 ASCII quality encoding.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#ff7a59;--pink:#ff6b9d;--violet:#7c5cff;--teal:#22c6a6;
+    --ink:#2c2436;--muted:#6d6478;--bg:#fff8f4;--card:#fff;--line:#f0e6ea;
+    --shadow-sm:0 6px 20px -10px rgba(70,40,90,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,.brand{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em}
+  a{color:var(--violet);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:740px;margin:0 auto;padding:0 22px}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(255,248,244,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:740px;margin:0 auto;padding:0 22px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink)}
+  .brand .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--coral),var(--violet));display:grid;place-items:center;color:#fff}
+  .back{font-weight:600;font-size:.9rem;color:var(--muted)}
+  .back:hover{color:var(--ink);text-decoration:none}
+
+  .hero{padding:56px 0 30px;position:relative;overflow:hidden}
+  .hero .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:#fff;background:linear-gradient(135deg,var(--coral),var(--violet));padding:5px 12px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:clamp(1.9rem,5vw,2.7rem);font-weight:800;line-height:1.1;margin-bottom:16px}
+  .hero .meta{color:var(--muted);font-size:.92rem;font-weight:500}
+
+  article{padding:20px 0 70px}
+  article p{margin:0 0 20px;font-size:1.05rem}
+  article h2{font-size:1.5rem;font-weight:800;margin:44px 0 14px}
+  article h3{font-size:1.15rem;font-weight:700;margin:30px 0 10px}
+  article strong{color:var(--ink)}
+  article ul,article ol{margin:0 0 20px;padding-left:24px}
+  article li{margin-bottom:8px}
+  blockquote{border-left:4px solid var(--coral);background:#fff3ee;padding:14px 20px;border-radius:0 12px 12px 0;margin:0 0 22px;color:#6b4a4a;font-size:.98rem}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f3ecf8;color:#7c4bc0;padding:2px 7px;border-radius:6px;font-size:.9em}
+  pre{background:#2c2436;color:#f7f2ff;padding:20px;border-radius:14px;overflow-x:auto;margin:0 0 24px;box-shadow:var(--shadow-sm)}
+  pre code{background:none;color:inherit;padding:0;font-size:.9rem;line-height:1.6}
+  table{width:100%;border-collapse:collapse;margin:0 0 26px;font-size:.95rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:linear-gradient(135deg,#fff2ec,#f6efff);font-family:'Plus Jakarta Sans';font-weight:700;font-size:.85rem}
+  tr:last-child td{border-bottom:0}
+  .formula{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;text-align:center;
+    font-family:ui-monospace,monospace;font-size:1.05rem;color:var(--ink);margin:0 0 24px;box-shadow:var(--shadow-sm)}
+  .end{margin-top:40px;padding-top:26px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
+  .end a{font-weight:700}
+  footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="dot">🧬</span>&nbsp;Aathma M. Bejoy</a>
+    <a href="index.html#blog" class="back">← All posts</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">Bioinformatics basics</span>
+    <h1>FASTA, FASTQ &amp; the Secret Code in Your DNA Files</h1>
+    <p class="meta">By Aathma Merin Bejoy · August 6, 2026 · 6 min read</p>
+  </div>
+</header>
+
+<article>
+  <div class="wrap">
+    <p>If you're stepping into bioinformatics for the first time, two file types will show up almost immediately: <strong>FASTA</strong> and <strong>FASTQ</strong>. They look cryptic at first — walls of A's, C's, G's, and T's, sprinkled with punctuation that seems random. But once you understand what each line is doing, they're genuinely simple. Let's walk through them together, no prior knowledge assumed.</p>
+
+    <h2>FASTA: the plain and simple one</h2>
+    <p>Think of <strong>FASTA</strong> as the "just the text, please" format. It stores a biological sequence — DNA, RNA, or protein — and almost nothing else.</p>
+    <p>A FASTA record is only two parts:</p>
+    <pre><code>&gt;my_first_sequence some optional description
+GATTACAGATTACAGATTACAGATTACA</code></pre>
+    <p>The first line always starts with a <code>&gt;</code> (greater-than sign). That's the <strong>header</strong> — a name for the sequence, plus any description you feel like adding. Every line after it, until the next <code>&gt;</code>, is the sequence itself.</p>
+    <p>That's the whole format. A FASTA file can hold one sequence or a million of them, each introduced by its own <code>&gt;</code> header. It's perfect when all you care about is <em>what</em> the sequence is — for example, a reference genome you want to compare your data against.</p>
+    <p>But FASTA has a blind spot. When a DNA sequencing machine reads a real biological sample, it isn't equally sure about every letter. Some bases it reads crisply and confidently; others are a blurry guess. FASTA has no way to record that confidence. Every letter looks equally trustworthy, even when it isn't.</p>
+    <p>That's exactly the gap FASTQ fills.</p>
+
+    <h2>FASTQ: FASTA's smarter cousin</h2>
+    <p><strong>FASTQ</strong> stores the same sequence letters, but adds a <strong>quality score for every single base</strong> — a note on how confident the machine was about each letter it read. This is the format that comes straight out of modern sequencers like Illumina, and it's where most real analysis begins.</p>
+    <p>The magic number to remember: a FASTQ record is always <strong>exactly four lines</strong>.</p>
+    <pre><code>@read_001 instrument info here
+GATTACAGATTACAGATTACAGATTACA
++
+IIIIIIIIIIIIIII?5+!!!!!!!!!!</code></pre>
+    <p>Here's what each line does:</p>
+    <ol>
+      <li><strong>Line 1 — the ID.</strong> Starts with <code>@</code>. It's the name of the read, usually with machine details tacked on. (Note: <code>@</code> here, <code>&gt;</code> in FASTA — an easy way to tell the two files apart at a glance.)</li>
+      <li><strong>Line 2 — the sequence.</strong> The actual bases: A, C, G, T, and sometimes <strong>N</strong> (which means "I couldn't tell").</li>
+      <li><strong>Line 3 — the separator.</strong> Just a <code>+</code> sign, marking the boundary between the sequence and the quality scores.</li>
+      <li><strong>Line 4 — the quality string.</strong> One character per base, describing how confident the machine was about each letter above it.</li>
+    </ol>
+    <p>The single most important rule of FASTQ: <strong>line 2 and line 4 must be the same length.</strong> Every base gets exactly one quality character sitting beneath it, like a caption under each letter.</p>
+
+    <h2>The idea behind quality scores</h2>
+    <p>So what does that weird string on line 4 actually mean? Each character is a compact way of writing a <strong>Phred quality score</strong> — a number that tells you how likely the base call is to be <em>wrong</em>.</p>
+    <p>The rule is simple once you see it: <strong>higher score = more confident.</strong> Scientists express it with this formula:</p>
+    <div class="formula">Q = &minus;10 × log₁₀(P<sub>error</sub>)</div>
+    <p>Don't let the log scare you. All it's really saying is: <em>every time the error rate drops by 10×, the quality score goes up by 10.</em> Here's the whole idea in a small table:</p>
+    <table>
+      <thead><tr><th>Quality (Q)</th><th>Chance the base is wrong</th><th>Accuracy</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td>1 in 10</td><td>90%</td></tr>
+        <tr><td>20</td><td>1 in 100</td><td>99%</td></tr>
+        <tr><td>30</td><td>1 in 1,000</td><td>99.9%</td></tr>
+        <tr><td>40</td><td>1 in 10,000</td><td>99.99%</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Q30</strong> is the number you'll hear thrown around as "good quality." It means there's only a 1-in-1,000 chance that base is a mistake.</p>
+
+    <h2>Phred+33: turning a number into a character</h2>
+    <p>Now for the part that confuses almost every beginner. If quality scores are numbers like 30 and 40, why does line 4 look like <code>IIIII?5+!</code> instead of digits?</p>
+    <p>Because of that one strict rule: <strong>one character per base.</strong> If we wrote "30" that's two characters, and the alignment with the sequence would fall apart instantly. So we need a way to squeeze <em>any</em> score into a <em>single</em> character.</p>
+    <p>The trick is to borrow from <strong>ASCII</strong>, the standard table that gives every keyboard character a number. In ASCII, <code>!</code> is 33, <code>+</code> is 43, <code>5</code> is 53, <code>?</code> is 63, and <code>I</code> is 73. The recipe is beautifully simple:</p>
+    <div class="formula">character's ASCII number = quality score + 33</div>
+    <p>That "+ 33" is why the format is called <strong>Phred+33</strong>. Why add 33? Because the ASCII numbers below 33 are invisible control characters (spaces, tabs, line breaks) that would corrupt a text file. Adding 33 shifts every score up into the safe, printable zone, starting at <code>!</code>.</p>
+    <p>Let's decode a real example. Take this quality string:</p>
+    <pre><code>I ? 5 + !</code></pre>
+    <p>Subtract 33 from each character's ASCII value:</p>
+    <ul>
+      <li><code>I</code> → 73 − 33 = <strong>Q40</strong> (superb)</li>
+      <li><code>?</code> → 63 − 33 = <strong>Q30</strong> (great)</li>
+      <li><code>5</code> → 53 − 33 = <strong>Q20</strong> (okay)</li>
+      <li><code>+</code> → 43 − 33 = <strong>Q10</strong> (shaky)</li>
+      <li><code>!</code> → 33 − 33 = <strong>Q0</strong> (basically a coin flip)</li>
+    </ul>
+    <p>Watch out for one sneaky trap: that <code>5</code> means <strong>Q20</strong>, <em>not</em> the number five! It's an ASCII code that happens to look like a digit. This exact mix-up trips up nearly everyone at first, so now you're ahead of the game.</p>
+    <p>Notice the pattern in the decoded scores, too — they start high and fade to garbage. That's completely normal: sequencing reads tend to get less reliable toward their tail end, which is why quality often drops off near the finish.</p>
+
+    <h2>Putting it all together</h2>
+    <p>Here's the whole story in one breath. <strong>FASTA</strong> stores sequences and nothing else — clean and minimal. <strong>FASTQ</strong> adds a quality score for every base, packed into four tidy lines. And <strong>Phred+33</strong> is the clever shorthand that shrinks each score into a single printable character by adding 33 and reading it off the ASCII table.</p>
+    <p>Master these three ideas and you've unlocked the front door of bioinformatics — because nearly every sequencing analysis, from quality checks to genome assembly, starts right here.</p>
+    <p><em>Happy sequencing!</em> 🧬</p>
+
+    <div class="end">
+      <p>← <a href="index.html#blog">Back to all posts</a> &nbsp;·&nbsp; <a href="index.html#roadmap">See the full roadmap</a></p>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <div class="wrap">© 2026 Aathma Merin Bejoy · Learning bioinformatics in public 🧬</div>
+</footer>
+</body>
+</html>
