@@ -41,7 +41,12 @@ p { margin: 0 0 1rem; }
 
 /* opening section */
 .hero { background: var(--tint); }
-.hero .wrap { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 29rem); gap: 3.5rem; align-items: center; padding-top: 3.5rem; padding-bottom: 3.5rem; }
+svg.cover .cov { fill: var(--emb); opacity: .22; }
+svg.cover .ref { stroke: var(--soft); stroke-width: 1; opacity: .55; }
+svg.cover .rf { fill: var(--emb); opacity: .85; }
+svg.cover .rr { fill: var(--hvg); opacity: .85; }
+svg.cover .mm { fill: #eb6834; }
 h1 { font-size: clamp(2.6rem, 6.2vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; margin: 0 0 1rem; color: var(--head); font-weight: 700; }
 .role { font-size: 1.2rem; color: var(--soft); margin-bottom: 1.5rem; }
 .lead { font-size: 1.3rem; line-height: 1.5; max-width: 38rem; margin-bottom: 0; }
@@ -101,20 +106,21 @@ ol.pubs li { margin-bottom: 1rem; }
 .dogs { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .6rem; margin-top: 1.1rem; }
 .dogs .big { grid-row: span 2; aspect-ratio: auto; height: 100%; }
 .trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1.1rem; }
-.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.75rem; }
+.facts { margin-top: 2.75rem; }
 .facts div { background: var(--paper); border-radius: 12px; padding: 1.1rem 1.25rem; }
 .facts h3 { margin: 0 0 .3rem; font-size: 1.05rem; }
 .facts p { margin: 0; }
 
 footer { background: var(--foot); color: var(--footink); padding: 3rem 0; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem 2rem; }
+footer small { flex-basis: auto !important; order: -1; }
 footer strong { font-size: 1.2rem; }
 footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; margin: 0; padding: 0; }
 footer a { color: var(--footink); }
 footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size: .9rem; }
 
 @media (max-width: 56rem) {
-  .hero .wrap { padding-top: 2.75rem; padding-bottom: 3rem; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 2rem; padding-top: 2.75rem; padding-bottom: 2.5rem; }
   .band { padding: 3rem 0; }
   .sec { grid-template-columns: 1fr; gap: 1.25rem; }
   .sec > h2 { position: static; }
@@ -150,8 +156,111 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
 <main>
 <section class="hero" id="top">
   <div class="wrap">
-    <h1>Aathma Merin Bejoy</h1>
-    <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I am now looking for a PhD position in machine learning for genomics.</p>
+    <div>
+      <h1>Aathma Merin Bejoy</h1>
+      <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I am now looking for a PhD position in machine learning for genomics.</p>
+    </div>
+    <svg class="cover" viewBox="0 0 560 372" role="img" aria-label="Illustration of sequencing reads aligned to a genome, with the coverage above them">
+<path class="cov" d="M8,88 L8,83.6 L12,83.6 L12,83.6 L16,83.6 L16,83.6 L20,83.6 L20,83.6 L24,83.6 L24,83.6 L28,83.6 L28,74.9 L32,74.9 L32,74.9 L36,74.9 L36,74.9 L40,74.9 L40,70.6 L44,70.6 L44,70.6 L48,70.6 L48,66.2 L52,66.2 L52,66.2 L56,66.2 L56,66.2 L60,66.2 L60,66.2 L64,66.2 L64,66.2 L68,66.2 L68,66.2 L72,66.2 L72,61.9 L76,61.9 L76,61.9 L80,61.9 L80,61.9 L84,61.9 L84,57.5 L88,57.5 L88,57.5 L92,57.5 L92,57.5 L96,57.5 L96,66.2 L100,66.2 L100,66.2 L104,66.2 L104,61.9 L108,61.9 L108,61.9 L112,61.9 L112,61.9 L116,61.9 L116,70.6 L120,70.6 L120,70.6 L124,70.6 L124,70.6 L128,70.6 L128,70.6 L132,70.6 L132,74.9 L136,74.9 L136,70.6 L140,70.6 L140,66.2 L144,66.2 L144,66.2 L148,66.2 L148,66.2 L152,66.2 L152,61.9 L156,61.9 L156,57.5 L160,57.5 L160,57.5 L164,57.5 L164,61.9 L168,61.9 L168,53.2 L172,53.2 L172,53.2 L176,53.2 L176,48.8 L180,48.8 L180,48.8 L184,48.8 L184,48.8 L188,48.8 L188,48.8 L192,48.8 L192,44.5 L196,44.5 L196,40.1 L200,40.1 L200,40.1 L204,40.1 L204,31.4 L208,31.4 L208,27.1 L212,27.1 L212,31.4 L216,31.4 L216,27.1 L220,27.1 L220,27.1 L224,27.1 L224,31.4 L228,31.4 L228,22.7 L232,22.7 L232,14.0 L236,14.0 L236,14.0 L240,14.0 L240,18.4 L244,18.4 L244,27.1 L248,27.1 L248,27.1 L252,27.1 L252,27.1 L256,27.1 L256,22.7 L260,22.7 L260,18.4 L264,18.4 L264,18.4 L268,18.4 L268,14.0 L272,14.0 L272,14.0 L276,14.0 L276,18.4 L280,18.4 L280,18.4 L284,18.4 L284,27.1 L288,27.1 L288,27.1 L292,27.1 L292,22.7 L296,22.7 L296,31.4 L300,31.4 L300,27.1 L304,27.1 L304,31.4 L308,31.4 L308,40.1 L312,40.1 L312,35.8 L316,35.8 L316,35.8 L320,35.8 L320,35.8 L324,35.8 L324,35.8 L328,35.8 L328,40.1 L332,40.1 L332,31.4 L336,31.4 L336,27.1 L340,27.1 L340,27.1 L344,27.1 L344,27.1 L348,27.1 L348,27.1 L352,27.1 L352,27.1 L356,27.1 L356,27.1 L360,27.1 L360,31.4 L364,31.4 L364,31.4 L368,31.4 L368,27.1 L372,27.1 L372,22.7 L376,22.7 L376,18.4 L380,18.4 L380,14.0 L384,14.0 L384,18.4 L388,18.4 L388,18.4 L392,18.4 L392,27.1 L396,27.1 L396,31.4 L400,31.4 L400,31.4 L404,31.4 L404,35.8 L408,35.8 L408,27.1 L412,27.1 L412,27.1 L416,27.1 L416,31.4 L420,31.4 L420,35.8 L424,35.8 L424,31.4 L428,31.4 L428,35.8 L432,35.8 L432,35.8 L436,35.8 L436,44.5 L440,44.5 L440,40.1 L444,40.1 L444,44.5 L448,44.5 L448,44.5 L452,44.5 L452,44.5 L456,44.5 L456,44.5 L460,44.5 L460,44.5 L464,44.5 L464,44.5 L468,44.5 L468,44.5 L472,44.5 L472,53.2 L476,53.2 L476,48.8 L480,48.8 L480,44.5 L484,44.5 L484,44.5 L488,44.5 L488,44.5 L492,44.5 L492,48.8 L496,48.8 L496,48.8 L500,48.8 L500,57.5 L504,57.5 L504,57.5 L508,57.5 L508,57.5 L512,57.5 L512,57.5 L516,57.5 L516,57.5 L520,57.5 L520,61.9 L524,61.9 L524,61.9 L528,61.9 L528,61.9 L532,61.9 L532,61.9 L536,61.9 L536,61.9 L540,61.9 L540,61.9 L544,61.9 L544,66.2 L548,66.2 L548,70.6 L552,70.6 L552,88 Z"/>
+<line class="ref" x1="8" x2="552" y1="100" y2="100"/>
+<line class="ref" x1="8" x2="8" y1="96" y2="104"/>
+<line class="ref" x1="42" x2="42" y1="96" y2="104"/>
+<line class="ref" x1="76" x2="76" y1="96" y2="104"/>
+<line class="ref" x1="110" x2="110" y1="96" y2="104"/>
+<line class="ref" x1="144" x2="144" y1="96" y2="104"/>
+<line class="ref" x1="178" x2="178" y1="96" y2="104"/>
+<line class="ref" x1="212" x2="212" y1="96" y2="104"/>
+<line class="ref" x1="246" x2="246" y1="96" y2="104"/>
+<line class="ref" x1="280" x2="280" y1="96" y2="104"/>
+<line class="ref" x1="314" x2="314" y1="96" y2="104"/>
+<line class="ref" x1="348" x2="348" y1="96" y2="104"/>
+<line class="ref" x1="382" x2="382" y1="96" y2="104"/>
+<line class="ref" x1="416" x2="416" y1="96" y2="104"/>
+<line class="ref" x1="450" x2="450" y1="96" y2="104"/>
+<line class="ref" x1="484" x2="484" y1="96" y2="104"/>
+<line class="ref" x1="518" x2="518" y1="96" y2="104"/>
+<line class="ref" x1="552" x2="552" y1="96" y2="104"/>
+<rect class="rf" x="8" y="118.0" width="87" height="10" rx="3"/>
+<rect class="rf" x="30" y="132.5" width="66" height="10" rx="3"/>
+<rect class="rf" x="30" y="147.0" width="84" height="10" rx="3"/>
+<rect class="mm" x="59" y="147.0" width="3" height="10"/>
+<rect class="rf" x="41" y="161.5" width="73" height="10" rx="3"/>
+<rect class="rf" x="51" y="176.0" width="81" height="10" rx="3"/>
+<rect class="rf" x="75" y="190.5" width="86" height="10" rx="3"/>
+<rect class="rr" x="87" y="205.0" width="62" height="10" rx="3"/>
+<rect class="rf" x="104" y="118.0" width="59" height="10" rx="3"/>
+<rect class="rr" x="138" y="132.5" width="63" height="10" rx="3"/>
+<rect class="rf" x="143" y="147.0" width="69" height="10" rx="3"/>
+<rect class="rr" x="151" y="161.5" width="72" height="10" rx="3"/>
+<rect class="rr" x="154" y="176.0" width="73" height="10" rx="3"/>
+<rect class="rr" x="158" y="205.0" width="92" height="10" rx="3"/>
+<rect class="rr" x="162" y="219.5" width="80" height="10" rx="3"/>
+<rect class="rf" x="168" y="190.5" width="70" height="10" rx="3"/>
+<rect class="mm" x="218" y="190.5" width="3" height="10"/>
+<rect class="rr" x="168" y="234.0" width="73" height="10" rx="3"/>
+<rect class="rr" x="176" y="118.0" width="67" height="10" rx="3"/>
+<rect class="rr" x="193" y="248.5" width="90" height="10" rx="3"/>
+<rect class="rf" x="198" y="263.0" width="75" height="10" rx="3"/>
+<rect class="mm" x="215" y="263.0" width="3" height="10"/>
+<rect class="rr" x="202" y="277.5" width="88" height="10" rx="3"/>
+<rect class="rr" x="206" y="292.0" width="77" height="10" rx="3"/>
+<rect class="rr" x="207" y="306.5" width="88" height="10" rx="3"/>
+<rect class="rr" x="211" y="132.5" width="80" height="10" rx="3"/>
+<rect class="mm" x="232" y="132.5" width="3" height="10"/>
+<rect class="rf" x="217" y="321.0" width="88" height="10" rx="3"/>
+<rect class="rf" x="227" y="147.0" width="78" height="10" rx="3"/>
+<rect class="rr" x="228" y="335.5" width="58" height="10" rx="3"/>
+<rect class="rr" x="229" y="350.0" width="70" height="10" rx="3"/>
+<rect class="rr" x="232" y="161.5" width="72" height="10" rx="3"/>
+<rect class="rf" x="234" y="176.0" width="62" height="10" rx="3"/>
+<rect class="rf" x="247" y="190.5" width="89" height="10" rx="3"/>
+<rect class="rf" x="250" y="118.0" width="90" height="10" rx="3"/>
+<rect class="mm" x="321.5" y="118.0" width="3" height="10"/>
+<rect class="rf" x="257" y="205.0" width="87" height="10" rx="3"/>
+<rect class="mm" x="321.5" y="205.0" width="3" height="10"/>
+<rect class="rf" x="260" y="219.5" width="66" height="10" rx="3"/>
+<rect class="mm" x="278" y="219.5" width="3" height="10"/>
+<rect class="rr" x="268" y="234.0" width="88" height="10" rx="3"/>
+<rect class="rr" x="286" y="263.0" width="84" height="10" rx="3"/>
+<rect class="rf" x="291" y="248.5" width="68" height="10" rx="3"/>
+<rect class="mm" x="321.5" y="248.5" width="3" height="10"/>
+<rect class="rf" x="292" y="292.0" width="70" height="10" rx="3"/>
+<rect class="rr" x="294" y="335.5" width="65" height="10" rx="3"/>
+<rect class="rf" x="300" y="132.5" width="89" height="10" rx="3"/>
+<rect class="mm" x="321.5" y="132.5" width="3" height="10"/>
+<rect class="rr" x="302" y="277.5" width="70" height="10" rx="3"/>
+<rect class="mm" x="321.5" y="277.5" width="3" height="10"/>
+<rect class="rf" x="312" y="147.0" width="71" height="10" rx="3"/>
+<rect class="rr" x="332" y="161.5" width="59" height="10" rx="3"/>
+<rect class="rf" x="333" y="176.0" width="61" height="10" rx="3"/>
+<rect class="rr" x="338" y="219.5" width="65" height="10" rx="3"/>
+<rect class="rr" x="338" y="306.5" width="82" height="10" rx="3"/>
+<rect class="rf" x="340" y="321.0" width="70" height="10" rx="3"/>
+<rect class="rf" x="347" y="118.0" width="69" height="10" rx="3"/>
+<rect class="rf" x="357" y="190.5" width="87" height="10" rx="3"/>
+<rect class="rf" x="360" y="205.0" width="58" height="10" rx="3"/>
+<rect class="rf" x="367" y="234.0" width="59" height="10" rx="3"/>
+<rect class="rr" x="368" y="248.5" width="68" height="10" rx="3"/>
+<rect class="rr" x="372" y="292.0" width="88" height="10" rx="3"/>
+<rect class="rr" x="373" y="335.5" width="62" height="10" rx="3"/>
+<rect class="rf" x="373" y="350.0" width="73" height="10" rx="3"/>
+<rect class="rf" x="379" y="263.0" width="92" height="10" rx="3"/>
+<rect class="rr" x="382" y="277.5" width="86" height="10" rx="3"/>
+<rect class="rr" x="409" y="132.5" width="72" height="10" rx="3"/>
+<rect class="rr" x="410" y="147.0" width="61" height="10" rx="3"/>
+<rect class="rf" x="411" y="161.5" width="86" height="10" rx="3"/>
+<rect class="rf" x="421" y="176.0" width="71" height="10" rx="3"/>
+<rect class="rr" x="424" y="118.0" width="75" height="10" rx="3"/>
+<rect class="mm" x="462" y="118.0" width="3" height="10"/>
+<rect class="rf" x="440" y="205.0" width="80" height="10" rx="3"/>
+<rect class="rf" x="450" y="219.5" width="91" height="10" rx="3"/>
+<rect class="mm" x="504" y="219.5" width="3" height="10"/>
+<rect class="rf" x="461" y="190.5" width="86" height="10" rx="3"/>
+<rect class="rf" x="469" y="234.0" width="83" height="10" rx="3"/>
+<rect class="rr" x="478" y="147.0" width="74" height="10" rx="3"/>
+<rect class="rr" x="480" y="248.5" width="72" height="10" rx="3"/>
+<rect class="rf" x="482" y="263.0" width="69" height="10" rx="3"/>
+</svg>
   </div>
 </section>
 
@@ -340,7 +449,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
   <div class="wrap sec">
     <h2>Outside the lab</h2>
     <div>
-      <p class="big">Getting here took a few hurdles and several part-time jobs. Through all of it I have kept enjoying life: being out in nature, around dogs, and on the way to somewhere new.</p>
+      <p class="big">Getting here took a few hurdles and several part-time jobs, at McDonald's, Subway, Kamps and Amazon. Through all of it I have kept enjoying life: being out in nature, around dogs, and on the way to somewhere new.</p>
 
       <h3>Dogs</h3>
       <p>I love dogs. The Labrador is my own. The others are dogs I looked after while I was studying in Germany.</p>
@@ -363,7 +472,6 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
     </div>
 
       <div class="facts">
-        <div><h3>Jobs along the way</h3><p>Alongside my studies I worked part-time at McDonald's, Subway, Kamps and Amazon.</p></div>
         <div><h3>Next goal</h3><p>To run a marathon.</p></div>
       </div>
     </div>
@@ -373,7 +481,6 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
 
 <footer>
   <div class="wrap">
-    <strong>Aathma Merin Bejoy</strong>
     <ul>
       <li><a href="mailto:aathmamerinbejoy@gmail.com">Email</a></li>
       <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
