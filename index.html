@@ -38,6 +38,9 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-ra
 .when { color: var(--soft); font-size: .95rem; margin: 0 0 .4rem; }
 ol.pubs { padding-left: 1.25rem; margin: 0; }
 ol.pubs li { margin-bottom: .9rem; }
+dl.path { display: grid; grid-template-columns: 7rem 1fr; gap: .9rem 1rem; margin: 0; }
+dl.path dt { color: var(--soft); font-variant-numeric: tabular-nums; }
+dl.path dd { margin: 0; }
 figure { margin: 1.25rem 0 1.5rem; }
 .plot { overflow-x: auto; }
 svg { display: block; width: 100%; height: auto; font-family: inherit; }
@@ -53,6 +56,8 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
   .page { grid-template-columns: 1fr; gap: 2rem; padding-top: 2.25rem; }
   .who { position: static; }
   .who ul { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+  dl.path { grid-template-columns: 1fr; gap: .15rem; }
+  dl.path dd { margin-bottom: .9rem; }
 }
 </style>
 </head>
@@ -141,10 +146,23 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <li><b>Bejoy AM</b>, et al. An insight on advances and applications of 3D bioprinting: a review. <i>Bioprinting</i>, 2021.</li>
     </ol>
 
-    <h2>Education</h2>
-    <p>M.Sc. Molecular Biotechnology, Anhalt University of Applied Sciences, 2025<br>
-       M.Sc. Bioinformatics, Manipal School of Life Sciences, 2021<br>
-       B.Sc. Chemistry, Botany and Zoology, Mahatma Gandhi Memorial College, 2019</p>
+    <h2>How I got here</h2>
+    <dl class="path">
+      <dt>2016 to 2019</dt>
+      <dd>B.Sc. in chemistry, botany and zoology at Mahatma Gandhi Memorial College. Biology only, no code yet.</dd>
+      <dt>2019 to 2021</dt>
+      <dd>M.Sc. Bioinformatics at Manipal School of Life Sciences. This is where I learned to program and first worked with sequencing data: for my thesis I searched public metagenomic datasets and found 106 new plant virus strains.</dd>
+      <dt>2022 to 2025</dt>
+      <dd>M.Sc. Molecular Biotechnology at Anhalt University of Applied Sciences. I went back to the bench to understand how the data I analyse is made: PCR, cell culture, CRISPR.</dd>
+      <dt>2024 to 2025</dt>
+      <dd>Max Planck Institute of Molecular Physiology, Dortmund. My first time inside a research project from experiment to paper, which led to two research papers.</dd>
+      <dt>2025</dt>
+      <dd>Joined the Max Delbrück Center. Here I learned to write analysis that other people depend on: pipelines that run on a cluster and give the same answer twice.</dd>
+      <dt>2026</dt>
+      <dd>First machine learning project, the BulkRNABert evaluation above. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
+      <dt>Next</dt>
+      <dd>Training models myself in PyTorch, and learning spatial transcriptomics analysis.</dd>
+    </dl>
 
     <footer>Berlin, 2026</footer>
   </main>
