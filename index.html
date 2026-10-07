@@ -7,67 +7,76 @@
 <meta name="description" content="Bioinformatician at the Max Delbrück Center, Berlin. Sequencing pipelines, transposon integration mapping and machine learning for genomics.">
 <style>
 :root {
-  --paper: #f8fafc; --ink: #17212b; --soft: #586673; --rule: #d9e2ea; --link: #1c5cab;
+  --paper: #f8fafc; --white: #ffffff; --ink: #17212b; --soft: #586673; --rule: #d9e2ea; --link: #1c5cab;
   --emb: #2a78d6; --hvg: #1baf7a; --conn: #cfd6dc;
-  --head: #173f6b; --year: #0d7355; --tint: #edf3f9; --tint2: #e9f5f0;
+  --head: #173f6b; --year: #0d7355; --tint: #edf3f9; --tint2: #e9f5f0; --foot: #173f6b; --footink: #eaf1f8;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --paper: #12171c; --ink: #e9eef2; --soft: #a3afba; --rule: #2b343d; --link: #8ab8f0;
+  :root { --paper: #12171c; --white: #161c22; --ink: #e9eef2; --soft: #a3afba; --rule: #2b343d; --link: #8ab8f0;
           --emb: #5b9cec; --hvg: #2fc48f; --conn: #3a444e;
-          --head: #a9cdf5; --year: #5fd0a8; --tint: #1a232d; --tint2: #17251f; }
+          --head: #a9cdf5; --year: #5fd0a8; --tint: #1a232d; --tint2: #17251f; --foot: #0d1217; --footink: #c9d5df; }
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0; background: var(--paper); color: var(--ink);
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4.5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--paper); color: var(--ink);
   font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
-  font-size: 1.0625rem; line-height: 1.6;
-}
-.page { max-width: 62rem; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; display: grid; grid-template-columns: 15rem 1fr; gap: 4rem; }
-.who { position: sticky; top: 3.5rem; align-self: start; }
-h1 { font-size: 1.9rem; line-height: 1.15; margin: 0 0 .75rem; font-weight: 700; letter-spacing: -.01em; color: var(--head); }
-.who p { margin: 0 0 1.25rem; color: var(--soft); }
-.who ul { list-style: none; margin: 0; padding: 0; }
-.views { display: flex; flex-direction: column; gap: .4rem; margin: 0 0 1.4rem; }
-.views a { display: block; padding: .45rem .8rem; border-radius: 8px; border: 1px solid var(--rule); color: var(--ink); text-decoration: none; }
-.views a:hover { border-color: var(--emb); }
-.views a[aria-current="page"] { background: var(--tint); border-color: var(--tint); color: var(--head); font-weight: 700; }
-.view > h2:first-child { margin-top: 0; }
-.hello { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; align-items: center; }
-.ph { position: relative; margin: 0; overflow: hidden; border-radius: 8px; aspect-ratio: 3 / 4; background: var(--tint); }
-.ph img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
-.ph .guard { position: absolute; inset: 0; -webkit-touch-callout: none; }
-.dogs { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .5rem; margin-top: 1.1rem; }
-.dogs .big { grid-row: span 2; aspect-ratio: auto; height: 100%; }
-.trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin-top: 1.1rem; }
-.who li { margin: .3rem 0; }
-main { max-width: 38rem; min-width: 0; }
-h2 { font-size: 1.2rem; margin: 3rem 0 .9rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-weight: 700; color: var(--head); }
-h3 { font-size: 1.0625rem; margin: 1.5rem 0 .25rem; font-weight: 700; }
-h4 { font-size: .95rem; margin: 1.1rem 0 .15rem; font-weight: 700; color: var(--soft); }
-.hint { color: var(--soft); font-size: .95rem; margin-top: -.4rem; }
-details { margin: .5rem 0; border-radius: 8px; background: var(--tint); }
-details[open] { background: var(--tint2); padding-bottom: 1.1rem; }
-summary { cursor: pointer; position: relative; list-style: none; padding: .8rem 1rem .8rem 2.3rem; border-radius: 8px; }
-summary::-webkit-details-marker { display: none; }
-summary::before { content: ""; position: absolute; left: 1rem; top: 1.2rem; border: 5px solid transparent; border-left: 8px solid var(--emb); transform-origin: 3px 50%; }
-details[open] > summary::before { border-left-color: var(--hvg); transform: rotate(90deg); }
-summary:hover .pt { color: var(--link); }
-summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
-.pt { font-weight: 700; display: block; }
-.pm { color: var(--soft); font-size: .95rem; display: block; }
-details > :not(summary) { margin-left: 2.3rem; margin-right: 1rem; }
-ol.pubs { padding-left: 1.25rem; margin: 0; }
-ol.pubs li { margin-bottom: .9rem; }
-p { margin: 0 0 1rem; }
-.lead { font-size: 1.2rem; line-height: 1.5; }
+  font-size: 1.0625rem; line-height: 1.6; }
 a { color: var(--link); text-underline-offset: .15em; }
 a:hover { text-decoration-thickness: 2px; }
-a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
-.when { color: var(--soft); font-size: .95rem; margin: 0 0 .4rem; }
-dl.path { display: grid; grid-template-columns: 7rem 1fr; gap: .9rem 1rem; margin: 0; }
-dl.path dt { color: var(--year); font-variant-numeric: tabular-nums; font-weight: 600; }
-dl.path dd { margin: 0; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 4px; }
+p { margin: 0 0 1rem; }
+.wrap { max-width: 66rem; margin: 0 auto; padding: 0 1.5rem; }
+
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: .25rem 1.5rem; flex-wrap: wrap; min-height: 3.5rem; }
+.brand { font-weight: 700; color: var(--head); text-decoration: none; padding: .6rem 0; }
+.bar nav { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; margin: 0 -.6rem; }
+.bar nav::-webkit-scrollbar { display: none; }
+.bar nav a { white-space: nowrap; text-decoration: none; color: var(--soft); padding: .35rem .7rem; border-radius: 999px; font-size: 1rem; }
+.bar nav a:hover { color: var(--ink); background: var(--tint); }
+.bar nav a[aria-current="true"] { color: var(--head); background: var(--tint); font-weight: 700; }
+
+/* opening section */
+.hero { background: var(--tint); }
+.hero .wrap { display: grid; grid-template-columns: 1fr 20rem; gap: 4rem; align-items: center; padding-top: 4.5rem; padding-bottom: 5rem; }
+h1 { font-size: clamp(2.6rem, 6.2vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; margin: 0 0 1rem; color: var(--head); font-weight: 700; }
+.role { font-size: 1.2rem; color: var(--soft); margin-bottom: 1.5rem; }
+.lead { font-size: 1.3rem; line-height: 1.5; max-width: 34rem; }
+.contact { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.8rem 0 0; padding: 0; list-style: none; }
+.contact a { display: inline-block; padding: .5rem 1.05rem; border-radius: 999px; text-decoration: none; font-weight: 700;
+  border: 1.5px solid var(--head); color: var(--head); }
+.contact li:first-child a { background: var(--head); color: var(--tint); }
+.contact a:hover { border-color: var(--hvg); }
+.portrait-wrap { position: relative; }
+.portrait-wrap::before { content: ""; position: absolute; inset: 1.1rem -1.1rem -1.1rem 1.1rem; border-radius: 18px; background: var(--hvg); opacity: .28; }
+.portrait-wrap .ph { border-radius: 18px; }
+
+/* sections */
+.band { padding: 4.5rem 0; }
+.band.alt { background: var(--white); }
+.band.life { background: var(--tint2); }
+.sec { display: grid; grid-template-columns: 14rem minmax(0, 40rem); gap: 3rem; }
+h2 { font-size: 1.9rem; line-height: 1.15; letter-spacing: -.01em; margin: 0; color: var(--head); font-weight: 700; }
+.sec > h2 { position: sticky; top: 5.5rem; align-self: start; }
+h3 { font-size: 1.25rem; margin: 2.75rem 0 .5rem; color: var(--head); }
+h4 { font-size: .95rem; margin: 1.1rem 0 .15rem; font-weight: 700; color: var(--soft); }
+.big { font-size: 1.2rem; line-height: 1.5; }
+
+/* projects */
+details { margin: .6rem 0; border-radius: 12px; background: var(--tint); }
+.band.alt details { background: var(--paper); border: 1px solid var(--rule); }
+details[open], .band.alt details[open] { background: var(--tint2); border-color: transparent; padding-bottom: 1.1rem; }
+summary { cursor: pointer; position: relative; list-style: none; padding: 1rem 1.1rem 1rem 2.5rem; border-radius: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; position: absolute; left: 1.1rem; top: 1.4rem; border: 5px solid transparent; border-left: 8px solid var(--emb); transform-origin: 3px 50%; }
+details[open] > summary::before { border-left-color: var(--hvg); transform: rotate(90deg); }
+summary:hover .pt { color: var(--link); }
+.pt { font-weight: 700; display: block; font-size: 1.1rem; }
+.pm { color: var(--soft); font-size: .95rem; display: block; }
+details > :not(summary) { margin-left: 2.5rem; margin-right: 1.1rem; }
 figure { margin: 1.25rem 0 1.5rem; }
 .plot { overflow-x: auto; }
 svg { display: block; width: 100%; height: auto; font-family: inherit; }
@@ -78,48 +87,106 @@ svg .c { stroke: var(--conn); stroke-width: 2; }
 svg .e { fill: var(--emb); stroke: var(--tint2); stroke-width: 1.5; }
 svg .h { fill: var(--hvg); stroke: var(--tint2); stroke-width: 1.5; }
 figcaption { color: var(--soft); font-size: .95rem; margin-top: .6rem; }
-footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
-@media (max-width: 52rem) {
-  .page { grid-template-columns: 1fr; gap: 2rem; padding-top: 2.25rem; }
-  .who { position: static; }
-  .who ul { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
-  .views { flex-direction: row; }
-  .views a { flex: 1; text-align: center; }
-  .hello { grid-template-columns: 7.5rem 1fr; gap: 1rem; }
+
+/* journey */
+dl.path { display: grid; grid-template-columns: 7.5rem 1fr; margin: 0; }
+dl.path dt { color: var(--year); font-weight: 700; font-variant-numeric: tabular-nums; padding: 0 1.25rem 1.6rem 0; text-align: right; }
+dl.path dd { margin: 0; padding: 0 0 1.6rem 1.5rem; border-left: 2px solid var(--rule); position: relative; }
+dl.path dd::before { content: ""; position: absolute; left: -7px; top: .5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--hvg); border: 2px solid var(--paper); }
+dl.path dd:last-of-type { border-left-color: transparent; padding-bottom: 0; }
+dl.path dd:last-of-type::before { background: var(--paper); border-color: var(--hvg); }
+dl.path dt:last-of-type { padding-bottom: 0; }
+
+ol.pubs { padding-left: 1.25rem; margin: 0; }
+ol.pubs li { margin-bottom: 1rem; }
+
+/* photos */
+.ph { position: relative; margin: 0; overflow: hidden; border-radius: 10px; aspect-ratio: 3 / 4; background: var(--tint); }
+.ph img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+.ph .guard { position: absolute; inset: 0; -webkit-touch-callout: none; }
+.dogs { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .6rem; margin-top: 1.1rem; }
+.dogs .big { grid-row: span 2; aspect-ratio: auto; height: 100%; }
+.trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-top: 1.1rem; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.75rem; }
+.facts div { background: var(--paper); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.facts h3 { margin: 0 0 .3rem; font-size: 1.05rem; }
+.facts p { margin: 0; }
+
+footer { background: var(--foot); color: var(--footink); padding: 3rem 0; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1rem 2rem; }
+footer strong { font-size: 1.2rem; }
+footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; margin: 0; padding: 0; }
+footer a { color: var(--footink); }
+footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size: .9rem; }
+
+@media (max-width: 56rem) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2.5rem; padding-bottom: 3.5rem; }
+  .portrait-wrap { max-width: 17rem; order: -1; }
+  .band { padding: 3rem 0; }
+  .sec { grid-template-columns: 1fr; gap: 1.25rem; }
+  .sec > h2 { position: static; }
+  .bar .wrap { padding-top: .2rem; padding-bottom: .4rem; }
+  .bar nav { width: 100%; }
+}
+@media (max-width: 34rem) {
+  dl.path { grid-template-columns: 1fr; }
+  dl.path dt { text-align: left; padding: 0 0 .1rem 1.5rem; border-left: 2px solid var(--rule); }
+  details > :not(summary) { margin-left: 1rem; }
+  details > figure { margin-left: .25rem; margin-right: .25rem; }
   .dogs { grid-template-columns: 1fr 1fr; }
   .dogs .big { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
   .dogs .big img { object-position: 50% 38%; }
-  dl.path { grid-template-columns: 1fr; gap: .15rem; }
-  details > :not(summary) { margin-left: 1rem; }
-  details > figure { margin-left: .25rem; margin-right: .25rem; }
-  dl.path dd { margin-bottom: .9rem; }
+  .facts { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
-<div class="page">
-  <header class="who">
-    <h1>Aathma Merin Bejoy</h1>
-    <p>Bioinformatician at the Max Delbrück Center, Berlin</p>
-    <nav class="views" aria-label="Parts of this page">
-      <a href="#work" data-view="work" aria-current="page">Research</a>
-      <a href="#life" data-view="life">Outside the lab</a>
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Aathma Merin Bejoy</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Journey</a>
+      <a href="#publications">Publications</a>
+      <a href="#life">Outside the lab</a>
     </nav>
-    <ul>
-      <li><a href="mailto:aathmamerinbejoy@gmail.com">Email</a></li>
-      <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
-    </ul>
-  </header>
+  </div>
+</header>
 
-  <main>
-   <section id="work" class="view">
-    <p class="lead">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center, where I build the pipelines that turn sequencing data into results the lab can use.</p>
-    <p>Most of my time goes into whole-genome sequencing, bulk RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome. I studied bioinformatics first and molecular biotechnology afterwards, so I have worked on both the computational and the wet-lab side.</p>
-    <p>I am moving towards machine learning for genomics. What I want in the end is to build methods that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment. The first project below is my first step in that direction.</p>
+<main>
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Aathma Merin Bejoy</h1>
+      <p class="role">Bioinformatician at the Max Delbrück Center, Berlin</p>
+      <p class="lead">I build the pipelines that turn sequencing data into results a lab can use, and I am moving towards machine learning for genomics.</p>
+      <ul class="contact">
+        <li><a href="mailto:aathmamerinbejoy@gmail.com">Email me</a></li>
+        <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="portrait-wrap"><figure class="ph "><img src="photos/me.jpg" width="600" height="800" draggable="false" alt="Aathma standing beside a window"><span class="guard"></span></figure></div>
+  </div>
+</section>
 
+<section class="band" id="about">
+  <div class="wrap sec">
+    <h2>About</h2>
+    <div>
+      <p class="big">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center. Most of my time goes into whole-genome sequencing, bulk RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome.</p>
+      <p>I studied bioinformatics first and molecular biotechnology afterwards, so I have worked on both the computational and the wet-lab side.</p>
+      <p>What I want in the end is to build methods that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment. The first project below is my first step in that direction.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="projects">
+  <div class="wrap sec">
     <h2>Projects</h2>
-    <details>
+    <div>
+<details>
       <summary><span class="pt">Do BulkRNABert embeddings know which tissue a cell line comes from?</span>
         <span class="pm">Machine learning side project at the MDC, 2026</span></summary>
       <h4>What I did</h4>
@@ -219,7 +286,12 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <h4>Limitations</h4>
       <p>I analysed one of the samples in the study, mostly with default settings, and nothing was validated in the lab. The data was DNA sequencing, which cannot detect the RNA viruses that make up most plant viruses.</p>
     </details>
+    </div>
+  </div>
+</section>
 
+<section class="band" id="journey">
+  <div class="wrap sec">
     <h2>How I got here</h2>
     <dl class="path">
       <dt>2016 to 2019</dt>
@@ -233,32 +305,33 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <dt>2025</dt>
       <dd>Joined the Max Delbrück Center. Here I learned to write analysis that other people depend on: pipelines that run on a cluster and give the same answer twice.</dd>
       <dt>2026</dt>
-      <dd>First machine learning project, the BulkRNABert evaluation at the top of this page. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
+      <dd>First machine learning project, the BulkRNABert evaluation under Projects. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
       <dt>Next</dt>
       <dd>Learning to train my own deep learning models in PyTorch, so that I can build such methods myself.</dd>
     </dl>
+  </div>
+</section>
 
+<section class="band alt" id="publications">
+  <div class="wrap sec">
     <h2>Publications</h2>
     <ol class="pubs">
       <li>Shamloo S, Schloßhauer JL, […], <b>Bejoy AM</b>, […], Imig J. RNA binding of GAPDH controls transcript stability and protein translation in acute myeloid leukemia. <i>RNA Biology</i>, 2025. <a href="https://doi.org/10.1080/15476286.2025.2580180">doi:10.1080/15476286.2025.2580180</a></li>
       <li>Schlösser V, Lightfoot HL, Leemann C, Banijamali SE, <b>Bejoy AM</b>, et al. Anti-HIV-1 effect of the fluoroquinolone Enoxacin and modulation of pro-viral hsa-miR-132 processing in CEM-SS cells. <i>Non-Coding RNA</i>, 2025. <a href="https://doi.org/10.3390/ncrna11010008">doi:10.3390/ncrna11010008</a></li>
       <li><b>Bejoy AM</b>, et al. An insight on advances and applications of 3D bioprinting: a review. <i>Bioprinting</i>, 2021.</li>
     </ol>
-   </section>
+  </div>
+</section>
 
-   <section id="life" class="view">
-    <div class="hello">
-      <figure class="ph"><img src="photos/me.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma standing beside a window"><span class="guard"></span></figure>
-      <div>
-        <p class="lead">Outside work I am mostly with dogs or on the way to somewhere new.</p>
-        <p>Alongside my studies I worked part-time at McDonald's, Subway, Kamps and Amazon.</p>
-        <p>My next goal is to run a marathon.</p>
-      </div>
-    </div>
+<section class="band life" id="life">
+  <div class="wrap sec">
+    <h2>Outside the lab</h2>
+    <div>
+      <p class="big">Outside work I am mostly with dogs or on the way to somewhere new.</p>
 
-    <h2>Dogs</h2>
-    <p>I love dogs. The Labrador is my own. The others are dogs I looked after while I was studying in Germany.</p>
-    <div class="dogs">
+      <h3>Dogs</h3>
+      <p>I love dogs. The Labrador is my own. The others are dogs I looked after while I was studying in Germany.</p>
+      <div class="dogs">
       <figure class="ph big"><img src="photos/dog-lab.jpg" width="780" height="1040" loading="lazy" draggable="false" alt="Aathma sitting on a lawn with her yellow Labrador"><span class="guard"></span></figure>
       <figure class="ph"><img src="photos/dog-2.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on a sofa with a large brown and white dog and a small white poodle"><span class="guard"></span></figure>
       <figure class="ph"><img src="photos/dog-1.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on a lawn hugging one dog and stroking another"><span class="guard"></span></figure>
@@ -266,9 +339,9 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <figure class="ph"><img src="photos/dog-4.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on the floor playing with a long-haired dog"><span class="guard"></span></figure>
     </div>
 
-    <h2>Travel</h2>
-    <p>So far: Switzerland, the Netherlands, Belgium, Poland, Qatar, Italy, Vatican City, Austria and Luxembourg. The list will continue.</p>
-    <div class="trips">
+      <h3>Travel</h3>
+      <p>So far: Switzerland, the Netherlands, Belgium, Poland, Qatar, Italy, Vatican City, Austria and Luxembourg. The list will continue.</p>
+      <div class="trips">
       <figure class="ph"><img src="photos/travel-1.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma in front of the Colosseum in Rome"><span class="guard"></span></figure>
       <figure class="ph"><img src="photos/travel-2.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on a mountain ridge with rocky peaks behind her"><span class="guard"></span></figure>
       <figure class="ph"><img src="photos/travel-3.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma at a viewpoint above a city with a cathedral dome"><span class="guard"></span></figure>
@@ -279,33 +352,45 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <figure class="ph"><img src="photos/travel-8.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma sitting on a rock looking up, with a town in the valley below"><span class="guard"></span></figure>
       <figure class="ph"><img src="photos/travel-9.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma in front of a wall of colourful chocolate bars"><span class="guard"></span></figure>
     </div>
-   </section>
 
-    <footer>Berlin, 2026</footer>
-  </main>
-</div>
+      <div class="facts">
+        <div><h3>Jobs along the way</h3><p>Alongside my studies I worked part-time at McDonald's, Subway, Kamps and Amazon.</p></div>
+        <div><h3>Next goal</h3><p>To run a marathon.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Aathma Merin Bejoy</strong>
+    <ul>
+      <li><a href="mailto:aathmamerinbejoy@gmail.com">Email</a></li>
+      <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
+    </ul>
+    <small>Berlin, 2026</small>
+  </div>
+</footer>
 <script>
 (function () {
-  var links = document.querySelectorAll('.views a');
-  function show(name) {
-    if (name !== 'life') name = 'work';
-    document.getElementById('work').hidden = name !== 'work';
-    document.getElementById('life').hidden = name !== 'life';
-    links.forEach(function (a) {
-      if (a.dataset.view === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-    });
+  // highlight the menu entry of the section being read
+  var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var a = byId[en.target.id];
+        if (a) a.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
   }
-  links.forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      history.pushState(null, '', a.getAttribute('href'));
-      show(a.dataset.view);
-      window.scrollTo(0, 0);
-    });
-  });
-  window.addEventListener('popstate', function () { show(location.hash.slice(1)); });
-  show(location.hash.slice(1));
-  // Photos: no menu on right-click or long-press, no dragging
+  // photos: no menu on right-click or long-press, no dragging
   document.querySelectorAll('.ph').forEach(function (f) {
     f.addEventListener('contextmenu', function (e) { e.preventDefault(); });
     f.addEventListener('dragstart', function (e) { e.preventDefault(); });
