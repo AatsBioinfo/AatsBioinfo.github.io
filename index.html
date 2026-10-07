@@ -31,7 +31,7 @@ p { margin: 0 0 1rem; }
 /* top bar */
 .bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: .25rem 1.5rem; flex-wrap: wrap; min-height: 3.5rem; }
+.bar .wrap { display: flex; align-items: center; justify-content: flex-end; gap: .25rem 1.5rem; flex-wrap: wrap; min-height: 3.5rem; }
 .brand { font-weight: 700; color: var(--head); text-decoration: none; padding: .6rem 0; }
 .bar nav { display: flex; gap: .25rem; overflow-x: auto; scrollbar-width: none; margin: 0 -.6rem; }
 .bar nav::-webkit-scrollbar { display: none; }
@@ -41,18 +41,12 @@ p { margin: 0 0 1rem; }
 
 /* opening section */
 .hero { background: var(--tint); }
-.hero .wrap { display: grid; grid-template-columns: 1fr 20rem; gap: 4rem; align-items: center; padding-top: 4.5rem; padding-bottom: 5rem; }
+.hero .wrap { padding-top: 4.5rem; padding-bottom: 4.5rem; }
 h1 { font-size: clamp(2.6rem, 6.2vw, 4.4rem); line-height: 1.02; letter-spacing: -.02em; margin: 0 0 1rem; color: var(--head); font-weight: 700; }
 .role { font-size: 1.2rem; color: var(--soft); margin-bottom: 1.5rem; }
-.lead { font-size: 1.3rem; line-height: 1.5; max-width: 34rem; }
-.contact { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.8rem 0 0; padding: 0; list-style: none; }
-.contact a { display: inline-block; padding: .5rem 1.05rem; border-radius: 999px; text-decoration: none; font-weight: 700;
-  border: 1.5px solid var(--head); color: var(--head); }
-.contact li:first-child a { background: var(--head); color: var(--tint); }
-.contact a:hover { border-color: var(--hvg); }
-.portrait-wrap { position: relative; }
-.portrait-wrap::before { content: ""; position: absolute; inset: 1.1rem -1.1rem -1.1rem 1.1rem; border-radius: 18px; background: var(--hvg); opacity: .28; }
-.portrait-wrap .ph { border-radius: 18px; }
+.lead { font-size: 1.3rem; line-height: 1.5; max-width: 38rem; margin-bottom: 0; }
+.contact { display: flex; flex-wrap: wrap; gap: .3rem 1.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.contact a { font-weight: 600; }
 
 /* sections */
 .band { padding: 4.5rem 0; }
@@ -120,8 +114,7 @@ footer a { color: var(--footink); }
 footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size: .9rem; }
 
 @media (max-width: 56rem) {
-  .hero .wrap { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 2.5rem; padding-bottom: 3.5rem; }
-  .portrait-wrap { max-width: 17rem; order: -1; }
+  .hero .wrap { padding-top: 2.75rem; padding-bottom: 3rem; }
   .band { padding: 3rem 0; }
   .sec { grid-template-columns: 1fr; gap: 1.25rem; }
   .sec > h2 { position: static; }
@@ -143,7 +136,6 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
 <body>
 <header class="bar">
   <div class="wrap">
-    <a class="brand" href="#top">Aathma Merin Bejoy</a>
     <nav aria-label="Sections">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -157,17 +149,13 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
 <main>
 <section class="hero" id="top">
   <div class="wrap">
-    <div>
-      <h1>Aathma Merin Bejoy</h1>
-      <p class="role">Bioinformatician at the Max Delbrück Center, Berlin</p>
-      <p class="lead">I build the pipelines that turn sequencing data into results a lab can use, and I am moving towards machine learning for genomics.</p>
-      <ul class="contact">
-        <li><a href="mailto:aathmamerinbejoy@gmail.com">Email me</a></li>
-        <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
-      </ul>
-    </div>
-    <div class="portrait-wrap"><figure class="ph "><img src="photos/me.jpg" width="600" height="800" draggable="false" alt="Aathma standing beside a window"><span class="guard"></span></figure></div>
+    <h1>Aathma Merin Bejoy</h1>
+    <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I am now looking for a PhD position in machine learning for genomics.</p>
+    <ul class="contact">
+      <li><a href="mailto:aathmamerinbejoy@gmail.com">Email</a></li>
+      <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
+    </ul>
   </div>
 </section>
 
@@ -177,6 +165,8 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
     <div>
       <p class="big">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center. Most of my time goes into whole-genome sequencing, bulk RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome.</p>
       <p>I studied bioinformatics first and molecular biotechnology afterwards, so I have worked on both the computational and the wet-lab side.</p>
+      <h3>Why a PhD</h3>
+      <p>So far I have applied methods that other people developed. I want to learn to develop them myself, and a PhD is the place to learn that properly: time on one hard question, with people who build such methods every day.</p>
       <p>What I want in the end is to build methods that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment. The first project below is my first step in that direction.</p>
     </div>
   </div>
