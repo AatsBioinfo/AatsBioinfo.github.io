@@ -30,6 +30,17 @@ h1 { font-size: 1.9rem; line-height: 1.15; margin: 0 0 .75rem; font-weight: 700;
 main { max-width: 38rem; min-width: 0; }
 h2 { font-size: 1.2rem; margin: 3rem 0 .9rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-weight: 700; }
 h3 { font-size: 1.0625rem; margin: 1.5rem 0 .25rem; font-weight: 700; }
+h4 { font-size: .95rem; margin: 1.1rem 0 .15rem; font-weight: 700; color: var(--soft); }
+.hint { color: var(--soft); font-size: .95rem; margin-top: -.4rem; }
+details { border-bottom: 1px solid var(--rule); padding: .85rem 0; }
+details:first-of-type { border-top: 1px solid var(--rule); }
+summary { cursor: pointer; list-style-position: outside; margin-left: 1.2rem; }
+summary::marker { color: var(--soft); }
+summary:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+.pt { font-weight: 700; display: block; }
+.pm { color: var(--soft); font-size: .95rem; display: block; }
+details > :not(summary) { margin-left: 1.2rem; }
+details[open] { padding-bottom: 1.25rem; }
 p { margin: 0 0 1rem; }
 .lead { font-size: 1.2rem; line-height: 1.5; }
 a { color: var(--link); text-underline-offset: .15em; }
@@ -76,14 +87,22 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
   <main>
     <p class="lead">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center, where I build the pipelines that turn sequencing data into results the lab can use.</p>
     <p>Most of my time goes into whole-genome sequencing, bulk RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome. I studied bioinformatics first and molecular biotechnology afterwards, so I have worked on both the computational and the wet-lab side.</p>
-    <p>I am moving towards machine learning for genomics. The project below is my first step in that direction.</p>
+    <p>I am moving towards machine learning for genomics. What I want in the end is to build methods that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment. The first project below is my first step in that direction.</p>
 
-    <h2>Project</h2>
-    <h3>Do BulkRNABert embeddings know which tissue a cell line comes from?</h3>
-    <p>BulkRNABert is a transformer model pretrained on tumour RNA-seq data. I ran it on 1,657 cancer cell lines from DepMap and asked whether its embeddings separate the 26 tissue lineages better than plain PCA on gene expression.</p>
-    <p>They do not. With a kNN classifier, the embeddings reach a balanced accuracy of 0.40 and PCA on the 2,000 most variable genes reaches 0.60. The gap depends strongly on the lineage: lymphoid and lung cell lines are classified almost equally well by both, whereas pancreas, kidney and pleura are lost in the embedding.</p>
-    <figure>
-      <div class="plot">
+    <h2>Projects</h2>
+    <p class="hint">Select a project to open it.</p>
+
+    <details open>
+      <summary><span class="pt">Do BulkRNABert embeddings know which tissue a cell line comes from?</span>
+        <span class="pm">Machine learning side project at the MDC, 2026</span></summary>
+      <h4>What I did</h4>
+      <p>BulkRNABert is a transformer model pretrained on tumour RNA-seq data. I ran it on 1,657 cancer cell lines from DepMap and asked whether its embeddings separate the 26 tissue lineages better than plain PCA on gene expression. A colleague set me this task to test my skills, and I did it alongside my lab work.</p>
+      <h4>Skills I used and learned</h4>
+      <p>Python (NumPy, pandas, scikit-learn), model inference in JAX/Haiku, Apptainer containers, SLURM. New for me: running a pretrained transformer, matching my data to a model's fixed gene vocabulary, and evaluating embeddings with cross-validation against a simple baseline.</p>
+      <h4>Outcome</h4>
+      <p>The embeddings are worse than the baseline. With a kNN classifier they reach a balanced accuracy of 0.40, and PCA on the 2,000 most variable genes reaches 0.60. The gap depends strongly on the lineage: lymphoid and lung cell lines are classified almost equally well by both, whereas pancreas, kidney and pleura are lost in the embedding.</p>
+      <figure>
+        <div class="plot">
 <svg viewBox="0 0 484 516" role="img" aria-labelledby="figt figd">
 <title id="figt">Recall per lineage for BulkRNABert embeddings and expression PCA</title>
 <desc id="figd">Expression PCA classifies 23 of 26 lineages better than the embeddings.</desc>
@@ -126,18 +145,71 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
 <g><title>Thyroid (22 cell lines): embeddings 0.00, expression PCA 0.04</title><text class="t" x="158" y="464.5" text-anchor="end">Thyroid</text><line class="c" x1="168.0" x2="181.5" y1="460.5" y2="460.5"/><circle class="e" cx="168.0" cy="460.5" r="4.5"/><circle class="h" cx="181.5" cy="460.5" r="4.5"/></g>
 <g><title>Prostate (13 cell lines): embeddings 0.08, expression PCA 0.00</title><text class="t" x="158" y="481.5" text-anchor="end">Prostate</text><line class="c" x1="191.1" x2="168.0" y1="477.5" y2="477.5"/><circle class="e" cx="191.1" cy="477.5" r="4.5"/><circle class="h" cx="168.0" cy="477.5" r="4.5"/></g>
 </svg>
-      </div>
-      <figcaption>Share of each lineage's cell lines classified correctly (recall, 5-fold cross-validation). Expression PCA is ahead in 23 of 26 lineages.</figcaption>
-    </figure>
-    <p><a href="https://github.com/AatsBioinfo/depmap-bulkrnabert">Code, methods and full results on GitHub</a></p>
+        </div>
+        <figcaption>Share of each lineage's cell lines classified correctly (recall, 5-fold cross-validation). Expression PCA is ahead in 23 of 26 lineages.</figcaption>
+      </figure>
+      <h4>Limitations</h4>
+      <p>I only ran the model; I did not train or fine-tune it. I tested one way of pooling the embeddings and one layer, and one task. The model was trained on tumours and I applied it to cell lines, which may explain part of the gap.</p>
+      <p><a href="https://github.com/AatsBioinfo/depmap-bulkrnabert">Code, methods and full results on GitHub</a></p>
+    </details>
 
-    <h2>Research</h2>
-    <h3>Mobile DNA lab, Max Delbrück Center</h3>
-    <p class="when">Bioinformatician, since 2025</p>
-    <p>Reproducible workflows in Python and R for WGS, RNA-seq and ChIP-seq on the MDC cluster; transposon integration mapping and annotation; differential expression and transposable element analysis.</p>
-    <h3>Chemical Genomics Centre, Max Planck Institute of Molecular Physiology</h3>
-    <p class="when">Master's thesis and research associate, 2024 to 2025</p>
-    <p>My thesis looked at GAPDH as an RNA-binding protein in acute myeloid leukemia, combining RNA-seq and CLIP-seq data. I also worked on RNA structure probing with SHAPE-MaP.</p>
+    <details>
+      <summary><span class="pt">ChIP-seq of a transcription factor in human embryonic stem cells</span>
+        <span class="pm">Mobile DNA lab, MDC, 2026</span></summary>
+      <h4>What I did</h4>
+      <p>I built the analysis for a ChIP-seq experiment from raw reads to annotated binding sites: alignment, quality control, peak calling on replicates, consensus peaks, annotation against genes and repeat families, and motif analysis. Because the lab studies repeats, I kept reads that map to several places in a separate track instead of discarding them.</p>
+      <h4>Skills I used and learned</h4>
+      <p>BWA, samtools, MACS3, deepTools, HOMER, bedtools, SLURM, micromamba environments. New for me: judging whether a weak ChIP is real. I learned to use a failed replicate as a control for library bias, to compare against shuffled regions, and to let the motif result decide when promoter peaks could be artefacts.</p>
+      <h4>Outcome</h4>
+      <p>A documented pipeline with one script per step and a decision log, which the lab can rerun on the next round of samples. The biological results are unpublished and belong to the lab, so I do not describe them here.</p>
+      <h4>Limitations</h4>
+      <p>The experiment had no IgG control and the enrichment was low, so the conclusions rest on replicate agreement and motif enrichment. Reproducibility between replicates was judged by overlap, without a formal IDR analysis.</p>
+    </details>
+
+    <details>
+      <summary><span class="pt">GAPDH as an RNA-binding protein in acute myeloid leukemia</span>
+        <span class="pm">Master's thesis, Max Planck Institute of Molecular Physiology, 2024 to 2025</span></summary>
+      <h4>What I did</h4>
+      <p>GAPDH is known as a metabolic enzyme, but it also binds RNA. In my thesis I combined CLIP-seq data, which shows which RNAs GAPDH binds, with RNA-seq data after GAPDH knockdown, which shows which RNAs change, and followed up selected targets by qPCR.</p>
+      <h4>Skills I used and learned</h4>
+      <p>R workflows for RNA-seq and CLIP-seq, differential expression, qPCR, cell culture. New for me: working on one question with both bench and computer, and taking an analysis through to a published figure.</p>
+      <h4>Outcome</h4>
+      <p>The work is part of a paper in <i>RNA Biology</i> (2025). The study found that GAPDH binds its targets mainly in the 5' untranslated region, including its own mRNA, and stabilises them.</p>
+      <h4>Limitations</h4>
+      <p>The experiments were done in leukemia cell lines, not in patient samples.</p>
+      <p><a href="https://doi.org/10.1080/15476286.2025.2580180">Read the paper</a></p>
+    </details>
+
+    <details>
+      <summary><span class="pt">Looking for viruses in a plant metagenome</span>
+        <span class="pm">Master's dissertation, Rajiv Gandhi Centre for Biotechnology and Manipal, 2021</span></summary>
+      <h4>What I did</h4>
+      <p>I took a public shotgun sequencing dataset of wild <i>Arabidopsis thaliana</i> leaves and searched it for viral sequences: quality control and trimming, removal of plant reads, de novo assembly, BLASTx against a viral protein database, and taxonomic classification. I also compiled a list of new plant viruses reported in metagenomic studies from 2015 to 2021.</p>
+      <h4>Skills I used and learned</h4>
+      <p>FastQC, Trimmomatic, Bowtie2, metaSPAdes, BLAST+, MEGAN, Galaxy. This was my first complete analysis from raw reads to a result. When the search was too large for Galaxy, I learned to set up a cloud server and run BLAST from the command line.</p>
+      <h4>Outcome</h4>
+      <p>Of 55,364 assembled contigs, 4,132 were assigned to viruses, covering 13 families. With a strict score threshold three families remained, two of them bacteriophages. I found no new virus.</p>
+      <h4>Limitations</h4>
+      <p>I analysed one of the samples in the study, mostly with default settings, and nothing was validated in the lab. The data was DNA sequencing, which cannot detect the RNA viruses that make up most plant viruses.</p>
+    </details>
+
+    <h2>How I got here</h2>
+    <dl class="path">
+      <dt>2016 to 2019</dt>
+      <dd>B.Sc. in chemistry, botany and zoology at Mahatma Gandhi Memorial College. Biology only, no code yet.</dd>
+      <dt>2019 to 2021</dt>
+      <dd>M.Sc. Bioinformatics at Manipal School of Life Sciences. This is where I learned to program and first worked with sequencing data: for my dissertation I searched a public plant metagenome for viruses.</dd>
+      <dt>2022 to 2025</dt>
+      <dd>M.Sc. Molecular Biotechnology at Anhalt University of Applied Sciences. I went back to the bench to understand how the data I analyse is made: PCR, cell culture, CRISPR.</dd>
+      <dt>2024 to 2025</dt>
+      <dd>Max Planck Institute of Molecular Physiology, Dortmund. For my thesis I studied how the enzyme GAPDH binds RNA in acute myeloid leukemia, combining RNA-seq and CLIP-seq data. It was my first time inside a research project from experiment to paper, and it led to two research papers.</dd>
+      <dt>2025</dt>
+      <dd>Joined the Max Delbrück Center. Here I learned to write analysis that other people depend on: pipelines that run on a cluster and give the same answer twice.</dd>
+      <dt>2026</dt>
+      <dd>First machine learning project, the BulkRNABert evaluation at the top of this page. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
+      <dt>Next</dt>
+      <dd>Learning to train my own deep learning models in PyTorch, so that I can build such methods myself.</dd>
+    </dl>
 
     <h2>Publications</h2>
     <ol class="pubs">
@@ -145,24 +217,6 @@ footer { margin-top: 3.5rem; color: var(--soft); font-size: .9rem; }
       <li>Schlösser V, Lightfoot HL, Leemann C, Banijamali SE, <b>Bejoy AM</b>, et al. Anti-HIV-1 effect of the fluoroquinolone Enoxacin and modulation of pro-viral hsa-miR-132 processing in CEM-SS cells. <i>Non-Coding RNA</i>, 2025. <a href="https://doi.org/10.3390/ncrna11010008">doi:10.3390/ncrna11010008</a></li>
       <li><b>Bejoy AM</b>, et al. An insight on advances and applications of 3D bioprinting: a review. <i>Bioprinting</i>, 2021.</li>
     </ol>
-
-    <h2>How I got here</h2>
-    <dl class="path">
-      <dt>2016 to 2019</dt>
-      <dd>B.Sc. in chemistry, botany and zoology at Mahatma Gandhi Memorial College. Biology only, no code yet.</dd>
-      <dt>2019 to 2021</dt>
-      <dd>M.Sc. Bioinformatics at Manipal School of Life Sciences. This is where I learned to program and first worked with sequencing data: for my thesis I searched public metagenomic datasets and found 106 new plant virus strains.</dd>
-      <dt>2022 to 2025</dt>
-      <dd>M.Sc. Molecular Biotechnology at Anhalt University of Applied Sciences. I went back to the bench to understand how the data I analyse is made: PCR, cell culture, CRISPR.</dd>
-      <dt>2024 to 2025</dt>
-      <dd>Max Planck Institute of Molecular Physiology, Dortmund. My first time inside a research project from experiment to paper, which led to two research papers.</dd>
-      <dt>2025</dt>
-      <dd>Joined the Max Delbrück Center. Here I learned to write analysis that other people depend on: pipelines that run on a cluster and give the same answer twice.</dd>
-      <dt>2026</dt>
-      <dd>First machine learning project, the BulkRNABert evaluation above. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
-      <dt>Next</dt>
-      <dd>Training models myself in PyTorch, and learning spatial transcriptomics analysis.</dd>
-    </dl>
 
     <footer>Berlin, 2026</footer>
   </main>
