@@ -143,6 +143,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
 <body>
 <header class="bar">
   <div class="wrap">
+    <a class="brand" href="#top">Aathma Merin Bejoy</a>
     <nav aria-label="Sections">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
@@ -158,6 +159,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
   <div class="wrap">
     <div>
       <h1>Aathma Merin Bejoy</h1>
+      <p class="role">Bioinformatician at the Max Delbrück Center, Berlin</p>
       <p class="lead">I build the pipelines that turn sequencing data into results a lab can use, and I am moving towards machine learning for genomics.</p>
       <ul class="contact">
         <li><a href="mailto:aathmamerinbejoy@gmail.com">Email me</a></li>
@@ -173,7 +175,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
   <div class="wrap sec">
     <h2>About</h2>
     <div>
-      <p class="big">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center. Most of my time goes into whole-genome sequencing, RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome.</p>
+      <p class="big">I work in the Mobile DNA lab of Zsuzsanna Izsvák at the Max Delbrück Center. Most of my time goes into whole-genome sequencing, bulk RNA-seq and ChIP-seq analysis, and into mapping where Sleeping Beauty transposons integrate in the genome.</p>
       <p>I studied bioinformatics first and molecular biotechnology afterwards, so I have worked on both the computational and the wet-lab side.</p>
       <p>What I want in the end is to build methods that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment. The first project below is my first step in that direction.</p>
     </div>
@@ -246,6 +248,19 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
     </details>
 
     <details>
+      <summary><span class="pt">Does it matter where a transposon lands? Linking integration sites to reporter expression</span>
+        <span class="pm">Mobile DNA lab, MDC</span></summary>
+      <h4>What I did</h4>
+      <p>In a barcoded Sleeping Beauty reporter assay, every integration carries a reporter gene and a unique barcode. The barcode is read in DNA to find where the transposon landed, and in RNA to see whether the reporter is switched on. I built the pipeline from raw reads to the final call set: require the exact transposon end, align the genomic flank to the human genome, read the barcode, and count it in RNA. I then annotated each site with its gene context and tested enrichment against randomly shuffled sites.</p>
+      <h4>Skills I used and learned</h4>
+      <p>Python, R, SLURM, bedtools, GENCODE annotation, permutation tests and chi-square tests. I removed index hopping between samples, and I accepted weak calls only when independent evidence supported them, not by lowering a threshold. I also used the transposon's own biology as a quality check: Sleeping Beauty integrates at TA sites, so genuine calls should sit on one.</p>
+      <h4>Outcome</h4>
+      <p>A validated set of integration sites, each with a location and an on/off call, for the lab's further analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p>
+      <h4>Limitations</h4>
+      <p>The sites are recovered by PCR, which favours some regions of the genome over others. The analysis asks whether a site is on or off given where it landed, not where the transposon prefers to land. Expression is a yes/no call that depends on a threshold.</p>
+    </details>
+
+    <details>
       <summary><span class="pt">ChIP-seq of a transcription factor in human embryonic stem cells</span>
         <span class="pm">Mobile DNA lab, MDC, 2026</span></summary>
       <h4>What I did</h4>
@@ -256,6 +271,19 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
       <p>A documented pipeline with one script per step and a decision log, which the lab can rerun on the next round of samples. The biological results are unpublished and belong to the lab, so I do not describe them here.</p>
       <h4>Limitations</h4>
       <p>The experiment had no IgG control and the enrichment was low, so the conclusions rest on replicate agreement and motif enrichment. Reproducibility between replicates was judged by overlap, without a formal IDR analysis.</p>
+    </details>
+
+    <details>
+      <summary><span class="pt">Differential gene expression in a rat tumour model</span>
+        <span class="pm">Bulk RNA-seq, MDC</span></summary>
+      <h4>What I did</h4>
+      <p>I compared bulk RNA-seq libraries from tumour and normal tissue: read quality control, alignment with STAR as a cross-check, quantification with Salmon using a decoy-aware index and bias correction, and differential expression with DESeq2. I exported a ranked gene list for gene set enrichment analysis.</p>
+      <h4>Skills I used and learned</h4>
+      <p>FastQC, MultiQC, STAR, Salmon, tximport, DESeq2 with fold-change shrinkage, R. Before trusting the comparison I checked by sample correlation that the tumour libraries were independent replicates and not repeated samples of one tumour.</p>
+      <h4>Outcome</h4>
+      <p>A differential expression table and a ranked gene list ready for enrichment analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p>
+      <h4>Limitations</h4>
+      <p>There were few samples per group, so only large differences can be detected. Bulk tissue mixes tumour, stroma and immune cells, and there was no purity estimate to correct for that. Non-coding RNAs were not quantified.</p>
     </details>
 
     <details>
