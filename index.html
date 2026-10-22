@@ -159,6 +159,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
       <a href="#journey">Journey</a>
       <a href="#publications">Publications</a>
       <a href="#life">Outside the lab</a>
+      <a href="learning.html">Learning</a>
     </nav>
   </div>
 </header>
@@ -440,7 +441,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
       <dt>2026</dt>
       <dd>First machine learning project, the BulkRNABert evaluation under Projects. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</dd>
       <dt>Next</dt>
-      <dd>Learning to train my own deep learning models in PyTorch, so that I can build such methods myself.</dd>
+      <dd>Learning to train my own deep learning models in PyTorch, so that I can build such methods myself. I am also going back over the foundations, and I keep a <a href="learning.html">learning page</a> for that.</dd>
     </dl>
   </div>
 </section>
@@ -505,7 +506,7 @@ footer small { color: var(--footink); opacity: .75; flex-basis: 100%; font-size:
   // highlight the menu entry of the section being read
   var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
   var byId = {};
-  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  links.forEach(function (a) { var h = a.getAttribute('href'); if (h.charAt(0) === '#') byId[h.slice(1)] = a; });
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
