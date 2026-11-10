@@ -344,6 +344,64 @@ h1 .ch.call { color: var(--acc); }
   .pairs li { grid-template-columns: 1fr; gap: .2rem; } .pairs .ar { display: none; } .pairs .b { color: var(--acc); }
   .bases { font-size: .92rem; }
 }
+
+/* ---------- plain navigation ---------- */
+html { scroll-padding-top: 5.2rem; }
+.toolbar { gap: .4rem 1.6rem; border-bottom: 0; padding-top: .7rem; padding-bottom: .5rem; }
+.menu { display: flex; gap: .2rem 1.5rem; flex-wrap: wrap; font-size: .95rem; font-weight: 500; margin-left: auto; }
+.menu a { text-decoration: none; padding: .25rem 0; border-bottom: 2px solid transparent; }
+.menu a:hover { color: var(--ink); border-bottom-color: var(--rule2); }
+.menu a[aria-current="true"] { border-bottom-color: var(--acc); }
+.cta { font: 600 .85rem var(--mono); text-decoration: none; background: var(--acc); color: #fff; padding: .4rem .95rem; }
+.cta:hover { background: var(--solid); color: var(--on-solid); }
+.ideo { padding: 0 1.25rem .35rem; }
+.chrom { height: 8px; border-width: 1px; }
+.win { top: -3px; height: 14px; }
+.blabels[hidden], .status[hidden] { display: none; }
+.ideo { padding-bottom: .5rem; }
+.tl.sticky > div { top: 5.6rem; }
+.start { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--ink); }
+.start li + li { border-left: 1px solid var(--ink); }
+.start a { display: flex; flex-direction: column; gap: .35rem; height: 100%; padding: 1rem 1.1rem 1.1rem; text-decoration: none; transition: background-color .15s, color .15s; }
+.start .n { font: 600 .8rem var(--mono); color: var(--acc); }
+.start b { font: 700 1.25rem/1.15 var(--cond); }
+.start .t { font-size: .92rem; line-height: 1.45; color: var(--grey); flex: 1; }
+.start i { font: normal 600 .8rem var(--mono); margin-top: .4rem; }
+.start a:hover { background: var(--solid); color: var(--on-solid); } .start a:hover .t { color: var(--on-solid); opacity: .75; }
+.also { font: .8rem var(--mono); color: var(--grey); margin: .9rem 0 0; }
+#start .td { padding-top: 1.4rem; padding-bottom: 1.6rem; }
+.capof { margin: 0 0 .6rem !important; }
+.capnav { list-style: none; margin: 0 0 .9rem; padding: 0; font: .8rem/1.3 var(--mono); }
+.capnav a { display: flex; gap: .5rem; padding: .32rem 0 .32rem .6rem; text-decoration: none; color: var(--grey); border-left: 2px solid var(--rule2); }
+.capnav a span { flex: none; }
+.capnav a:hover { color: var(--ink); border-left-color: var(--ink); }
+.capnav .cur a { color: var(--ink); font-weight: 600; border-left-color: var(--acc); } .capnav .cur a span { color: var(--acc); }
+.capnext { margin: 1.6rem 0 0; font: 600 .82rem var(--mono); }
+.capnext a { display: inline-block; text-decoration: none; border: 1px solid var(--ink); padding: .45rem .9rem; }
+.capnext a:hover { background: var(--solid); color: var(--on-solid); }
+.pile { height: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; border: 0; margin-bottom: 1.2rem; }
+.pile button { position: relative; top: auto; left: auto; width: 100%; height: 34px; }
+.pnote { font: inherit; font-size: .97rem; color: var(--ink); margin: -.6rem 0 1.2rem; }
+.sec .tl .f { font-size: .9rem; }
+.contactbar { border-top: 1px solid var(--ink); padding: 3rem 1.25rem 3.2rem; text-align: center; background: var(--panel); }
+.contactbar h2 { font: 700 clamp(1.8rem, 3.6vw, 2.6rem)/1.05 var(--cond); margin-bottom: .8rem; }
+.contactbar p { max-width: 38rem; margin: 0 auto 1.3rem; }
+.contactbar .cl { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .8rem 1.6rem; font: .9rem var(--mono); margin-bottom: 0; }
+.cta.big { font-size: .95rem; padding: .65rem 1.2rem; }
+.totop { position: fixed; right: 1rem; bottom: 1rem; z-index: 15; font: 600 .8rem var(--mono); text-decoration: none; background: var(--solid); color: var(--on-solid); padding: .5rem .8rem; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.totop.on { opacity: 1; pointer-events: auto; } .totop:hover { background: var(--acc); color: #fff; }
+@media (max-width: 62rem) {
+  html { scroll-padding-top: 6.4rem; }
+  .toolbar { padding: .55rem 1.1rem .3rem; }
+  .menu { order: 3; width: 100%; margin: 0; flex-wrap: nowrap; overflow-x: auto; gap: 1.3rem; scrollbar-width: none; font-size: .9rem; }
+  .menu::-webkit-scrollbar { display: none; } .menu a { white-space: nowrap; }
+  .cta { margin-left: auto; }
+  .ideo { padding: 0 1.1rem .3rem; }
+  .start { grid-template-columns: 1fr 1fr; } .start li + li { border-left: 0; } .start li:nth-child(even) { border-left: 1px solid var(--ink); } .start li:nth-child(n+3) { border-top: 1px solid var(--ink); }
+  .capnav { display: none; } .capof { margin: 0 !important; color: var(--acc) !important; font-weight: 600; }
+  .pile { grid-template-columns: 1fr; }
+}
+@media (max-width: 30rem) { .start { grid-template-columns: 1fr; } .start li:nth-child(even) { border-left: 0; } .start li + li { border-top: 1px solid var(--ink); } }
 </style>
 <script>document.documentElement.className = 'js';</script>
 </head>
@@ -352,25 +410,22 @@ h1 .ch.call { color: var(--acc); }
 <header class="top">
   <div class="toolbar">
     <a class="brand" href="#top">aathma<b>.</b>genome</a>
-    <form class="locus" id="locus" role="search">
-      <label for="q" class="visually-hidden" style="position:absolute;left:-9999px">Locus or search</label>
-      <input id="q" name="q" spellcheck="false" autocomplete="off" autocapitalize="off" value="aathma:1-1,000">
-      <button type="submit">Go</button>
-    </form>
-    <span class="hint">try <b>pipelines</b> · <b>benchmark</b> · <b>phd</b> · <b>contact</b></span>
-    <nav class="links" aria-label="Elsewhere">
-      <a href="mailto:aathmamerinbejoy@gmail.com">email</a>
-      <a href="https://github.com/AatsBioinfo">github</a>
-      <a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">linkedin</a>
-      <a href="learning.html">learning</a>
+    <nav class="menu" id="menu" aria-label="Sections">
+      <a href="#can">What I can do</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">What's next</a>
+      <a href="#publications">Publications</a>
+      <a href="#life">Outside the lab</a>
+      <a href="learning.html">Learning</a>
     </nav>
+    <a class="cta" href="#contact">Contact</a>
   </div>
-  <div class="status" id="status" aria-live="polite"></div>
-  <nav class="ideo" aria-label="Sections">
+  <div class="status" id="status" aria-live="polite" hidden></div>
+  <div class="ideo" aria-hidden="true">
     <div class="chrom" id="chrom"></div>
-    <div class="win" id="win" aria-hidden="true"></div>
-    <div class="blabels" id="blabels"></div>
-  </nav>
+    <div class="win" id="win"></div>
+    <div class="blabels" id="blabels" hidden></div>
+  </div>
 </header>
 
 <main>
@@ -514,13 +569,25 @@ h1 .ch.call { color: var(--acc); }
     <div class="tl"><span class="f">sequence</span><span class="d">TA sites marked</span></div>
     <div class="td"><div class="seq"><span class="seqtrack">CGATTCAAATGACGGCAGCAGGCCGGGAGTCCCTGAGAGGCTTGTTCCGGAAATGTGCCATCTGCGTGCGAACGCAGCG<span class="ta">T</span><span class="ta">A</span>AGAGGAGGGC<span class="ta">T</span><span class="ta">A</span>GCTGCGTCGAGATCGGGATCTCAAAACCATCGAAGTCTCCTT<span class="ta">T</span><span class="ta">A</span>CTTCTCTCAAGGCCCTGCGAGA<span class="ta">T</span><span class="ta">A</span>T<span class="ta">T</span><span class="ta">A</span>TCCGGTGTCGGT<span class="ta">T</span><span class="ta">A</span>GCATCGACTTTTCACCAGATTCACCGT<span class="ta">T</span><span class="ta">A</span>AAATGCAGAAGGAATTCGTCT<span class="ta">T</span><span class="ta">A</span>AAGTT<span class="ta">T</span><span class="ta">A</span>CGTCGATTCAAATGACGGCAGCAGGCCGGGAGTCCCTGAGAGGCTTGTTCCGGAAATGTGCCATCTGCGTGCGAACGCAGCG<span class="ta">T</span><span class="ta">A</span>AGAGGAGGGC<span class="ta">T</span><span class="ta">A</span>GCTGCGTCGAGATCGGGATCTCAAAACCATCGAAGTCTCCTT<span class="ta">T</span><span class="ta">A</span>CTTCTCTCAAGGCCCTGCGAGA<span class="ta">T</span><span class="ta">A</span>T<span class="ta">T</span><span class="ta">A</span>TCCGGTGTCGGT<span class="ta">T</span><span class="ta">A</span>GCATCGACTTTTCACCAGATTCACCGT<span class="ta">T</span><span class="ta">A</span>AAATGCAGAAGGAATTCGTCT<span class="ta">T</span><span class="ta">A</span>AAGTT<span class="ta">T</span><span class="ta">A</span>CGT</span></div></div>
   </div>
+  <nav class="track" id="start" aria-label="Start here">
+    <div class="tl"><span class="f">start here</span><span class="d">four things to try</span></div>
+    <div class="td">
+      <ol class="start">
+        <li><a href="#cap-pipeline"><span class="n">01</span><b>Run a pipeline</b><span class="t">The steps and tools I use from raw reads to a result.</span><i>try it →</i></a></li>
+        <li><a href="#cap-ta"><span class="n">02</span><b>Check calls with biology</b><span class="t">Apply the TA-site check to transposon integration calls.</span><i>try it →</i></a></li>
+        <li><a href="#cap-benchmark"><span class="n">03</span><b>Compare a model to a baseline</b><span class="t">Sort my BulkRNABert benchmark and read the numbers.</span><i>try it →</i></a></li>
+        <li><a href="#cap-bench"><span class="n">04</span><b>Read the bench in the data</b><span class="t">What an experiment's design tells me to look for.</span><i>see it →</i></a></li>
+      </ol>
+      <p class="also">or go straight to <a href="#projects">the six projects</a> · <a href="#about">what I want next</a> · <a href="#contact">contact</a></p>
+    </div>
+  </nav>
 </div>
 
 <!-- ===== what I can do ===== -->
 <div id="can" data-band="what I can do" data-g="g3">
 
 <section class="track sec cap" id="cap-pipeline">
-  <div class="tl sticky"><div><span class="f">01_reads_to_result</span><span class="d">press run</span></div></div>
+  <div class="tl sticky"><div><span class="d capof">what I can do · 1 of 4</span><ol class="capnav"><li class="cur"><a href="#cap-pipeline" aria-current="true"><span>01</span>Run a pipeline</a></li><li><a href="#cap-ta"><span>02</span>Check calls with biology</a></li><li><a href="#cap-benchmark"><span>03</span>Compare to a baseline</a></li><li><a href="#cap-bench"><span>04</span>Bench to data</a></li></ol><span class="d">press run</span></div></div>
   <div class="td">
     <h2 class="claim">I take raw sequencing reads to a result a lab can use.</h2>
     <p class="sub">Pick a data type and run it. These are the steps and tools I use, and the check I make before I trust the output.</p>
@@ -536,11 +603,12 @@ h1 .ch.call { color: var(--acc); }
       <p class="check" id="rcheck"></p>
     </div>
     <p class="ev">the work behind it: <button data-ev="p4">rat tumour RNA-seq</button> · <button data-ev="p3">ChIP-seq in hESC</button> · <button data-ev="p2">Sleeping Beauty</button> · <button data-ev="p6">plant virome</button></p>
+    <p class="capnext"><a href="#cap-ta">next: 02 Check calls with biology ↓</a></p>
   </div>
 </section>
 
 <section class="track sec cap" id="cap-ta">
-  <div class="tl sticky"><div><span class="f">02_biology_as_qc</span><span class="d">click a base</span></div></div>
+  <div class="tl sticky"><div><span class="d capof">what I can do · 2 of 4</span><ol class="capnav"><li><a href="#cap-pipeline"><span>01</span>Run a pipeline</a></li><li class="cur"><a href="#cap-ta" aria-current="true"><span>02</span>Check calls with biology</a></li><li><a href="#cap-benchmark"><span>03</span>Compare to a baseline</a></li><li><a href="#cap-bench"><span>04</span>Bench to data</a></li></ol><span class="d">click a base</span></div></div>
   <div class="td">
     <h2 class="claim">I use the biology to check the data.</h2>
     <p class="sub">Sleeping Beauty integrates at TA sites. So when I map integration sites, a genuine call should sit on a TA, and one that does not is probably an artefact. Try it: the arrows are candidate calls. Click any base to add your own, then apply the check.</p>
@@ -554,11 +622,12 @@ h1 .ch.call { color: var(--acc); }
       <p class="fine">Illustration with a made-up sequence, not lab data.</p>
     </div>
     <p class="ev">the work behind it: <button data-ev="p2">linking integration sites to reporter expression</button></p>
+    <p class="capnext"><a href="#cap-benchmark">next: 03 Compare to a baseline ↓</a></p>
   </div>
 </section>
 
 <section class="track sec cap" id="cap-benchmark">
-  <div class="tl sticky"><div><span class="f">03_honest_benchmark</span><span class="d">real numbers · sort them</span></div></div>
+  <div class="tl sticky"><div><span class="d capof">what I can do · 3 of 4</span><ol class="capnav"><li><a href="#cap-pipeline"><span>01</span>Run a pipeline</a></li><li><a href="#cap-ta"><span>02</span>Check calls with biology</a></li><li class="cur"><a href="#cap-benchmark" aria-current="true"><span>03</span>Compare to a baseline</a></li><li><a href="#cap-bench"><span>04</span>Bench to data</a></li></ol><span class="d">sort the chart</span></div></div>
   <div class="td">
     <h2 class="claim">I test a model against a simple baseline, and report what I find.</h2>
     <p class="sub">I ran BulkRNABert, a transformer pretrained on tumour RNA-seq, on 1,657 cancer cell lines from DepMap and asked whether its embeddings separate the 26 tissue lineages better than plain PCA on gene expression. They do not.</p>
@@ -617,11 +686,12 @@ h1 .ch.call { color: var(--acc); }
     </figure>
     <p class="sub">What this does not show: I only ran the model, I did not train or fine-tune it. I tested one way of pooling the embeddings, one layer and one task. The model was trained on tumours and I applied it to cell lines, which may explain part of the gap.</p>
     <p class="ev"><a href="https://github.com/AatsBioinfo/depmap-bulkrnabert">code, methods and full results on GitHub →</a></p>
+    <p class="capnext"><a href="#cap-bench">next: 04 Bench to data ↓</a></p>
   </div>
 </section>
 
 <section class="track sec cap" id="cap-bench">
-  <div class="tl sticky"><div><span class="f">04_bench_to_data</span><span class="d">how the data is made</span></div></div>
+  <div class="tl sticky"><div><span class="d capof">what I can do · 4 of 4</span><ol class="capnav"><li><a href="#cap-pipeline"><span>01</span>Run a pipeline</a></li><li><a href="#cap-ta"><span>02</span>Check calls with biology</a></li><li><a href="#cap-benchmark"><span>03</span>Compare to a baseline</a></li><li class="cur"><a href="#cap-bench" aria-current="true"><span>04</span>Bench to data</a></li></ol><span class="d">how the data is made</span></div></div>
   <div class="td">
     <h2 class="claim">I know how the data was made, so I know where it can mislead.</h2>
     <p class="sub">I studied bioinformatics first and then went back to the bench: PCR, qPCR, cell culture, CRISPR, knockdowns. That is why I read an experiment's design before I read its output.</p>
@@ -633,6 +703,7 @@ h1 .ch.call { color: var(--acc); }
       <li><span class="b">a DNA library from leaves</span><span class="ar"></span><span>It cannot detect RNA viruses, and those are most plant viruses.</span></li>
     </ul>
     <p class="ev">the work behind it: <button data-ev="p5">GAPDH in AML, bench and code on one question</button></p>
+    <p class="capnext"><a href="#projects">next: the six projects behind this ↓</a></p>
   </div>
 </section>
 
@@ -640,7 +711,7 @@ h1 .ch.call { color: var(--acc); }
 
 <!-- ===== projects ===== -->
 <section class="track sec" id="projects" data-band="the work" data-g="g2">
-  <div class="tl sticky"><div><span class="f">projects.bam</span><span class="d">6 projects · click one</span></div></div>
+  <div class="tl sticky"><div><span class="f">Projects</span><span class="d">6 projects · click one to open it</span></div></div>
   <div class="td">
     <h2>The work behind it</h2>
     <div class="pile" id="pile">
@@ -651,7 +722,7 @@ h1 .ch.call { color: var(--acc); }
       <button style="--r:2; --x:3%; --w:43%; --mm:91%" data-p="p5" aria-pressed="false"><span class="n">5</span>GAPDH in AML · 2024–25</button>
       <button class="rev" style="--r:2; --x:49%; --w:44%; --mm:91%" data-p="p6" aria-pressed="false"><span class="n">6</span>Plant virome · 2021</button>
     </div>
-    <p class="pnote">six analyses, each from raw data to a result, with what it cannot show</p>
+    <p class="pnote">Six analyses, each from raw data to a result, with what it cannot show. Click a project to open it.</p>
 
     <article class="proj on" id="p1">
       <header><h3>Do BulkRNABert embeddings know which tissue a cell line comes from?</h3><span class="m">Machine learning side project at the MDC, 2026</span></header>
@@ -719,7 +790,7 @@ h1 .ch.call { color: var(--acc); }
 
 <!-- ===== next ===== -->
 <section class="track sec" id="about" data-band="next" data-g="g0">
-  <div class="tl sticky"><div><span class="f">next.txt</span><span class="d">what I want to be</span></div></div>
+  <div class="tl sticky"><div><span class="f">What's next</span><span class="d">what I want to be</span></div></div>
   <div class="td">
     <h2>Next: building the methods myself</h2>
     <div class="about">
@@ -739,7 +810,7 @@ h1 .ch.call { color: var(--acc); }
 
 <!-- ===== papers ===== -->
 <section class="track sec" id="publications" data-band="papers" data-g="g4">
-  <div class="tl sticky"><div><span class="f">papers.bib</span><span class="d">3 entries</span></div></div>
+  <div class="tl sticky"><div><span class="f">Publications</span><span class="d">3 papers</span></div></div>
   <div class="td">
     <h2>Publications</h2>
     <ol class="pubs">
@@ -752,7 +823,7 @@ h1 .ch.call { color: var(--acc); }
 
 <!-- ===== life ===== -->
 <section class="track sec" id="life" data-band="life" data-g="g1">
-  <div class="tl sticky"><div><span class="f">life.jpg</span><span class="d">outside the lab</span></div></div>
+  <div class="tl sticky"><div><span class="f">Outside the lab</span><span class="d">dogs, travel, running</span></div></div>
   <div class="td">
     <h2>Outside the lab</h2>
     <div class="life">
@@ -781,9 +852,15 @@ h1 .ch.call { color: var(--acc); }
 </section>
 </main>
 
+<section class="contactbar" id="contact">
+  <h2>Get in touch</h2>
+  <p>I am looking for a PhD position in machine learning for genomics, or a bioinformatics role in a team that works on hard data. Write to me and I will answer.</p>
+  <p class="cl"><a class="cta big" href="mailto:aathmamerinbejoy@gmail.com">aathmamerinbejoy@gmail.com</a><a href="https://github.com/AatsBioinfo">GitHub</a><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></p>
+</section>
+<a class="totop" id="totop" href="#top" aria-label="Back to top">↑ top</a>
+
 <footer>
   <span id="foot-locus">aathma:1-1,000</span><span class="sep">│</span><span>4 things I can do</span><span class="sep">│</span><span>6 projects</span><span class="sep">│</span><span>3 papers</span><span class="sep">│</span><span>Berlin, 2026</span>
-  <span class="r"><a href="mailto:aathmamerinbejoy@gmail.com">email</a><a href="https://github.com/AatsBioinfo">github</a><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">linkedin</a></span>
 </footer>
 
 <script>
@@ -821,11 +898,13 @@ h1 .ch.call { color: var(--acc); }
     var loc = 'aathma:' + fmt(f0 * GENOME) + '-' + fmt(f1 * GENOME);
     if (loc !== lastLocus) {
       lastLocus = loc; footLocus.textContent = loc;
-      if (document.activeElement !== q) q.value = loc;
+      if (q && document.activeElement !== q) q.value = loc;
     }
     var mid = y + vh * .35, on = 0;
     bands.forEach(function (b, i) { if (b.offsetTop <= mid) on = i; });
-    Array.prototype.forEach.call(blabels.children, function (l, i) { l.classList.toggle('on', i === on); });
+    var cur = '#' + bands[on].id;
+    Array.prototype.forEach.call(document.getElementById('menu').children, function (a) { if (a.getAttribute('href') === cur) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    document.getElementById('totop').classList.toggle('on', y > vh * .8);
   }
   window.addEventListener('scroll', track, { passive: true });
   window.addEventListener('resize', layout);
@@ -837,7 +916,6 @@ h1 .ch.call { color: var(--acc); }
     var el = document.getElementById(id); if (!el) return;
     el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
-    statusEl.textContent = msg || '';
   }
   function openFeat(id) {
     var f = document.getElementById(id), b = f.querySelector('.fbar');
@@ -856,19 +934,6 @@ h1 .ch.call { color: var(--acc); }
   };
   var projKeys = { bulkrnabert: 'p1', transformer: 'p1', 'sleeping beauty': 'p2', transposon: 'p2', integration: 'p2', sb: 'p2',
     chip: 'p3', 'chip-seq': 'p3', chipseq: 'p3', rat: 'p4', 'rna-seq': 'p4', rnaseq: 'p4', deseq2: 'p4', gapdh: 'p5', aml: 'p5', clip: 'p5', virus: 'p6', virome: 'p6', plant: 'p6', metagenome: 'p6' };
-  document.getElementById('locus').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var v = q.value.trim().toLowerCase().replace(/^\.\/|\.sh$/g, '').replace(/^for_/, '');
-    statusEl.textContent = '';
-    if (/^aathma:/.test(v) || !v) { var m = v.match(/:([\d,]+)/); if (m) { var n = +m[1].replace(/,/g, ''); window.scrollTo({ top: n / GENOME * document.documentElement.scrollHeight, behavior: calm ? 'auto' : 'smooth' }); } q.blur(); return; }
-    if (/^sudo\b/.test(v)) { statusEl.innerHTML = 'permission denied: this needs a supervisor. are you one? → <a href="mailto:aathmamerinbejoy@gmail.com">email me</a>'; return; }
-    if (map[v]) { map[v](); q.blur(); return; }
-    for (var k in projKeys) if (v.indexOf(k) !== -1) { pick(projKeys[k]); go('projects', 'found in projects.bam: read ' + projKeys[k].slice(1)); q.blur(); return; }
-    statusEl.textContent = 'no feature named "' + q.value.trim() + '" · try pipelines, benchmark, phd, contact, help';
-  });
-  q.addEventListener('focus', function () { q.select(); });
-  q.addEventListener('blur', function () { setTimeout(function () { if (document.activeElement !== q) q.value = lastLocus; }, 0); });
-
   // collapsible features
   document.querySelectorAll('.fbar').forEach(function (b) {
     b.addEventListener('click', function () {
