@@ -89,13 +89,6 @@ h1 em { font-style: normal; color: var(--lav); }
 .role { font-family: var(--mono); font-size: .92rem; color: var(--soft); margin-bottom: 1.25rem; }
 .role b { color: var(--mint); font-weight: 600; }
 .lead { font-size: 1.22rem; line-height: 1.55; max-width: 36rem; }
-.term { margin: 1.5rem 0 0; background: var(--plum); color: #f3eaf8; border-radius: 14px; padding: .9rem 1.1rem 1rem; font-family: var(--mono); font-size: .84rem; line-height: 1.7; max-width: 34rem; box-shadow: 0 10px 30px -12px rgba(59,37,80,.5); position: relative; z-index: 1; }
-.term .dots { display: flex; gap: 6px; margin-bottom: .5rem; }
-.term .dots i { width: 10px; height: 10px; border-radius: 50%; background: #f27aa6; }
-.term .dots i:nth-child(2) { background: #f5c76a; } .term .dots i:nth-child(3) { background: #4fd1a2; }
-.term .p { color: #a597f5; } .term .c { color: #4fd1a2; } .term .s { color: #f5c76a; } .term .m { color: #b9a9c9; }
-.term .cur { display: inline-block; width: .55em; height: 1.05em; background: #f27aa6; vertical-align: -.15em; }
-@media (prefers-reduced-motion: no-preference) { .term .cur { animation: blink 1.1s steps(1) infinite; } @keyframes blink { 50% { opacity: 0; } } }
 .contact { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
 .contact a { display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; font-weight: 600; color: var(--ink); background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; padding: .4rem 1rem; box-shadow: 3px 3px 0 var(--rose); transition: transform .15s, box-shadow .15s; }
 .contact a:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--lav); }
@@ -109,21 +102,6 @@ svg.cover .ref { stroke: var(--soft); stroke-width: 1; opacity: .55; }
 svg.cover .rf { fill: var(--lav); opacity: .9; }
 svg.cover .rr { fill: var(--mint); opacity: .85; }
 svg.cover .mm { fill: var(--rose); }
-
-/* audience switch */
-.who { padding: 1rem 0 3.5rem; }
-.who .box { position: relative; background: var(--card); border: 1.5px solid var(--line); border-radius: 22px; padding: 1.6rem 1.8rem 1.8rem; box-shadow: 6px 6px 0 var(--lav-t); }
-.who .q { font-family: var(--hand); font-size: 1.7rem; margin: 0 0 .7rem; }
-.tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
-.tabs button { font: inherit; font-weight: 600; cursor: pointer; border: 1.5px solid var(--line); background: transparent; color: var(--ink); padding: .5rem 1.1rem; border-radius: 999px; display: inline-flex; align-items: center; gap: .45rem; }
-.tabs button svg { width: 22px; height: 22px; }
-.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); }
-.tabs button[aria-selected="true"] svg { --line: var(--paper); }
-.panel ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .8rem 2rem; }
-.panel li { position: relative; padding-left: 1.7rem; }
-.panel li::before { content: ""; position: absolute; left: 0; top: .45em; width: .9rem; height: .9rem; border-radius: 50% 50% 50% 0; background: var(--rose); transform: rotate(-45deg); }
-.panel.ind li::before { background: var(--mint); border-radius: 3px; transform: rotate(0); }
-.panel .go { margin: 1.2rem 0 0; font-weight: 600; }
 
 /* sections */
 .band { position: relative; padding: 5rem 0; }
@@ -217,17 +195,6 @@ html:not(.js) .stage { display: block; }
 html:not(.js) .spread { visibility: visible; margin-bottom: 14px; }
 html:not(.js) .ctrl { display: none; }
 
-/* journey */
-.path { list-style: none; margin: 0; padding: 0; position: relative; }
-.path::before { content: ""; position: absolute; left: 1.15rem; top: .5rem; bottom: .5rem; width: 3px;
-  background: repeating-linear-gradient(180deg, var(--lav) 0 8px, transparent 8px 14px); opacity: .5; }
-.path li { position: relative; display: grid; grid-template-columns: 2.3rem 8.5rem 1fr; gap: 1rem; padding-bottom: 1.6rem; }
-.path .dot { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--card); border: 2px solid var(--line); display: grid; place-items: center; position: relative; z-index: 1; }
-.path .dot svg { width: 1.4rem; height: 1.4rem; overflow: visible; }
-.path .yr { font-family: var(--hand); font-size: 1.4rem; color: var(--mint); line-height: 1.3; padding-top: .2rem; }
-.path p { margin: 0; padding-top: .3rem; }
-.path li:last-child .dot { background: var(--rose-t); border-style: dashed; }
-
 /* publications */
 .pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
 .pubs li { position: relative; background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.1rem 1.3rem 1.1rem 4.4rem; }
@@ -255,7 +222,6 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
 
 @media (max-width: 60rem) {
   .hero .wrap, .about { grid-template-columns: 1fr; gap: 2.2rem; }
-  .panel ul { grid-template-columns: 1fr; }
   .sides { grid-template-columns: 1fr; gap: 2.4rem; }
   .band { padding: 3.5rem 0; }
   .bar .wrap { padding-top: .2rem; padding-bottom: .4rem; }
@@ -274,8 +240,6 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
   .ctrl button { white-space: nowrap; }
 }
 @media (max-width: 34rem) {
-  .path li { grid-template-columns: 2.3rem 1fr; }
-  .path .yr { grid-column: 2; } .path p { grid-column: 2; padding-top: 0; }
   .dogs { grid-template-columns: 1fr 1fr; }
   .dogs .big { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
   .dogs .big img { object-position: 50% 38%; }
@@ -285,6 +249,90 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .spread.fade { animation: fadeIn .35s ease; } @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } }
+}
+/* hero: intro + live editor */
+.mono { font-family: var(--mono); }
+.hero .wrap { display: block; }
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: end; margin-bottom: 2.6rem; }
+.intro .lead { font-size: 1.12rem; margin-bottom: 0; }
+.intro .contact { margin-top: 1.1rem; }
+.ide-wrap { position: relative; }
+.ide { position: relative; z-index: 2; background: #221830; color: #efe6f5; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px -28px rgba(59,37,80,.75), 0 0 0 1px rgba(255,255,255,.04); }
+.ide-bar, .shell-bar { display: flex; align-items: center; gap: .9rem; padding: .6rem 1rem; background: #170f21; font-family: var(--mono); font-size: .8rem; color: #b9a9c9; }
+.dots { display: inline-flex; gap: 6px; }
+.dots i { width: 11px; height: 11px; border-radius: 50%; background: #f27aa6; }
+.dots i:nth-child(2) { background: #f5c76a; } .dots i:nth-child(3) { background: #4fd1a2; }
+.ide-bar .tab { padding: .2rem .7rem; border-radius: 6px; }
+.ide-bar .tab.on { background: #221830; color: #fff; box-shadow: inset 0 -2px 0 #f27aa6; }
+.skip { margin-left: auto; font: inherit; color: #b9a9c9; background: none; border: 1px solid #3a2f47; border-radius: 6px; padding: .15rem .55rem; cursor: pointer; }
+.skip:hover { color: #fff; border-color: #f27aa6; }
+.ide-body { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
+.editor { display: flex; padding: 1rem 0 1.2rem; min-height: 27.5rem; overflow-x: auto; border-right: 1px solid #3a2f47; }
+.gutter { flex: none; padding: 0 .9rem 0 1rem; text-align: right; color: #5e4f70; font-family: var(--mono); font-size: .8rem; line-height: 1.68; user-select: none; }
+.gutter div.on { color: #f27aa6; }
+pre.code { margin: 0; padding-right: 1.2rem; font-family: var(--mono); font-size: .8rem; line-height: 1.68; color: #efe6f5; white-space: pre; tab-size: 4; }
+.code .k { color: #f27aa6; } .code .s { color: #4fd1a2; } .code .cm { color: #8a7a9e; font-style: italic; }
+.code .n { color: #a597f5; } .code .f { color: #f5c76a; } .code .b { color: #8ec5ff; }
+.code .caret { display: inline-block; width: 2px; height: 1.15em; background: #f27aa6; vertical-align: -.2em; margin-left: 1px; }
+@media (prefers-reduced-motion: no-preference) { .code .caret, .cur { animation: blink 1s steps(1) infinite; } }
+@keyframes blink { 50% { opacity: 0; } }
+.out { display: flex; flex-direction: column; background: #1c1428; }
+.out-bar { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; color: #8a7a9e; padding: .55rem 1rem; border-bottom: 1px solid #3a2f47; }
+.out-log { font-size: .78rem; color: #cbbcd9; padding: .6rem 1rem; min-height: 2.2rem; }
+.out-log .p { color: #a597f5; } .out-log .m { color: #8a7a9e; } .out-log .ok { color: #4fd1a2; } .out-log .w { color: #f27aa6; }
+.browser { position: relative; margin: 0 .8rem; padding: .7rem .7rem .4rem; background: #fbf7f3; border-radius: 10px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.browser .locus { font-size: .68rem; color: #6b5f78; margin-bottom: .3rem; }
+.browser svg.cover { --lav: #7b6be0; --mint: #1f9e74; --rose: #e2588c; --soft: #6b5f78; }
+.browser svg.cover .cov { transform-origin: 0 88px; transform: scaleY(0); transition: transform 1.2s cubic-bezier(.3,.7,.3,1); }
+.browser.go svg.cover .cov { transform: scaleY(1); }
+.js .browser svg.cover rect { opacity: 0; transform: translateX(var(--dx, 40px)); }
+.js .browser.go svg.cover rect { opacity: 1; transform: none; transition: opacity .35s ease var(--d, 0s), transform .55s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
+.js .browser.go svg.cover rect.rf, .js .browser.go svg.cover rect.rr { opacity: .9; }
+
+/* interactive shell */
+.who { padding: 0 0 3rem; margin-top: -1rem; }
+.shell { background: #221830; color: #efe6f5; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px -26px rgba(59,37,80,.7); }
+.log { padding: 1rem 1.2rem .3rem; font-size: .86rem; line-height: 1.65; max-height: 22rem; overflow-y: auto; }
+.log .line { white-space: pre-wrap; }
+.log .m { color: #b9a9c9; } .log .ok { color: #4fd1a2; } .log .w { color: #f27aa6; } .log .y { color: #f5c76a; } .log .n { color: #a597f5; }
+.log .echo .p { color: #a597f5; } .log .echo .c { color: #4fd1a2; }
+.log a { color: #f5c76a; }
+.log ul { margin: .2rem 0 .6rem; padding-left: 0; list-style: none; }
+.log li { position: relative; padding-left: 1.3rem; font-family: "DM Sans", system-ui, sans-serif; font-size: .95rem; margin: .25rem 0; color: #efe6f5; }
+.log li::before { content: "›"; position: absolute; left: .2rem; color: #f27aa6; font-family: var(--mono); }
+.prompt { display: flex; align-items: center; gap: .5rem; padding: .3rem 1.2rem .8rem; font-size: .86rem; }
+.prompt label .p { color: #a597f5; } .prompt label .c { color: #4fd1a2; }
+.prompt input { flex: 1; min-width: 0; font: inherit; color: #fff; background: transparent; border: 0; outline: none; caret-color: #f27aa6; }
+.prompt input::placeholder { color: #5e4f70; }
+.prompt:focus-within { box-shadow: inset 3px 0 0 #f27aa6; }
+.cmds { display: flex; flex-wrap: wrap; gap: .45rem; padding: .8rem 1.2rem 1.1rem; border-top: 1px solid #3a2f47; background: #1c1428; }
+.cmds button { font-family: var(--mono); font-size: .8rem; color: #efe6f5; background: rgba(255,255,255,.06); border: 1px solid #3a2f47; border-radius: 8px; padding: .35rem .7rem; cursor: pointer; }
+.cmds button:hover { border-color: #f27aa6; color: #fff; }
+.cmds button:nth-child(1), .cmds button:nth-child(2) { border-color: #a597f5; color: #fff; }
+
+/* scrolling sequence strips */
+.seqbar { overflow: hidden; white-space: nowrap; padding: .55rem 0; background: var(--plum); font-family: var(--mono); font-size: .82rem; letter-spacing: .18em; user-select: none; }
+.seqbar .track { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .seqbar .track { animation: slide 80s linear infinite; }
+  .seqbar.rev .track { animation-direction: reverse; animation-duration: 95s; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+}
+.seqbar .hd { color: #f5c76a; letter-spacing: .02em; margin-right: 1.2em; }
+.seqbar .A { color: #a597f5; } .seqbar .T { color: #f27aa6; } .seqbar .G { color: #4fd1a2; } .seqbar .C { color: #f5c76a; }
+.seqbar .ta { background: rgba(242,122,166,.22); border-radius: 3px; }
+
+@media (max-width: 60rem) {
+  .intro { grid-template-columns: 1fr; margin-bottom: 2rem; }
+  .ide-body { grid-template-columns: 1fr; }
+  .editor { min-height: 0; border-right: 0; border-bottom: 1px solid #3a2f47; }
+  .browser { margin-bottom: .2rem; }
+  .ide-bar .tab:not(.on) { display: none; }
+}
+@media (max-width: 34rem) {
+  pre.code, .gutter { font-size: .6rem; }
+  .gutter { padding: 0 .6rem 0 .6rem; }
+  pre.code { padding-right: .6rem; }
 }
 </style>
 <script>document.documentElement.className = 'js';</script>
@@ -426,7 +474,6 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#journey">Journey</a>
       <a href="#publications">Publications</a>
       <a href="#life">Outside the lab</a>
       <a href="learning.html">Learning</a>
@@ -438,32 +485,59 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
 <section class="hero" id="top">
   <svg class="dd float c hide-sm" style="--s:46px; left:3%; top:12%" aria-hidden="true"><use href="#i-spark"/></svg>
   <div class="wrap">
-    <div>
-      <p class="hi">hallo, I'm</p>
-      <h1>Aathma Merin <em>Bejoy</em></h1>
-      <p class="role">bioinformatician · <b>Max Delbrück Center</b> · Berlin</p>
-      <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I know the biology behind the data, because I have made it at the bench too. Next I want to build the methods themselves, in a PhD in machine learning for genomics or a bioinformatics team that works on hard data.</p>
-      <div class="term" aria-label="Terminal illustration">
-        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
-        <div><span class="p">aathma@mdc:~$</span> cat background.txt</div>
-        <div class="m">bench: PCR · cell culture · CRISPR · qPCR</div>
-        <div class="m">code&nbsp;: Python · R · SLURM · containers</div>
-        <div><span class="p">aathma@mdc:~$</span> sbatch <span class="s">next_step.sh</span></div>
-        <div class="c">Submitted: ML for genomics <span class="cur" aria-hidden="true"></span></div>
+    <div class="intro">
+      <div>
+        <p class="hi">hallo, I'm</p>
+        <h1>Aathma Merin <em>Bejoy</em></h1>
+        <p class="role">bioinformatician · <b>Max Delbrück Center</b> · Berlin</p>
       </div>
-      <ul class="contact">
-        <li><a href="mailto:aathmamerinbejoy@gmail.com">✉ Email</a></li>
-        <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
-      </ul>
+      <div>
+        <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I know the biology behind the data, because I have made it at the bench too. Next I want to build the methods themselves, in a PhD in machine learning for genomics or a bioinformatics team that works on hard data.</p>
+        <ul class="contact">
+          <li><a href="mailto:aathmamerinbejoy@gmail.com">✉ Email</a></li>
+          <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
+        </ul>
+      </div>
     </div>
-    <div style="position:relative">
-      <svg class="dd float" style="--s:70px; left:-34px; top:-46px; z-index:2" aria-hidden="true"><use href="#i-dna"/></svg>
-      <svg class="dd float b" style="--s:62px; right:-14px; top:-54px; z-index:2" aria-hidden="true"><use href="#i-pipette"/></svg>
-      <svg class="dd float c" style="--s:74px; right:-24px; bottom:-40px; z-index:2" aria-hidden="true"><use href="#i-laptop"/></svg>
-      <svg class="dd float b" style="--s:58px; left:-26px; bottom:-30px; z-index:2" aria-hidden="true"><use href="#i-petri"/></svg>
-      <figure class="note" style="margin:0">
-        <svg class="cover" viewBox="0 0 560 372" role="img" aria-label="Illustration of sequencing reads aligned to a genome, with the coverage above them">
+
+    <div class="ide-wrap">
+      <svg class="dd float" style="--s:66px; left:-30px; top:-40px; z-index:3" aria-hidden="true"><use href="#i-dna"/></svg>
+      <svg class="dd float b" style="--s:58px; right:-18px; top:-44px; z-index:3" aria-hidden="true"><use href="#i-pipette"/></svg>
+      <svg class="dd float c" style="--s:60px; left:-26px; bottom:-30px; z-index:3" aria-hidden="true"><use href="#i-petri"/></svg>
+      <div class="ide" role="group" aria-label="Animated code editor: my profile written as a Python class, and its output, reads aligned to a genome">
+        <div class="ide-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="tab on">aathma.py</span><span class="tab">reads.bam</span>
+          <button type="button" class="skip" id="skip">skip ▸▸</button>
+        </div>
+        <div class="ide-body">
+          <div class="editor"><div class="gutter" id="gutter" aria-hidden="true"></div><pre class="code" id="code"># aathma.py · who I am, written as code
+from mdc_berlin import MobileDNALab
+from the_bench import pcr, cell_culture, crispr, qpcr
+
+class Aathma(Bioinformatician):
+    """Knows the biology. Writes the code."""
+
+    def __init__(self):
+        self.lab     = MobileDNALab(city="Berlin")
+        self.studied = ["bioinformatics", "molecular biotech"]
+        self.bench   = [pcr, cell_culture, crispr, qpcr]
+        self.data    = ["WGS", "RNA-seq", "ChIP-seq"]
+        self.speaks  = ["Python", "R", "Bash"]
+        self.trusts  = "results I can defend"
+
+    def next_step(self):
+        return "machine learning for genomics"
+
+me = Aathma()
+me.align(reads)  # output →</pre></div>
+          <div class="out">
+            <div class="out-bar">OUTPUT</div>
+            <div class="out-log mono"><span class="p">$</span> python aathma.py</div>
+            <div class="browser" id="browser">
+              <div class="locus mono">chr7 : 1,204,880 – 1,205,440 · coverage</div>
+              <svg class="cover" viewBox="0 0 560 372" role="img" aria-label="Illustration of sequencing reads aligned to a genome, with the coverage above them">
 <path class="cov" d="M8,88 L8,83.6 L12,83.6 L12,83.6 L16,83.6 L16,83.6 L20,83.6 L20,83.6 L24,83.6 L24,83.6 L28,83.6 L28,74.9 L32,74.9 L32,74.9 L36,74.9 L36,74.9 L40,74.9 L40,70.6 L44,70.6 L44,70.6 L48,70.6 L48,66.2 L52,66.2 L52,66.2 L56,66.2 L56,66.2 L60,66.2 L60,66.2 L64,66.2 L64,66.2 L68,66.2 L68,66.2 L72,66.2 L72,61.9 L76,61.9 L76,61.9 L80,61.9 L80,61.9 L84,61.9 L84,57.5 L88,57.5 L88,57.5 L92,57.5 L92,57.5 L96,57.5 L96,66.2 L100,66.2 L100,66.2 L104,66.2 L104,61.9 L108,61.9 L108,61.9 L112,61.9 L112,61.9 L116,61.9 L116,70.6 L120,70.6 L120,70.6 L124,70.6 L124,70.6 L128,70.6 L128,70.6 L132,70.6 L132,74.9 L136,74.9 L136,70.6 L140,70.6 L140,66.2 L144,66.2 L144,66.2 L148,66.2 L148,66.2 L152,66.2 L152,61.9 L156,61.9 L156,57.5 L160,57.5 L160,57.5 L164,57.5 L164,61.9 L168,61.9 L168,53.2 L172,53.2 L172,53.2 L176,53.2 L176,48.8 L180,48.8 L180,48.8 L184,48.8 L184,48.8 L188,48.8 L188,48.8 L192,48.8 L192,44.5 L196,44.5 L196,40.1 L200,40.1 L200,40.1 L204,40.1 L204,31.4 L208,31.4 L208,27.1 L212,27.1 L212,31.4 L216,31.4 L216,27.1 L220,27.1 L220,27.1 L224,27.1 L224,31.4 L228,31.4 L228,22.7 L232,22.7 L232,14.0 L236,14.0 L236,14.0 L240,14.0 L240,18.4 L244,18.4 L244,27.1 L248,27.1 L248,27.1 L252,27.1 L252,27.1 L256,27.1 L256,22.7 L260,22.7 L260,18.4 L264,18.4 L264,18.4 L268,18.4 L268,14.0 L272,14.0 L272,14.0 L276,14.0 L276,18.4 L280,18.4 L280,18.4 L284,18.4 L284,27.1 L288,27.1 L288,27.1 L292,27.1 L292,22.7 L296,22.7 L296,31.4 L300,31.4 L300,27.1 L304,27.1 L304,31.4 L308,31.4 L308,40.1 L312,40.1 L312,35.8 L316,35.8 L316,35.8 L320,35.8 L320,35.8 L324,35.8 L324,35.8 L328,35.8 L328,40.1 L332,40.1 L332,31.4 L336,31.4 L336,27.1 L340,27.1 L340,27.1 L344,27.1 L344,27.1 L348,27.1 L348,27.1 L352,27.1 L352,27.1 L356,27.1 L356,27.1 L360,27.1 L360,31.4 L364,31.4 L364,31.4 L368,31.4 L368,27.1 L372,27.1 L372,22.7 L376,22.7 L376,18.4 L380,18.4 L380,14.0 L384,14.0 L384,18.4 L388,18.4 L388,18.4 L392,18.4 L392,27.1 L396,27.1 L396,31.4 L400,31.4 L400,31.4 L404,31.4 L404,35.8 L408,35.8 L408,27.1 L412,27.1 L412,27.1 L416,27.1 L416,31.4 L420,31.4 L420,35.8 L424,35.8 L424,31.4 L428,31.4 L428,35.8 L432,35.8 L432,35.8 L436,35.8 L436,44.5 L440,44.5 L440,40.1 L444,40.1 L444,44.5 L448,44.5 L448,44.5 L452,44.5 L452,44.5 L456,44.5 L456,44.5 L460,44.5 L460,44.5 L464,44.5 L464,44.5 L468,44.5 L468,44.5 L472,44.5 L472,53.2 L476,53.2 L476,48.8 L480,48.8 L480,44.5 L484,44.5 L484,44.5 L488,44.5 L488,44.5 L492,44.5 L492,48.8 L496,48.8 L496,48.8 L500,48.8 L500,57.5 L504,57.5 L504,57.5 L508,57.5 L508,57.5 L512,57.5 L512,57.5 L516,57.5 L516,57.5 L520,57.5 L520,61.9 L524,61.9 L524,61.9 L528,61.9 L528,61.9 L532,61.9 L532,61.9 L536,61.9 L536,61.9 L540,61.9 L540,61.9 L544,61.9 L544,66.2 L548,66.2 L548,70.6 L552,70.6 L552,88 Z"/>
 <line class="ref" x1="8" x2="552" y1="100" y2="100"/>
 <line class="ref" x1="8" x2="8" y1="96" y2="104"/>
@@ -564,41 +638,39 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
 <rect class="rr" x="480" y="248.5" width="72" height="10" rx="3"/>
 <rect class="rf" x="482" y="263.0" width="69" height="10" rx="3"/>
 </svg>
-        <figcaption class="cap">my everyday view: reads piling up on a genome</figcaption>
-      </figure>
+            </div>
+            <div class="out-log mono" id="outmsg"><span class="m">waiting for me.align(reads) …</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="who" aria-label="Who is reading">
+<section class="who" aria-label="Ask me something">
   <div class="wrap">
-    <div class="box">
-      <p class="q">Who's reading? Pick one, I'll keep it short.</p>
-      <div class="tabs" role="tablist">
-        <button role="tab" id="tab-phd" aria-controls="pan-phd" aria-selected="true"><svg viewBox="0 0 64 64" class="dd" style="position:static" aria-hidden="true"><use href="#i-grad"/></svg>A PhD group</button>
-        <button role="tab" id="tab-ind" aria-controls="pan-ind" aria-selected="false" tabindex="-1"><svg viewBox="0 0 64 64" class="dd" style="position:static" aria-hidden="true"><use href="#i-brief"/></svg>A company or core facility</button>
+    <div class="shell">
+      <div class="shell-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">guest@aathma: ~</span></div>
+      <div class="log mono" id="log" aria-live="polite">
+        <div class="line m">Welcome! Who's reading? Run a command, or tap one below.</div>
       </div>
-      <div class="panel" role="tabpanel" id="pan-phd" aria-labelledby="tab-phd">
-        <ul>
-          <li>Two master's degrees: bioinformatics first, then molecular biotechnology at the bench, so I know how the data is made.</li>
-          <li>My master's thesis at the Max Planck Institute in Dortmund became part of a paper in <i>RNA Biology</i> (2025).</li>
-          <li>My first machine learning project tested a pretrained transformer honestly against a simple baseline, and reported that the baseline won.</li>
-          <li>What I want: one question in depth, building methods for genomics, with healthcare as the long-term aim.</li>
-        </ul>
-        <p class="go"><a href="#about">Why a PhD →</a></p>
-      </div>
-      <div class="panel ind" role="tabpanel" id="pan-ind" aria-labelledby="tab-ind" hidden>
-        <ul>
-          <li>Every day: whole-genome sequencing, bulk RNA-seq, ChIP-seq and transposon integration mapping on an HPC cluster with SLURM.</li>
-          <li>I run and maintain pipelines that other people depend on, and I write them so someone else can run them again.</li>
-          <li>Python, R and shell; Apptainer containers and micromamba environments; standard NGS tools from alignment to statistics.</li>
-          <li>Six analyses taken from raw reads to a result, each with its limitations written down.</li>
-        </ul>
-        <p class="go"><a href="#projects">Open the project notebook →</a></p>
+      <form class="prompt mono" id="prompt" autocomplete="off">
+        <label for="cmd"><span class="p">guest@aathma</span>:<span class="c">~</span>$</label>
+        <input id="cmd" name="cmd" spellcheck="false" autocapitalize="off" placeholder="type help">
+      </form>
+      <div class="cmds" id="cmds">
+        <button type="button" data-cmd="./for_phd_groups.sh">./for_phd_groups.sh</button>
+        <button type="button" data-cmd="./for_industry.sh">./for_industry.sh</button>
+        <button type="button" data-cmd="ls projects/">ls projects/</button>
+        <button type="button" data-cmd="cat contact.txt">cat contact.txt</button>
+        <button type="button" data-cmd="cat dogs.txt">cat dogs.txt</button>
+        <button type="button" data-cmd="help">help</button>
       </div>
     </div>
   </div>
 </section>
+
+<div class="seqbar" data-label="&gt;sleeping_beauty_target · TA sites highlighted" aria-hidden="true"></div>
 
 <section class="band alt" id="about">
   <svg class="dd float hide-sm" style="--s:80px; right:4%; top:2.5rem" aria-hidden="true"><use href="#i-cell"/></svg>
@@ -650,6 +722,8 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
     <p class="bridge">the bench tells me what to expect, the code tells me whether it happened</p>
   </div>
 </section>
+
+<div class="seqbar rev" data-label="&gt;chip_peaks.fa" aria-hidden="true"></div>
 
 <section class="band" id="projects">
   <svg class="dd float b hide-sm" style="--s:56px; left:3%; top:4rem" aria-hidden="true"><use href="#i-flask"/></svg>
@@ -926,24 +1000,9 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
   </div>
 </section>
 
-<section class="band alt" id="journey">
-  <svg class="dd float hide-sm" style="--s:70px; right:6%; top:4rem" aria-hidden="true"><use href="#i-chromo"/></svg>
-  <div class="wrap">
-    <p class="kick">// journey</p>
-    <h2>How I <span class="hl">got here</span></h2>
-    <ol class="path">
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-leaf"/></svg></span><span class="yr">2016 to 2019</span><p>B.Sc. in chemistry, botany and zoology at Mahatma Gandhi Memorial College. Biology only, no code yet.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-laptop"/></svg></span><span class="yr">2019 to 2021</span><p>M.Sc. Bioinformatics at Manipal School of Life Sciences. This is where I learned to program and first worked with sequencing data: for my dissertation I searched a public plant metagenome for viruses.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-pipette"/></svg></span><span class="yr">2022 to 2025</span><p>M.Sc. Molecular Biotechnology at Anhalt University of Applied Sciences. I went back to the bench to understand how the data I analyse is made: PCR, cell culture, CRISPR.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-micro"/></svg></span><span class="yr">2024 to 2025</span><p>Max Planck Institute of Molecular Physiology, Dortmund. For my thesis I studied how the enzyme GAPDH binds RNA in acute myeloid leukemia, combining RNA-seq and CLIP-seq data. It was my first time inside a research project from experiment to paper, and it led to two research papers.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-dna"/></svg></span><span class="yr">2025</span><p>Joined the Max Delbrück Center. Here I learned to write analysis that other people depend on: pipelines that run on a cluster and give the same answer twice.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-net"/></svg></span><span class="yr">2026</span><p>First machine learning project, the BulkRNABert evaluation in the notebook above. The main thing it taught me is how easily a model runs without errors on wrongly prepared input, and how much checking that takes.</p></li>
-      <li><span class="dot"><svg viewBox="0 0 64 64" class="dd" style="position:static"><use href="#i-spark"/></svg></span><span class="yr">Next</span><p>Learning to train my own deep learning models in PyTorch, so that I can build such methods myself. I am also going back over the foundations, and I keep a <a href="learning.html">learning page</a> for that.</p></li>
-    </ol>
-  </div>
-</section>
+<div class="seqbar rev" data-label="&gt;reads_R1.fastq" aria-hidden="true"></div>
 
-<section class="band" id="publications">
+<section class="band alt" id="publications">
   <svg class="dd float b hide-sm" style="--s:64px; right:5%; top:4rem" aria-hidden="true"><use href="#i-book"/></svg>
   <div class="wrap">
     <p class="kick">// publications</p>
@@ -1002,7 +1061,7 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
       <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
       <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
     </ul>
-    <small>Berlin, 2026 · drawings and code by me, data from my own projects</small>
+    <small>Berlin, 2026</small>
   </div>
 </footer>
 
@@ -1030,22 +1089,140 @@ footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
     f.addEventListener('dragstart', function (e) { e.preventDefault(); });
   });
 
-  // who's reading tabs
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  function pick(t) {
-    tabs.forEach(function (x) {
-      var on = x === t;
-      x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
-      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
-    });
+  // ---------- live code editor ----------
+  var calmNow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var codeEl = document.getElementById('code'), gutter = document.getElementById('gutter');
+  var browser = document.getElementById('browser'), outmsg = document.getElementById('outmsg');
+  var src = codeEl.textContent.replace(/\s+$/, '');
+  var KW = /^(from|import|class|def|return|self|None|True|False)$/;
+  function tokenize(line) {
+    var out = [], m, re = /(#.*$)|("""[^"]*"""|"[^"]*")|([A-Za-z_][A-Za-z0-9_]*)|(\s+)|([^\sA-Za-z_"#]+)/g, prev = '';
+    while ((m = re.exec(line))) {
+      if (m[1]) out.push(['cm', m[1]]);
+      else if (m[2]) out.push(['s', m[2]]);
+      else if (m[3]) {
+        var w = m[3], c = '';
+        if (KW.test(w)) c = 'k';
+        else if (prev === 'class') c = 'n';
+        else if (prev === 'def') c = 'f';
+        else if (line.charAt(m.index + w.length) === '(') c = 'b';
+        out.push([c, w]); prev = w;
+        continue;
+      } else out.push(['', m[4] || m[5]]);
+      if (!m[4]) prev = '';
+    }
+    return out;
   }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { pick(t); });
-    t.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; pick(n); n.focus();
-      }
+  var lines = src.split('\n').map(tokenize);
+  gutter.innerHTML = lines.map(function (_, i) { return '<div>' + (i + 1) + '</div>'; }).join('');
+  var gl = gutter.children;
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function render(li, ci, caret) {
+    var html = '';
+    for (var i = 0; i <= li && i < lines.length; i++) {
+      var left = i < li ? Infinity : ci;
+      lines[i].forEach(function (seg) {
+        if (left <= 0) return;
+        var t = seg[1].slice(0, left); left -= seg[1].length;
+        html += seg[0] ? '<span class="' + seg[0] + '">' + esc(t) + '</span>' : esc(t);
+      });
+      if (i === li && caret) html += '<span class="caret"></span>';
+      if (i < li) html += '\n';
+    }
+    codeEl.innerHTML = html;
+    for (var g = 0; g < gl.length; g++) gl[g].className = g === li ? 'on' : '';
+  }
+  // reads slide in from alternating sides, left to right
+  var reads = Array.prototype.slice.call(browser.querySelectorAll('svg.cover rect'));
+  var nReads = 0, nMis = 0;
+  reads.forEach(function (r) {
+    var x = +r.getAttribute('x');
+    var mm = r.classList.contains('mm');
+    if (mm) nMis++; else nReads++;
+    r.style.setProperty('--d', (x / 560 * 1.3 + (mm ? .5 : 0)).toFixed(2) + 's');
+    r.style.setProperty('--dx', (r.classList.contains('rr') ? '-' : '') + '50px');
+  });
+  var finished = false;
+  function finish() {
+    if (finished) return; finished = true;
+    render(lines.length - 1, Infinity, true);
+    browser.classList.add('go');
+    outmsg.innerHTML = '<span class="ok">✓</span> ' + nReads + ' reads aligned · <span class="w">' + nMis + ' mismatches flagged</span> · ready for questions';
+    document.getElementById('skip').hidden = true;
+  }
+  document.getElementById('skip').addEventListener('click', finish);
+  if (calmNow) finish();
+  else {
+    var li = 0, ci = 0, lens = lines.map(function (l) { return l.reduce(function (a, s) { return a + s[1].length; }, 0); });
+    (function step() {
+      if (finished) return;
+      if (li >= lines.length) { finish(); return; }
+      if (ci === 0) { var ind = (src.split('\n')[li].match(/^\s*/) || [''])[0].length; ci = ind; }
+      ci += 1;
+      render(li, ci, true);
+      var delay = 9 + Math.random() * 14;
+      if (ci >= lens[li]) { li++; ci = 0; delay = lens[li - 1] === 0 ? 40 : 110; }
+      setTimeout(step, delay);
+    })();
+  }
+
+  // ---------- interactive shell ----------
+  var log = document.getElementById('log'), form = document.getElementById('prompt'), cmd = document.getElementById('cmd');
+  var R = {
+    help: '<div class="line m">commands you can run:</div><div class="line"><span class="y">./for_phd_groups.sh</span>   what a PhD group should know\n<span class="y">./for_industry.sh</span>     what a company or core facility should know\n<span class="y">whoami</span>                the one-line version\n<span class="y">ls projects/</span>          my project notebook\n<span class="y">cat skills.txt</span>        bench and terminal\n<span class="y">cat papers.bib</span>        publications\n<span class="y">cat contact.txt</span>       how to reach me\n<span class="y">cat dogs.txt</span>          important\n<span class="y">clear</span>                 start over</div>',
+    phd: '<div class="line ok">Running for_phd_groups.sh …</div><ul>' +
+      '<li>Two master\'s degrees: bioinformatics first, then molecular biotechnology at the bench, so I know how the data is made.</li>' +
+      '<li>My master\'s thesis at the Max Planck Institute in Dortmund became part of a paper in <i>RNA Biology</i> (2025).</li>' +
+      '<li>My first machine learning project tested a pretrained transformer honestly against a simple baseline, and reported that the baseline won.</li>' +
+      '<li>What I want: one question in depth, building methods for genomics, with healthcare as the long-term aim.</li></ul>' +
+      '<div class="line m">→ <a href="#about">read why I want a PhD</a></div>',
+    ind: '<div class="line ok">Running for_industry.sh …</div><ul>' +
+      '<li>Every day: whole-genome sequencing, bulk RNA-seq, ChIP-seq and transposon integration mapping on an HPC cluster with SLURM.</li>' +
+      '<li>I run and maintain pipelines that other people depend on, and I write them so someone else can run them again.</li>' +
+      '<li>Python, R and shell; Apptainer containers and micromamba environments; standard NGS tools from alignment to statistics.</li>' +
+      '<li>Six analyses taken from raw reads to a result, each with its limitations written down.</li></ul>' +
+      '<div class="line m">→ <a href="#projects">open the project notebook</a></div>',
+    whoami: '<div class="line">aathma · bioinformatician in Berlin · knows the biology, writes the code</div>',
+    ls: '<div class="line"><span class="n">ch1_bulkrnabert_embeddings/</span>   <span class="m">ML · Python · JAX</span>\n<span class="n">ch2_transposon_integration/</span>   <span class="m">Sleeping Beauty · Python · R</span>\n<span class="n">ch3_chipseq_hesc/</span>             <span class="m">MACS3 · HOMER</span>\n<span class="n">ch4_rat_tumour_rnaseq/</span>        <span class="m">Salmon · DESeq2</span>\n<span class="n">ch5_gapdh_aml/</span>                <span class="m">CLIP-seq · qPCR</span>\n<span class="n">ch6_plant_virome/</span>             <span class="m">metaSPAdes · BLAST</span></div><div class="line m">→ <a href="#projects">open them as a book</a></div>',
+    skills: '<div class="line"><span class="y">bench   </span> PCR · qPCR · cell culture · CRISPR · knockdowns\n<span class="y">code    </span> Python · R · Bash · SLURM · Apptainer\n<span class="y">data    </span> WGS · RNA-seq · ChIP-seq · CLIP-seq · integration sites\n<span class="y">ml      </span> scikit-learn · JAX · learning PyTorch</div>',
+    papers: '<div class="line">@article{shamloo2025, journal = {<span class="ok">RNA Biology</span>}, year = 2025, title = {RNA binding of GAPDH …}}\n@article{schloesser2025, journal = {<span class="ok">Non-Coding RNA</span>}, year = 2025, title = {Anti-HIV-1 effect of Enoxacin …}}\n@article{bejoy2021, journal = {<span class="ok">Bioprinting</span>}, year = 2021, title = {3D bioprinting: a review}}</div><div class="line m">→ <a href="#publications">full list</a></div>',
+    contact: '<div class="line">email    <a href="mailto:aathmamerinbejoy@gmail.com">aathmamerinbejoy@gmail.com</a>\ngithub   <a href="https://github.com/AatsBioinfo">github.com/AatsBioinfo</a>\nlinkedin <a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">aathma-merin-bejoy</a>\nbased in Berlin, Germany</div>',
+    dogs: '<div class="line">1 Labrador of my own, and many more I looked after while I was studying in Germany.\n<span class="w">♥</span> <a href="#life">see the photos</a></div>',
+    sudo: '<div class="line w">permission denied: this needs a supervisor.</div><div class="line m">are you one? → cat contact.txt</div>'
+  };
+  var alias = { './for_phd_groups.sh': 'phd', 'phd': 'phd', './for_industry.sh': 'ind', 'industry': 'ind',
+    'ls': 'ls', 'ls projects/': 'ls', 'ls projects': 'ls', 'projects': 'ls', 'cat skills.txt': 'skills', 'skills': 'skills',
+    'cat papers.bib': 'papers', 'papers': 'papers', 'publications': 'papers', 'cat contact.txt': 'contact', 'contact': 'contact',
+    'cat dogs.txt': 'dogs', 'dogs': 'dogs', 'whoami': 'whoami', 'help': 'help', '?': 'help' };
+  function run(c) {
+    c = c.trim().replace(/\s+/g, ' ');
+    if (!c) return;
+    var echo = document.createElement('div'); echo.className = 'line echo';
+    echo.innerHTML = '<span class="p">guest@aathma</span>:<span class="c">~</span>$ ' + esc(c);
+    if (c === 'clear') { log.innerHTML = ''; return; }
+    log.appendChild(echo);
+    var key = alias[c.toLowerCase()] || (/^sudo\b/.test(c) ? 'sudo' : null);
+    var box = document.createElement('div');
+    box.innerHTML = key ? R[key] : '<div class="line w">command not found: ' + esc(c.split(' ')[0]) + '</div><div class="line m">try <span class="y">help</span></div>';
+    log.appendChild(box);
+    log.scrollTop = log.scrollHeight;
+  }
+  form.addEventListener('submit', function (e) { e.preventDefault(); run(cmd.value); cmd.value = ''; });
+  document.getElementById('cmds').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cmd]'); if (b) run(b.getAttribute('data-cmd'));
+  });
+
+  // ---------- scrolling sequence strips ----------
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  document.querySelectorAll('.seqbar').forEach(function (bar) {
+    var s = '';
+    for (var i = 0; i < 160; i++) s += 'ACGT'.charAt(Math.floor(rnd() * 4));
+    var html = s.replace(/TA|[ACGT]/g, function (b) {
+      return b === 'TA' ? '<span class="ta"><span class="T">T</span><span class="A">A</span></span>' : '<span class="' + b + '">' + b + '</span>';
     });
+    var hd = '<span class="hd">' + bar.getAttribute('data-label') + '</span>';
+    bar.innerHTML = '<span class="track">' + hd + html + ' ' + hd + html + ' </span>';
   });
 
   // the project book
