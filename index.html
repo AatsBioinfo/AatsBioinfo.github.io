@@ -17,527 +17,331 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #fbf7f3; --card: #ffffff; --ink: #2a1f36; --soft: #6b5f78; --rule: #eadfe6; --link: #b8336a;
-  --rose: #e2588c; --rose-t: #fce8ef; --lav: #7b6be0; --lav-t: #eeebfc; --mint: #1f9e74; --mint-t: #e3f4ec;
-  --sun: #f2b84b; --sun-t: #fdf3dc; --plum: #3b2550; --line: #2a1f36;
-  --emb: #7b6be0; --hvg: #1f9e74; --conn: #d9cfe0;
-  --pg: #fffdf8; --grid: rgba(123,107,224,.09); --ruled: rgba(226,88,140,.13);
-  --hand: "Caveat", "Segoe Print", cursive; --serif: "Fraunces", Georgia, serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --bg: #ffffff; --panel: #f5f5f4; --ink: #111111; --grey: #6e6e6e; --rule: #e2e2e0; --rule2: #c9c9c7;
+  --acc: #d1006b; --acc-t: #fbe3ef;
+  --read: #c6c6c4; --read2: #aeaeac; --cov: #9b9b99; --solid: #111111; --on-solid: #ffffff;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", "Arial Narrow", sans-serif;
+  --lab: 12.5rem;
 }
 @media (prefers-color-scheme: dark) {
-  :root { --paper: #1a1422; --card: #231b2e; --ink: #f1eaf6; --soft: #b8aac6; --rule: #3a2f47; --link: #f590b7;
-    --rose: #f27aa6; --rose-t: #3a2232; --lav: #a597f5; --lav-t: #2b2545; --mint: #4fd1a2; --mint-t: #1c3329;
-    --sun: #f5c76a; --sun-t: #3a3020; --plum: #120d18; --line: #e6dcef;
-    --emb: #a597f5; --hvg: #4fd1a2; --conn: #4a3f58;
-    --pg: #251d30; --grid: rgba(165,151,245,.10); --ruled: rgba(242,122,166,.14); }
+  :root { --bg: #0f0f10; --panel: #18181a; --ink: #ececea; --grey: #9a9a98; --rule: #29292c; --rule2: #3a3a3e;
+    --acc: #ff4fa3; --acc-t: #3a1428; --read: #4a4a4e; --read2: #5e5e62; --cov: #6a6a6e; --solid: #ececea; --on-solid: #111111; }
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 4.5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 6.4rem; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-body { margin: 0; background: var(--paper); color: var(--ink);
-  font-family: "DM Sans", system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.62; overflow-x: hidden; }
-a { color: var(--link); text-underline-offset: .18em; }
-a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; border-radius: 4px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 1.03rem; line-height: 1.6; }
+a { color: var(--ink); text-decoration-color: var(--acc); text-decoration-thickness: 1.5px; text-underline-offset: .2em; }
+a:hover { color: var(--acc); }
+:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
 p { margin: 0 0 1rem; }
-.wrap { max-width: 70rem; margin: 0 auto; padding: 0 1.5rem; position: relative; }
-.hand { font-family: var(--hand); font-weight: 700; }
-.kick { font-family: var(--mono); font-size: .85rem; color: var(--rose); letter-spacing: .02em; margin: 0 0 .4rem; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 700; color: var(--ink); }
-h2 { font-size: clamp(1.9rem, 3.6vw, 2.5rem); line-height: 1.1; letter-spacing: -.01em; margin: 0 0 1.5rem; }
-h2 .hl { background: linear-gradient(transparent 62%, var(--rose-t) 62%); padding: 0 .1em; }
-h3 { font-size: 1.3rem; line-height: 1.25; margin: 0 0 .4rem; }
-h4 { font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; margin: 1.1rem 0 .25rem; color: var(--lav); font-weight: 600; }
+.mono { font-family: var(--mono); }
+h1, h2, h3 { margin: 0; }
+h3 { font-size: 1.25rem; line-height: 1.3; font-weight: 700; }
+h4 { font-family: var(--mono); font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--grey); margin: 0 0 .35rem; }
 
-/* doodles */
-svg.dd { position: absolute; width: var(--s, 64px); height: var(--s, 64px); overflow: visible; pointer-events: none; z-index: 0; }
-symbol .o { fill: none; stroke: var(--line); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-symbol .fr { fill: var(--rose-t); } symbol .fl { fill: var(--lav-t); } symbol .fm { fill: var(--mint-t); } symbol .fs { fill: var(--sun-t); }
-symbol .sr { fill: var(--rose); } symbol .sl { fill: var(--lav); } symbol .sm { fill: var(--mint); } symbol .ss { fill: var(--sun); }
-symbol .kr { stroke: var(--rose); } symbol .kl { stroke: var(--lav); } symbol .km { stroke: var(--mint); }
-@media (prefers-reduced-motion: no-preference) {
-  .float { animation: bob 6s ease-in-out infinite; }
-  .float.b { animation-duration: 7.5s; animation-delay: -2s; }
-  .float.c { animation-duration: 9s; animation-delay: -4s; }
-  @keyframes bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
-}
-.inl { display: inline-block; width: 1.6em; height: 1.6em; vertical-align: -.45em; overflow: visible; }
+/* ---------- browser header ---------- */
+.top { position: sticky; top: 0; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--ink); }
+.toolbar { display: flex; align-items: center; gap: .6rem 1rem; padding: .55rem 1.25rem; flex-wrap: wrap; border-bottom: 1px solid var(--rule); }
+.brand { font-family: var(--mono); font-weight: 600; font-size: .95rem; text-decoration: none; color: var(--ink); margin-right: .4rem; }
+.brand b { color: var(--acc); font-weight: 600; }
+form.locus { display: flex; align-items: stretch; }
+form.locus input { font: 500 .85rem var(--mono); width: 17rem; max-width: 52vw; padding: .32rem .55rem; border: 1px solid var(--ink); border-right: 0; background: var(--bg); color: var(--ink); border-radius: 0; }
+form.locus input:focus { outline: none; box-shadow: inset 0 0 0 1px var(--acc); border-color: var(--acc); }
+form.locus button { font: 600 .8rem var(--mono); padding: 0 .75rem; border: 1px solid var(--ink); background: var(--solid); color: var(--on-solid); cursor: pointer; border-radius: 0; }
+.hint { font: .76rem var(--mono); color: var(--grey); }
+.hint b { color: var(--ink); font-weight: 500; }
+.links { margin-left: auto; display: flex; gap: 1.1rem; font: .82rem var(--mono); }
+.links a { text-decoration: none; } .links a:hover { text-decoration: underline; text-decoration-color: var(--acc); }
+.status { font: .76rem var(--mono); color: var(--acc); padding: 0 1.25rem; min-height: 0; }
+.status:not(:empty) { padding: .3rem 1.25rem; border-bottom: 1px solid var(--rule); }
+.ideo { position: relative; padding: .45rem 1.25rem .25rem; }
+.chrom { position: relative; height: 16px; border: 1.5px solid var(--ink); border-radius: 9px; overflow: hidden; display: flex; }
+.chrom a { display: block; height: 100%; border-right: 1px solid var(--ink); }
+.chrom a:last-child { border-right: 0; }
+.chrom a:hover { outline: 2px solid var(--acc); outline-offset: -2px; }
+.chrom .g0 { background: var(--bg); } .chrom .g1 { background: var(--rule2); } .chrom .g2 { background: var(--grey); } .chrom .g3 { background: var(--ink); }
+.chrom .g4 { background: repeating-linear-gradient(90deg, var(--ink) 0 2px, var(--bg) 2px 5px); }
+.win { position: absolute; top: .3rem; height: calc(16px + .3rem); border: 2px solid var(--acc); pointer-events: none; transition: left .08s linear; }
+.blabels { display: flex; font: .68rem var(--mono); color: var(--grey); margin-top: .2rem; }
+.blabels a { text-decoration: none; color: inherit; text-align: center; overflow: hidden; white-space: nowrap; text-overflow: clip; }
+.blabels a.on { color: var(--acc); font-weight: 600; }
 
-/* top bar */
-.bar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--paper) 86%, transparent);
-  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px dashed var(--rule); }
-.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: .25rem 1.5rem; flex-wrap: wrap; min-height: 3.6rem; }
-.brand { display: flex; align-items: center; gap: .45rem; font-family: var(--hand); font-size: 1.55rem; font-weight: 700; color: var(--ink); text-decoration: none; }
-.brand svg { width: 26px; height: 26px; }
-.bar nav { display: flex; gap: .15rem; overflow-x: auto; scrollbar-width: none; }
-.bar nav::-webkit-scrollbar { display: none; }
-.bar nav a { white-space: nowrap; text-decoration: none; color: var(--soft); padding: .35rem .7rem; border-radius: 999px; font-size: .95rem; }
-.bar nav a:hover { color: var(--ink); background: var(--rose-t); }
-.bar nav a[aria-current="true"] { color: var(--ink); background: var(--lav-t); font-weight: 700; }
+/* ---------- tracks ---------- */
+.track { display: grid; grid-template-columns: var(--lab) minmax(0, 1fr); border-bottom: 1px solid var(--rule); }
+.tl { background: var(--panel); border-right: 1px solid var(--rule); padding: 1rem 1.25rem; font-family: var(--mono); }
+.tl .f { display: block; font-size: .84rem; font-weight: 600; word-break: break-all; }
+.tl .d { display: block; font-size: .72rem; color: var(--grey); line-height: 1.45; margin-top: .2rem; }
+.tl.sticky > div { position: sticky; top: 7.4rem; }
+.td { padding: 1.4rem 2rem 1.6rem; min-width: 0; }
+.sec { border-top: 1px solid var(--ink); }
+.sec .td { padding-top: 2.4rem; padding-bottom: 2.6rem; }
+.sec h2 { font-family: var(--cond); font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.05; letter-spacing: -.01em; margin-bottom: 1.4rem; }
+.flash { animation: flash 1.4s ease; }
+@keyframes flash { 0%, 40% { box-shadow: inset 4px 0 0 var(--acc); background: var(--acc-t); } 100% { box-shadow: inset 4px 0 0 transparent; } }
 
-/* hero */
-.hero { position: relative; padding: 4rem 0 3.5rem; overflow: hidden;
-  background: radial-gradient(60rem 30rem at 85% 10%, var(--lav-t), transparent 60%), radial-gradient(40rem 26rem at 0% 100%, var(--rose-t), transparent 60%); }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3rem; align-items: center; }
-.hi { font-family: var(--hand); font-size: 1.9rem; color: var(--rose); margin: 0; transform: rotate(-3deg); display: inline-block; }
-h1 { font-size: clamp(2.8rem, 6.4vw, 4.6rem); line-height: 1; letter-spacing: -.025em; margin: .2rem 0 .8rem; }
-h1 em { font-style: normal; color: var(--lav); }
-.role { font-family: var(--mono); font-size: .92rem; color: var(--soft); margin-bottom: 1.25rem; }
-.role b { color: var(--mint); font-weight: 600; }
-.lead { font-size: 1.22rem; line-height: 1.55; max-width: 36rem; }
-.contact { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
-.contact a { display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; font-weight: 600; color: var(--ink); background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; padding: .4rem 1rem; box-shadow: 3px 3px 0 var(--rose); transition: transform .15s, box-shadow .15s; }
-.contact a:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--lav); }
-.note { position: relative; background: var(--card); border-radius: 6px; padding: 1.2rem 1.2rem .8rem; box-shadow: 0 18px 40px -20px rgba(59,37,80,.45); transform: rotate(1.5deg); z-index: 1; }
-.note::before, .note::after { content: ""; position: absolute; width: 84px; height: 24px; background: color-mix(in srgb, var(--sun) 55%, transparent); top: -11px; }
-.note::before { left: 18px; transform: rotate(-6deg); } .note::after { right: 18px; transform: rotate(5deg); background: color-mix(in srgb, var(--rose) 40%, transparent); }
-.note .cap { font-family: var(--hand); font-size: 1.35rem; color: var(--soft); text-align: center; margin: .4rem 0 0; }
-svg.cover { display: block; width: 100%; height: auto; }
-svg.cover .cov { fill: var(--lav); opacity: .28; }
-svg.cover .ref { stroke: var(--soft); stroke-width: 1; opacity: .55; }
-svg.cover .rf { fill: var(--lav); opacity: .9; }
-svg.cover .rr { fill: var(--mint); opacity: .85; }
-svg.cover .mm { fill: var(--rose); }
+/* profile */
+h1 { font-family: var(--cond); font-weight: 700; font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: .95; letter-spacing: -.02em; }
+.role { font: .85rem var(--mono); color: var(--grey); margin: .8rem 0 1.4rem; }
+.role span { color: var(--ink); }
+.prof { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.5rem 3rem; align-items: end; }
+.lead { font-size: 1.15rem; line-height: 1.55; margin: 0; }
+.contact { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; font: .85rem var(--mono); }
+.thin .td { padding-top: .5rem; padding-bottom: .5rem; }
+.thin .tl { padding-top: .55rem; padding-bottom: .55rem; }
+svg { display: block; width: 100%; overflow: visible; }
+svg.ruler { height: 30px; }
+.ruler .ln { stroke: var(--ink); stroke-width: 1; } .ruler .tk { stroke: var(--ink); stroke-width: 1; }
+.ruler text { fill: var(--grey); font: 10px var(--mono); }
+svg.gene { height: 86px; }
+.gene .ln { stroke: var(--ink); stroke-width: 1.4; } .gene .chev { stroke: var(--grey); stroke-width: 1.2; fill: none; }
+.gene .ex { fill: var(--solid); transform-box: fill-box; transform-origin: left center; }
+.gene .utr3 { fill: none; stroke: var(--acc); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.gene text { font: 11.5px var(--mono); fill: var(--ink); }
+.gene .nx { fill: var(--acc); } .gene .sub { fill: var(--grey); font-size: 10.5px; }
+.js .gene .ex { transform: scaleX(0); }
+.js .gene.go .ex { transform: none; transition: transform .5s cubic-bezier(.3,.8,.3,1) var(--d); }
+svg.cover { height: 250px; }
+.cover .cov { fill: var(--cov); opacity: .55; } .cover .ref { stroke: var(--rule2); stroke-width: 1; }
+.cover .rf { fill: var(--read); } .cover .rr { fill: var(--read2); } .cover .mm { fill: var(--acc); }
+.readcap { font: .72rem var(--mono); color: var(--grey); margin-top: .3rem; }
+.readcap b { color: var(--acc); font-weight: 500; }
 
-/* sections */
-.band { position: relative; padding: 5rem 0; }
-.band.alt { background: var(--card); }
-.band.tint { background: linear-gradient(180deg, var(--lav-t), var(--paper)); }
-.band.life { background: linear-gradient(180deg, var(--mint-t), var(--paper)); }
-.about { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 3.5rem; align-items: start; }
-.big { font-size: 1.22rem; line-height: 1.55; }
-.pull { position: relative; background: var(--rose-t); border-radius: 18px; padding: 1.4rem 1.5rem; }
-.pull h3 { margin-bottom: .6rem; }
-.pull p:last-child { margin-bottom: 0; }
+/* audience features */
+.feats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 2.2rem; }
+.fbar { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; height: 30px; padding: 0 .8rem; background: var(--solid); color: var(--on-solid); font: 500 .82rem var(--mono); }
+.fbar:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.fbar .ar { letter-spacing: .3em; opacity: .55; }
+.fbar[aria-expanded="false"] { background: var(--read2); color: var(--ink); }
+.feat ul { margin: .7rem 0 0; padding: 0; list-style: none; }
+.feat li { position: relative; padding-left: 1.3rem; margin-bottom: .55rem; font-size: .97rem; }
+.feat li::before { content: ""; position: absolute; left: 0; top: .62em; width: .7rem; height: 3px; background: var(--acc); }
+.feat .go { font: .8rem var(--mono); margin: .2rem 0 0; }
 
-/* bench + terminal */
-.sides { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; }
-.side { background: var(--card); border: 1.5px solid var(--line); border-radius: 22px; padding: 1.5rem 1.6rem; position: relative; }
-.side.code { background: var(--plum); color: #f3eaf8; border-color: var(--plum); }
-.side.code h3 { color: #fff; } .side.code h4 { color: #a597f5; }
-.side .ic { position: absolute; right: 1.1rem; top: -1.6rem; width: 72px; height: 72px; }
-.side.code .ic { --line: #f3eaf8; }
-.chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .3rem 0 0; padding: 0; list-style: none; }
-.chips li { font-size: .88rem; padding: .18rem .65rem; border-radius: 999px; background: var(--mint-t); }
-.side.code .chips li { font-family: var(--mono); font-size: .8rem; background: rgba(255,255,255,.08); color: #f3eaf8; border: 1px solid rgba(255,255,255,.14); }
-.bridge { text-align: center; font-family: var(--hand); font-size: 1.55rem; color: var(--soft); margin: 1.6rem auto 0; max-width: 40rem; }
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 2rem 3rem; }
+.big { font-size: 1.15rem; line-height: 1.55; }
+.why { border-left: 3px solid var(--acc); padding-left: 1.3rem; align-self: start; }
+.why h3 { margin-bottom: .6rem; }
 
-/* ---------- the book ---------- */
-.bookwrap { position: relative; }
-.book { position: relative; margin: 1rem auto 0; max-width: 66rem; padding: 14px; border-radius: 18px;
-  background: var(--plum); box-shadow: 0 30px 60px -30px rgba(59,37,80,.7), 0 4px 0 #2a1a3a; }
-.book::before { content: ""; position: absolute; inset: 14px; border-radius: 6px; box-shadow: 0 0 0 4px #e9e1d7, 0 0 0 7px #d9cfc3, 0 0 0 9px #f1ebe2; pointer-events: none; }
-.ribbon { position: absolute; top: -10px; right: 5%; width: 20px; height: 48px; background: var(--rose); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); z-index: 6; box-shadow: 0 2px 4px rgba(0,0,0,.2); }
-.stage { position: relative; display: grid; grid-template-columns: 1fr 1fr; perspective: 2600px; }
-.spread { grid-area: 1 / 1 / 2 / 3; display: grid; grid-template-columns: 1fr 1fr; visibility: hidden; }
-.spread.on { visibility: visible; }
-.page { position: relative; background-color: var(--pg); padding: 2.2rem 2.4rem 3rem; font-size: .98rem; line-height: 1.6; min-height: 100%; overflow: hidden; }
-.page.l { border-radius: 6px 0 0 6px; background-image: linear-gradient(90deg, transparent 92%, rgba(0,0,0,.07)), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 100% 100%, 22px 22px, 22px 22px; }
-.page.r { border-radius: 0 6px 6px 0; background-image: linear-gradient(90deg, rgba(0,0,0,.08), transparent 7%), linear-gradient(transparent 27px, var(--ruled) 28px); background-size: 100% 100%, 100% 28px; }
-.page .num { position: absolute; bottom: 1rem; font-family: var(--hand); font-size: 1.15rem; color: var(--soft); }
-.page.l .num { left: 2.4rem; } .page.r .num { right: 2.4rem; }
-.page .ch { font-family: var(--mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--rose); margin: 0 0 .5rem; }
-.page h3 { font-size: 1.45rem; margin-bottom: .5rem; }
-.page .meta { color: var(--soft); font-size: .92rem; margin-bottom: .2rem; }
-.page .tags { display: flex; flex-wrap: wrap; gap: .3rem; list-style: none; padding: 0; margin: .6rem 0 0; }
-.page .tags li { font-family: var(--mono); font-size: .72rem; padding: .1rem .5rem; border-radius: 6px; background: var(--lav-t); color: var(--ink); }
-.page .pic { position: relative; width: 100%; height: 110px; margin: .6rem 0 .2rem; }
-.page .pic svg.dd { position: absolute; }
-.sticky { position: relative; z-index: 1; display: inline-block; font-family: var(--hand); font-size: 1.3rem; line-height: 1.2; background: var(--sun-t); padding: .55rem .8rem .5rem; border-radius: 3px; transform: rotate(-2deg); box-shadow: 0 6px 14px -8px rgba(59,37,80,.5); margin: 1rem 0 0; max-width: 18rem; }
-.sticky.pink { background: var(--rose-t); transform: rotate(2deg); }
-.page .lnk { display: inline-flex; align-items: center; gap: .35rem; margin-top: .4rem; font-weight: 700; }
-.page figure { margin: .3rem 0 0; }
-.page svg.fig { display: block; width: 100%; height: auto; font-family: inherit; }
-.fig .t { fill: var(--ink); font-size: 11.5px; } .fig .a { fill: var(--soft); font-size: 10.5px; }
-.fig .g { stroke: var(--rule); stroke-width: 1; } .fig .c { stroke: var(--conn); stroke-width: 2; }
-.fig .e { fill: var(--emb); stroke: var(--pg); stroke-width: 1.5; } .fig .h { fill: var(--hvg); stroke: var(--pg); stroke-width: 1.5; }
-.page figcaption { color: var(--soft); font-size: .9rem; }
-/* contents + cover */
-.toc { list-style: none; margin: .8rem 0 0; padding: 0; counter-reset: c; }
-.toc li { border-bottom: 1px dotted var(--soft); }
-.toc button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 1.8rem 1fr auto; gap: .5rem; align-items: baseline; width: 100%; padding: .55rem .2rem; border-radius: 6px; }
-.toc button:hover { background: var(--rose-t); }
-.toc button:focus-visible { outline: 2px solid var(--rose); }
-.toc .n { font-family: var(--hand); font-size: 1.3rem; color: var(--rose); }
-.toc .tt { font-weight: 600; line-height: 1.3; }
-.toc .tt small { display: block; font-weight: 400; color: var(--soft); font-size: .82rem; font-family: var(--mono); }
-.toc .pg { font-family: var(--hand); font-size: 1.2rem; color: var(--soft); }
-.coverpg { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-.coverpg h3 { font-size: 2.2rem; margin: .4rem 0; }
-.coverpg .by { font-family: var(--hand); font-size: 1.5rem; color: var(--rose); }
-.coverpg .art { position: relative; width: 220px; height: 200px; margin: 1.2rem auto; }
-.coverpg .hint { font-family: var(--hand); font-size: 1.3rem; color: var(--soft); }
-/* flip overlays */
-.ov, .leaf { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 5; }
-.ov.L, .leaf.L { left: 0; } .ov.R, .leaf.R { left: 50%; }
-.ov > .page, .face > .page { height: 100%; }
-.leaf { transform-style: preserve-3d; transition: transform .85s cubic-bezier(.55,.05,.35,1); }
-.leaf.R { transform-origin: 0 50%; } .leaf.L { transform-origin: 100% 50%; }
-.leaf.R.go { transform: rotateY(-180deg); } .leaf.L.go { transform: rotateY(180deg); }
-.face { position: absolute; inset: 0; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-.face.back { transform: rotateY(180deg); }
-.face::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.0), rgba(0,0,0,.12)); opacity: 0; transition: opacity .85s; }
-.leaf.go .face::after { opacity: 1; }
-/* controls */
-.ctrl { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 1.3rem auto 0; max-width: 66rem; }
-.ctrl button { font: inherit; font-weight: 700; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); padding: .55rem 1.1rem; border-radius: 999px; box-shadow: 3px 3px 0 var(--rose); }
-.ctrl button:disabled { opacity: .35; cursor: default; box-shadow: none; }
-.ctrl .where { font-family: var(--hand); font-size: 1.35rem; color: var(--soft); text-align: center; }
-.pips { display: flex; gap: .4rem; justify-content: center; margin-top: .3rem; }
-.pips i { width: 8px; height: 8px; border-radius: 50%; background: var(--rule); }
-.pips i.on { background: var(--rose); width: 22px; border-radius: 6px; }
-/* no-JS fallback: show every spread */
-html:not(.js) .stage { display: block; }
-html:not(.js) .spread { visibility: visible; margin-bottom: 14px; }
-html:not(.js) .ctrl { display: none; }
+/* skills */
+.srow { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: .8rem; padding: .7rem 0; border-bottom: 1px dashed var(--rule); align-items: baseline; }
+.srow:last-of-type { border-bottom: 0; }
+.srow .k { font: 500 .78rem var(--mono); color: var(--grey); }
+.blocks { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.blocks li { font: .8rem var(--mono); border: 1px solid var(--ink); padding: .12rem .55rem; }
+.blocks li.lr { border-style: dashed; color: var(--grey); }
+.legend { font: .74rem var(--mono); color: var(--grey); margin-top: 1rem; }
+.legend i { display: inline-block; width: 1.4rem; height: .8rem; border: 1px solid var(--ink); vertical-align: -.1rem; margin: 0 .3rem 0 0; }
+.legend i.lr { border-style: dashed; margin-left: 1rem; }
 
-/* publications */
-.pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
-.pubs li { position: relative; background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: 1.1rem 1.3rem 1.1rem 4.4rem; }
-.pubs li .yr { position: absolute; left: 1rem; top: 1rem; font-family: var(--hand); font-size: 1.5rem; color: var(--lav); line-height: 1; }
-.pubs li:nth-child(1) { box-shadow: 5px 5px 0 var(--rose-t); } .pubs li:nth-child(2) { box-shadow: 5px 5px 0 var(--lav-t); } .pubs li:nth-child(3) { box-shadow: 5px 5px 0 var(--mint-t); }
+/* projects as reads */
+.pile { position: relative; height: calc(3 * 34px + 4px); margin: .3rem 0 1.6rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.pile button { all: unset; box-sizing: border-box; cursor: pointer; position: absolute; height: 26px; top: calc(var(--r) * 34px + 4px); left: var(--x); width: var(--w);
+  background: var(--read); color: var(--ink); font: 500 .78rem var(--mono); padding: 0 1.1rem 0 .7rem; display: flex; align-items: center; white-space: nowrap; overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 50%, calc(100% - 11px) 100%, 0 100%); }
+.pile button.rev::after { left: auto; right: 9%; }
+.pile button.rev { clip-path: polygon(11px 0, 100% 0, 100% 100%, 11px 100%, 0 50%); padding: 0 .7rem 0 1.3rem; background: var(--read2); }
+.pile button::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--mm, 70%); width: 3px; background: var(--acc); }
+.pile button:hover { background: var(--rule2); }
+.pile button[aria-pressed="true"] { background: var(--solid); color: var(--on-solid); }
+.pile button:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+.pile .n { color: var(--acc); margin-right: .55rem; }
+.pile button[aria-pressed="true"] .n { color: var(--acc); }
+.pnote { font: .74rem var(--mono); color: var(--grey); margin: -.9rem 0 1.4rem; }
+.proj { border: 1px solid var(--ink); }
+.js .proj { display: none; } .js .proj.on { display: block; }
+html:not(.js) .proj { margin-bottom: 1.2rem; }
+.proj header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; padding: 1rem 1.4rem; border-bottom: 1px solid var(--ink); background: var(--panel); }
+.proj header .m { font: .76rem var(--mono); color: var(--grey); }
+.proj header h3 { flex: 1 1 26rem; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; }
+.cols > div { padding: 1.1rem 1.4rem .4rem; border-bottom: 1px solid var(--rule); }
+.cols > div:nth-child(odd) { border-right: 1px solid var(--rule); }
+.cols > div:nth-last-child(-n+2) { border-bottom: 0; }
+.proj .extra { border-top: 1px solid var(--rule); padding: 1.1rem 1.4rem 1.2rem; }
+.proj .extra figure { margin: 0 0 .6rem; max-width: 34rem; }
+.proj figcaption { font-size: .88rem; color: var(--grey); margin-top: .4rem; }
+.proj .ln { font: 500 .85rem var(--mono); }
+.fig .t { fill: var(--ink); font-size: 11.5px; } .fig .a { fill: var(--grey); font-size: 10.5px; }
+.fig .g { stroke: var(--rule); stroke-width: 1; } .fig .c { stroke: var(--rule2); stroke-width: 2; }
+.fig .e { fill: var(--acc); stroke: var(--bg); stroke-width: 1.5; } .fig .h { fill: var(--ink); stroke: var(--bg); stroke-width: 1.5; }
+
+/* papers */
+.pubs { list-style: none; margin: 0; padding: 0; }
+.pubs li { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--rule); }
+.pubs li:last-child { border-bottom: 0; }
+.pubs .y { font: 600 .9rem var(--mono); color: var(--acc); }
 
 /* life */
-.lifegrid { max-width: 46rem; }
-.lifegrid h3 { display: flex; align-items: center; gap: .5rem; margin-top: 2.5rem; }
-.ph { position: relative; margin: 0; overflow: hidden; border-radius: 14px; aspect-ratio: 3 / 4; background: var(--lav-t); }
+.life { max-width: 50rem; }
+.life h3 { margin: 2.2rem 0 .3rem; font-size: 1.1rem; }
+.ph { position: relative; margin: 0; overflow: hidden; aspect-ratio: 3 / 4; background: var(--panel); }
 .ph img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
 .ph .guard { position: absolute; inset: 0; -webkit-touch-callout: none; }
-.dogs { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: .6rem; margin-top: 1.1rem; }
+.dogs { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4px; margin-top: 1rem; }
 .dogs .big { grid-row: span 2; aspect-ratio: auto; height: 100%; }
-.goal { display: inline-flex; align-items: center; gap: .8rem; margin-top: 2.5rem; background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; padding: .9rem 1.3rem; box-shadow: 4px 4px 0 var(--mint); }
-.goal svg { width: 46px; height: 46px; overflow: visible; }
-.goal p { margin: 0; }
+.goal { margin-top: 2.2rem; font: .9rem var(--mono); border-top: 1px solid var(--ink); padding-top: .8rem; }
+.goal b { color: var(--acc); font-weight: 500; }
 
-footer { background: var(--plum); color: #efe6f5; padding: 3.5rem 0 3rem; position: relative; overflow: hidden; }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem 2rem; }
-footer .say { font-family: var(--hand); font-size: 2.2rem; margin: 0; }
-footer ul { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0; padding: 0; }
-footer a { color: #efe6f5; font-weight: 600; }
-footer small { flex-basis: 100%; opacity: .7; font-size: .9rem; }
+/* status bar footer */
+footer { background: var(--solid); color: var(--on-solid); font: .8rem var(--mono); padding: .9rem 1.25rem; display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; align-items: center; }
+footer a { color: var(--on-solid); }
+footer .sep { opacity: .4; }
+footer .r { margin-left: auto; display: flex; gap: 1.2rem; }
 
-@media (max-width: 60rem) {
-  .hero .wrap, .about { grid-template-columns: 1fr; gap: 2.2rem; }
-  .sides { grid-template-columns: 1fr; gap: 2.4rem; }
-  .band { padding: 3.5rem 0; }
-  .bar .wrap { padding-top: .2rem; padding-bottom: .4rem; }
-  .bar nav { width: 100%; }
-  .stage { display: block; }
-  .spread { display: none; }
-  .spread.on { display: grid; grid-template-columns: 1fr; }
-  .page.l, .page.r { border-radius: 6px; }
-  .page.r { border-top: 2px dashed var(--rule); border-radius: 0 0 6px 6px; } .page.l { border-radius: 6px 6px 0 0; }
-  .page { padding: 1.7rem 1.4rem 2.8rem; }
-  .page.l .num, .page.r .num { left: auto; right: 1.4rem; }
-  .ribbon { right: 12%; }
+@media (max-width: 62rem) {
+  :root { --lab: 1fr; }
+  .track { grid-template-columns: 1fr; }
+  .tl { border-right: 0; border-bottom: 1px solid var(--rule); padding: .45rem 1.1rem; display: flex; gap: .8rem; align-items: baseline; }
+  .tl .d { margin: 0; }
+  .tl.sticky > div { position: static; display: flex; gap: .8rem; align-items: baseline; }
+  .td { padding: 1.1rem 1.1rem 1.3rem; }
+  .sec .td { padding-top: 1.6rem; padding-bottom: 1.8rem; }
+  .prof, .about, .feats, .cols { grid-template-columns: 1fr; }
+  .cols > div:nth-child(odd) { border-right: 0; }
+  .cols > div:nth-last-child(2) { border-bottom: 1px solid var(--rule); }
+  .hint, .links { display: none; }
+  .toolbar { padding: .5rem 1.1rem; }
+  .ideo { padding: .4rem 1.1rem .25rem; }
+  .pile { height: auto; border: 0; display: grid; gap: 6px; }
+  .pile button { position: relative; top: auto; left: auto; width: 100%; }
+  .srow { grid-template-columns: 1fr; gap: .3rem; }
+  svg.cover { height: 180px; }
+  html { scroll-padding-top: 5.6rem; }
   .hide-sm { display: none; }
-  .hero .note { margin-top: 2.5rem !important; }
-  .ctrl .where { font-size: 1.1rem; }
-  .ctrl button { white-space: nowrap; }
+  .genewrap { overflow-x: auto; }
+  svg.gene { min-width: 640px; }
 }
 @media (max-width: 34rem) {
   .dogs { grid-template-columns: 1fr 1fr; }
   .dogs .big { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
   .dogs .big img { object-position: 50% 38%; }
   .dogs .big.low img { object-position: 50% 78%; }
-  .pubs li { padding-left: 1.3rem; padding-top: 2.6rem; }
-  .ctrl button { padding: .5rem .8rem; }
+  .blabels { font-size: .6rem; }
 }
-@media (prefers-reduced-motion: no-preference) {
-  .spread.fade { animation: fadeIn .35s ease; } @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } }
-}
-/* hero: intro + live editor */
-.mono { font-family: var(--mono); }
-.hero .wrap { display: block; }
-.intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem 3rem; align-items: end; margin-bottom: 2.6rem; }
-.intro .lead { font-size: 1.12rem; margin-bottom: 0; }
-.intro .contact { margin-top: 1.1rem; }
-.ide-wrap { position: relative; }
-.ide { position: relative; z-index: 2; background: #221830; color: #efe6f5; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px -28px rgba(59,37,80,.75), 0 0 0 1px rgba(255,255,255,.04); }
-.ide-bar, .shell-bar { display: flex; align-items: center; gap: .9rem; padding: .6rem 1rem; background: #170f21; font-family: var(--mono); font-size: .8rem; color: #b9a9c9; }
-.dots { display: inline-flex; gap: 6px; }
-.dots i { width: 11px; height: 11px; border-radius: 50%; background: #f27aa6; }
-.dots i:nth-child(2) { background: #f5c76a; } .dots i:nth-child(3) { background: #4fd1a2; }
-.ide-bar .tab { padding: .2rem .7rem; border-radius: 6px; }
-.ide-bar .tab.on { background: #221830; color: #fff; box-shadow: inset 0 -2px 0 #f27aa6; }
-.skip { margin-left: auto; font: inherit; color: #b9a9c9; background: none; border: 1px solid #3a2f47; border-radius: 6px; padding: .15rem .55rem; cursor: pointer; }
-.skip:hover { color: #fff; border-color: #f27aa6; }
-.ide-body { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
-.editor { display: flex; padding: 1rem 0 1.2rem; min-height: 27.5rem; overflow-x: auto; border-right: 1px solid #3a2f47; }
-.gutter { flex: none; padding: 0 .9rem 0 1rem; text-align: right; color: #5e4f70; font-family: var(--mono); font-size: .8rem; line-height: 1.68; user-select: none; }
-.gutter div.on { color: #f27aa6; }
-pre.code { margin: 0; padding-right: 1.2rem; font-family: var(--mono); font-size: .8rem; line-height: 1.68; color: #efe6f5; white-space: pre; tab-size: 4; }
-.code .k { color: #f27aa6; } .code .s { color: #4fd1a2; } .code .cm { color: #8a7a9e; font-style: italic; }
-.code .n { color: #a597f5; } .code .f { color: #f5c76a; } .code .b { color: #8ec5ff; }
-.code .caret { display: inline-block; width: 2px; height: 1.15em; background: #f27aa6; vertical-align: -.2em; margin-left: 1px; }
-@media (prefers-reduced-motion: no-preference) { .code .caret, .cur { animation: blink 1s steps(1) infinite; } }
-@keyframes blink { 50% { opacity: 0; } }
-.out { display: flex; flex-direction: column; background: #1c1428; }
-.out-bar { font-family: var(--mono); font-size: .7rem; letter-spacing: .14em; color: #8a7a9e; padding: .55rem 1rem; border-bottom: 1px solid #3a2f47; }
-.out-log { font-size: .78rem; color: #cbbcd9; padding: .6rem 1rem; min-height: 2.2rem; }
-.out-log .p { color: #a597f5; } .out-log .m { color: #8a7a9e; } .out-log .ok { color: #4fd1a2; } .out-log .w { color: #f27aa6; }
-.browser { position: relative; margin: 0 .8rem; padding: .7rem .7rem .4rem; background: #fbf7f3; border-radius: 10px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.browser .locus { font-size: .68rem; color: #6b5f78; margin-bottom: .3rem; }
-.browser svg.cover { --lav: #7b6be0; --mint: #1f9e74; --rose: #e2588c; --soft: #6b5f78; }
-.browser svg.cover .cov { transform-origin: 0 88px; transform: scaleY(0); transition: transform 1.2s cubic-bezier(.3,.7,.3,1); }
-.browser.go svg.cover .cov { transform: scaleY(1); }
-.js .browser svg.cover rect { opacity: 0; transform: translateX(var(--dx, 40px)); }
-.js .browser.go svg.cover rect { opacity: 1; transform: none; transition: opacity .35s ease var(--d, 0s), transform .55s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
-.js .browser.go svg.cover rect.rf, .js .browser.go svg.cover rect.rr { opacity: .9; }
 
-/* interactive shell */
-.who { padding: 0 0 3rem; margin-top: -1rem; }
-.shell { background: #221830; color: #efe6f5; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px -26px rgba(59,37,80,.7); }
-.log { padding: 1rem 1.2rem .3rem; font-size: .86rem; line-height: 1.65; max-height: 22rem; overflow-y: auto; }
-.log .line { white-space: pre-wrap; }
-.log .m { color: #b9a9c9; } .log .ok { color: #4fd1a2; } .log .w { color: #f27aa6; } .log .y { color: #f5c76a; } .log .n { color: #a597f5; }
-.log .echo .p { color: #a597f5; } .log .echo .c { color: #4fd1a2; }
-.log a { color: #f5c76a; }
-.log ul { margin: .2rem 0 .6rem; padding-left: 0; list-style: none; }
-.log li { position: relative; padding-left: 1.3rem; font-family: "DM Sans", system-ui, sans-serif; font-size: .95rem; margin: .25rem 0; color: #efe6f5; }
-.log li::before { content: "›"; position: absolute; left: .2rem; color: #f27aa6; font-family: var(--mono); }
-.prompt { display: flex; align-items: center; gap: .5rem; padding: .3rem 1.2rem .8rem; font-size: .86rem; }
-.prompt label .p { color: #a597f5; } .prompt label .c { color: #4fd1a2; }
-.prompt input { flex: 1; min-width: 0; font: inherit; color: #fff; background: transparent; border: 0; outline: none; caret-color: #f27aa6; }
-.prompt input::placeholder { color: #5e4f70; }
-.prompt:focus-within { box-shadow: inset 3px 0 0 #f27aa6; }
-.cmds { display: flex; flex-wrap: wrap; gap: .45rem; padding: .8rem 1.2rem 1.1rem; border-top: 1px solid #3a2f47; background: #1c1428; }
-.cmds button { font-family: var(--mono); font-size: .8rem; color: #efe6f5; background: rgba(255,255,255,.06); border: 1px solid #3a2f47; border-radius: 8px; padding: .35rem .7rem; cursor: pointer; }
-.cmds button:hover { border-color: #f27aa6; color: #fff; }
-.cmds button:nth-child(1), .cmds button:nth-child(2) { border-color: #a597f5; color: #fff; }
-
-/* scrolling sequence strips */
-.seqbar { overflow: hidden; white-space: nowrap; padding: .55rem 0; background: var(--plum); font-family: var(--mono); font-size: .82rem; letter-spacing: .18em; user-select: none; }
-.seqbar .track { display: inline-block; }
-@media (prefers-reduced-motion: no-preference) {
-  .seqbar .track { animation: slide 80s linear infinite; }
-  .seqbar.rev .track { animation-direction: reverse; animation-duration: 95s; }
-  @keyframes slide { to { transform: translateX(-50%); } }
-}
-.seqbar .hd { color: #f5c76a; letter-spacing: .02em; margin-right: 1.2em; }
-.seqbar .A { color: #a597f5; } .seqbar .T { color: #f27aa6; } .seqbar .G { color: #4fd1a2; } .seqbar .C { color: #f5c76a; }
-.seqbar .ta { background: rgba(242,122,166,.22); border-radius: 3px; }
-
-@media (max-width: 60rem) {
-  .intro { grid-template-columns: 1fr; margin-bottom: 2rem; }
-  .ide-body { grid-template-columns: 1fr; }
-  .editor { min-height: 0; border-right: 0; border-bottom: 1px solid #3a2f47; }
-  .browser { margin-bottom: .2rem; }
-  .ide-bar .tab:not(.on) { display: none; }
-}
-@media (max-width: 34rem) {
-  pre.code, .gutter { font-size: .6rem; }
-  .gutter { padding: 0 .6rem 0 .6rem; }
-  pre.code { padding-right: .6rem; }
+/* ---------- motion ---------- */
+#top { position: relative; }
+main { overflow-x: clip; }
+h1 .word { display: inline-block; white-space: nowrap; }
+h1 .ch { display: inline-block; text-align: center; }
+h1 .ch.call { color: var(--acc); }
+.js .chrom { clip-path: inset(0 100% 0 0 round 9px); }
+.js .chrom.go { clip-path: inset(0 0 0 0 round 9px); transition: clip-path 1.2s cubic-bezier(.3,.7,.2,1); }
+.js .blabels { opacity: 0; } .js .chrom.go ~ .blabels { opacity: 1; transition: opacity .6s ease .8s; }
+.js .win { opacity: 0; } .js .chrom.go ~ .win, .js .chrom.go + .win { opacity: 1; transition: opacity .4s ease 1s, left .08s linear; }
+.js .cover rect { opacity: 0; transform: translateX(var(--dx, 0px)); }
+.js .cover.go rect { opacity: 1; transform: none; transition: opacity .3s ease var(--d), transform .65s cubic-bezier(.2,.8,.2,1) var(--d); }
+.js .cover .cov { transform-origin: 0 88px; transform: scaleY(0); }
+.js .cover.go .cov { transform: none; transition: transform 1.8s cubic-bezier(.3,.7,.3,1) .35s; }
+.guide { position: absolute; width: 1px; background: var(--acc); pointer-events: none; opacity: 0; z-index: 2; }
+.guide.on { opacity: 1; }
+.guide span { position: absolute; top: 2px; left: 6px; font: .68rem var(--mono); background: var(--acc); color: #fff; padding: 0 .35rem; white-space: nowrap; }
+.seq { display: block; white-space: nowrap; overflow: hidden; font: 11px var(--mono); color: var(--grey); letter-spacing: .42em; }
+.seq .ta { color: var(--acc); font-weight: 600; }
+.seqtrack { display: inline-block; animation: seqslide 90s linear infinite; }
+@keyframes seqslide { to { transform: translateX(-50%); } }
+.js .rv { opacity: 0; transform: translateY(16px); }
+.js .rv.in { opacity: 1; transform: none; transition: opacity .6s ease calc(var(--i, 0) * 80ms), transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--i, 0) * 80ms); }
+.js .sec h2 { overflow: hidden; padding-bottom: .12em; margin-bottom: 1.25rem; }
+.js .sec h2 > span { display: inline-block; transform: translateY(110%); }
+.js .sec h2.in > span { transform: none; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+.js .tl .f { clip-path: inset(0 100% 0 0); }
+.js .tl.in .f { clip-path: inset(0); transition: clip-path .6s steps(12) .1s; }
+.js .feat .fbar { clip-path: inset(0 100% 0 0); }
+.js .feat.in .fbar { clip-path: inset(0); transition: clip-path .7s cubic-bezier(.3,.7,.2,1) calc(var(--i, 0) * 150ms); }
+.js .feat li, .js .feat .go { opacity: 0; transform: translateX(-12px); }
+.js .feat.in li, .js .feat.in .go { opacity: 1; transform: none; transition: opacity .5s ease calc(var(--j, 4) * 90ms + .35s), transform .5s ease calc(var(--j, 4) * 90ms + .35s); }
+.js .blocks li { opacity: 0; transform: scale(.7); }
+.js .srow.in .blocks li { opacity: 1; transform: none; transition: opacity .3s ease calc(var(--j) * 45ms + .15s), transform .45s cubic-bezier(.3,1.5,.5,1) calc(var(--j) * 45ms + .15s); }
+.blocks li.lr { animation: learn 2.4s ease-in-out infinite; }
+@keyframes learn { 50% { border-color: var(--acc); color: var(--acc); } }
+.js .pile button { opacity: 0; transform: translateX(-70px); }
+.js .pile button.rev { transform: translateX(70px); }
+.js .pile.in button { opacity: 1; transform: none; transition: opacity .35s ease calc(var(--k) * 110ms), transform .7s cubic-bezier(.2,.8,.2,1) calc(var(--k) * 110ms), background-color .15s; }
+.js .pile.done button { transition: transform .15s ease, background-color .15s; }
+.pile.done button:hover { transform: translateY(-2px); }
+.js .proj.on { animation: projin .5s cubic-bezier(.2,.8,.2,1); }
+@keyframes projin { from { opacity: 0; transform: translateY(12px); } }
+.js .fig g circle { transform: translateX(var(--tx, 0px)); }
+.js .fig g line.c { opacity: 0; }
+.js .fig.in g circle { transform: none; transition: transform 1s cubic-bezier(.2,.8,.2,1) calc(var(--g) * 28ms); }
+.js .fig.in g line.c { opacity: 1; transition: opacity .4s ease calc(var(--g) * 28ms + .7s); }
+.js .ph { clip-path: inset(0 0 100% 0); }
+.js .dogs.in .ph { clip-path: inset(0); transition: clip-path .9s cubic-bezier(.2,.8,.2,1) calc(var(--i, 0) * 90ms); }
+.js .ph img { transform: scale(1.14); }
+.js .dogs.in .ph img { transform: none; transition: transform 1.5s cubic-bezier(.2,.8,.2,1) calc(var(--i, 0) * 90ms); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 </style>
 <script>document.documentElement.className = 'js';</script>
 </head>
 <body>
 
-<!-- reusable hand-drawn doodles -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="i-dna" viewBox="0 0 64 64"><path class="o kr" d="M27.1 8.0H36.9"/><path class="o kl" d="M20.5 14.6H43.5"/><path class="o km" d="M25.2 21.2H38.8"/><path class="o kl" d="M21.9 34.4H42.1"/><path class="o km" d="M22.1 41.0H41.9"/><path class="o kl" d="M24.9 54.2H39.1"/><path class="o" d="M32.0,4.0 L34.7,5.4 L37.4,6.8 L39.8,8.2 L41.9,9.6 L43.6,11.0 L44.9,12.4 L45.7,13.8 L46.0,15.2 L45.7,16.6 L44.9,18.0 L43.6,19.4 L41.9,20.8 L39.8,22.2 L37.4,23.6 L34.7,25.0 L32.0,26.4 L29.3,27.8 L26.6,29.2 L24.2,30.6 L22.1,32.0 L20.4,33.4 L19.1,34.8 L18.3,36.2 L18.0,37.6 L18.3,39.0 L19.1,40.4 L20.4,41.8 L22.1,43.2 L24.2,44.6 L26.6,46.0 L29.3,47.4 L32.0,48.8 L34.7,50.2 L37.4,51.6 L39.8,53.0 L41.9,54.4 L43.6,55.8 L44.9,57.2 L45.7,58.6 L46.0,60.0"/><path class="o" d="M32.0,4.0 L29.3,5.4 L26.6,6.8 L24.2,8.2 L22.1,9.6 L20.4,11.0 L19.1,12.4 L18.3,13.8 L18.0,15.2 L18.3,16.6 L19.1,18.0 L20.4,19.4 L22.1,20.8 L24.2,22.2 L26.6,23.6 L29.3,25.0 L32.0,26.4 L34.7,27.8 L37.4,29.2 L39.8,30.6 L41.9,32.0 L43.6,33.4 L44.9,34.8 L45.7,36.2 L46.0,37.6 L45.7,39.0 L44.9,40.4 L43.6,41.8 L41.9,43.2 L39.8,44.6 L37.4,46.0 L34.7,47.4 L32.0,48.8 L29.3,50.2 L26.6,51.6 L24.2,53.0 L22.1,54.4 L20.4,55.8 L19.1,57.2 L18.3,58.6 L18.0,60.0"/></symbol>
-    <symbol id="i-tube" viewBox="0 0 64 64">
-      <path class="fm" d="M27 30h10v18a5 5 0 0 1-10 0z"/>
-      <path class="o" d="M23 6h18M27 6v42a5 5 0 0 0 10 0V6"/>
-      <path class="o km" d="M27 30h10"/>
-      <circle class="sm" cx="31" cy="40" r="1.8"/><circle class="sm" cx="34" cy="46" r="1.3"/><circle class="sm" cx="30.5" cy="35" r="1"/>
-    </symbol>
-    <symbol id="i-pipette" viewBox="0 0 64 64">
-      <rect class="fr" x="27" y="2" width="10" height="8" rx="3"/>
-      <rect class="o" x="27" y="2" width="10" height="8" rx="3"/>
-      <path class="o" d="M32 10v4"/>
-      <rect class="fl" x="25" y="14" width="14" height="26" rx="4"/>
-      <rect class="o" x="25" y="14" width="14" height="26" rx="4"/>
-      <path class="o" d="M29 20h6M29 26h6M29 32h4"/>
-      <path class="o" d="M28 40l4 20 4-20"/>
-      <circle class="sr" cx="32" cy="62.5" r="1.6"/>
-    </symbol>
-    <symbol id="i-petri" viewBox="0 0 64 64">
-      <ellipse class="fm" cx="32" cy="40" rx="27" ry="11"/>
-      <ellipse class="o" cx="32" cy="40" rx="27" ry="11"/>
-      <path class="o" d="M5 40v4c0 6 12 11 27 11s27-5 27-11v-4"/>
-      <circle class="sr" cx="22" cy="38" r="2.6"/><circle class="sl" cx="35" cy="43" r="2.2"/><circle class="ss" cx="42" cy="36" r="2.4"/><circle class="sr" cx="29" cy="45" r="1.6"/><circle class="sm" cx="45" cy="44" r="1.5"/><circle class="sl" cx="17" cy="43" r="1.5"/>
-      <path class="o" d="M10 30c4-7 13-11 22-11s18 4 22 11" stroke-dasharray="3 5"/>
-    </symbol>
-    <symbol id="i-laptop" viewBox="0 0 64 64">
-      <rect class="fl" x="10" y="12" width="44" height="30" rx="3"/>
-      <rect class="o" x="10" y="12" width="44" height="30" rx="3"/>
-      <path class="fr" d="M4 46h56l-4 6H8z"/><path class="o" d="M4 46h56l-4 6H8z"/>
-      <path class="o kr" d="M25 21l-6 6 6 6M39 21l6 6-6 6"/><path class="o kl" d="M35 19l-6 16"/>
-    </symbol>
-    <symbol id="i-cell" viewBox="0 0 64 64">
-      <path class="fr" d="M32 5c15 0 27 9 27 24 0 16-11 30-28 30C14 59 5 47 5 32 5 16 17 5 32 5z"/>
-      <path class="o" d="M32 5c15 0 27 9 27 24 0 16-11 30-28 30C14 59 5 47 5 32 5 16 17 5 32 5z"/>
-      <circle class="fl" cx="30" cy="30" r="10"/><circle class="o" cx="30" cy="30" r="10"/>
-      <circle class="sl" cx="27" cy="28" r="2.4"/>
-      <path class="o km" d="M44 44c3-1 5-3 5-6M14 22c2-3 4-4 7-5"/>
-      <circle class="ss" cx="46" cy="20" r="2"/><circle class="ss" cx="18" cy="44" r="2.2"/>
-    </symbol>
-    <symbol id="i-micro" viewBox="0 0 64 64">
-      <path class="o" d="M14 58h36"/>
-      <path class="o" d="M42 58v-8c0-9-6-16-15-17"/>
-      <path class="o" d="M18 44h24"/>
-      <g transform="rotate(-22 30 20)"><rect class="fl" x="25" y="4" width="11" height="26" rx="2"/><rect class="o" x="25" y="4" width="11" height="26" rx="2"/><path class="o" d="M27.5 30v5h6v-5"/></g>
-      <circle class="sr" cx="26" cy="44" r="2"/>
-    </symbol>
-    <symbol id="i-flask" viewBox="0 0 64 64">
-      <path class="fl" d="M19 44h26l5 10a3 3 0 0 1-3 4H17a3 3 0 0 1-3-4z"/>
-      <path class="o" d="M25 6h14M28 6v16L14 54a3 3 0 0 0 3 4h30a3 3 0 0 0 3-4L36 22V6"/>
-      <path class="o kl" d="M19 44h26"/>
-      <circle class="sl" cx="30" cy="38" r="1.8"/><circle class="sl" cx="34" cy="31" r="1.3"/>
-    </symbol>
-    <symbol id="i-cut" viewBox="0 0 64 64">
-      <path class="o kl" d="M2 54c8-3 12 3 20 0s12-6 20-3 12 3 20 0" stroke-dasharray="1 0"/>
-      <rect class="fr" x="24" y="6" width="16" height="9" rx="2"/><rect class="o" x="24" y="6" width="16" height="9" rx="2"/>
-      <path class="o kr" d="M32 17v22" stroke-dasharray="3 4"/>
-      <path class="o kr" d="M27 35l5 6 5-6"/>
-    </symbol>
-    <symbol id="i-chromo" viewBox="0 0 64 64">
-      <path class="fr" d="M24 6c5 0 7 5 6 12l-1 9c-.5 3 .5 5 2 5-1.5 0-2.5 2-2 5l1 9c1 7-1 12-6 12s-7-5-6-12l1-9c.5-3-.5-5-2-5 1.5 0 2.5-2 2-5l-1-9c-1-7 1-12 6-12z"/>
-      <path class="o" d="M24 6c5 0 7 5 6 12l-1 9c-.5 3 .5 5 2 5-1.5 0-2.5 2-2 5l1 9c1 7-1 12-6 12s-7-5-6-12l1-9c.5-3-.5-5-2-5 1.5 0 2.5-2 2-5l-1-9c-1-7 1-12 6-12z"/>
-      <path class="fl" d="M40 6c5 0 7 5 6 12l-1 9c-.5 3 .5 5 2 5-1.5 0-2.5 2-2 5l1 9c1 7-1 12-6 12s-7-5-6-12l1-9c.5-3-.5-5-2-5 1.5 0 2.5-2 2-5l-1-9c-1-7 1-12 6-12z"/>
-      <path class="o" d="M40 6c5 0 7 5 6 12l-1 9c-.5 3 .5 5 2 5-1.5 0-2.5 2-2 5l1 9c1 7-1 12-6 12s-7-5-6-12l1-9c.5-3-.5-5-2-5 1.5 0 2.5-2 2-5l-1-9c-1-7 1-12 6-12z"/>
-      <path class="o" d="M19 16h10M19.5 46h10M35 20h10M35.5 44h10"/>
-    </symbol>
-    <symbol id="i-net" viewBox="0 0 64 64">
-      <path class="o kl" d="M10 14L32 10M10 14L32 32M10 14L32 54M10 50L32 10M10 50L32 32M10 50L32 54M32 10L54 32M32 32L54 32M32 54L54 32"/>
-      <circle class="fr" cx="10" cy="14" r="5"/><circle class="o" cx="10" cy="14" r="5"/>
-      <circle class="fr" cx="10" cy="50" r="5"/><circle class="o" cx="10" cy="50" r="5"/>
-      <circle class="fl" cx="32" cy="10" r="5"/><circle class="o" cx="32" cy="10" r="5"/>
-      <circle class="fl" cx="32" cy="32" r="5"/><circle class="o" cx="32" cy="32" r="5"/>
-      <circle class="fl" cx="32" cy="54" r="5"/><circle class="o" cx="32" cy="54" r="5"/>
-      <circle class="fm" cx="54" cy="32" r="6"/><circle class="o" cx="54" cy="32" r="6"/>
-    </symbol>
-    <symbol id="i-leaf" viewBox="0 0 64 64">
-      <path class="fm" d="M10 54C10 28 26 10 56 8c0 30-18 46-46 46z"/>
-      <path class="o" d="M10 54C10 28 26 10 56 8c0 30-18 46-46 46z"/>
-      <path class="o km" d="M10 54L44 20M24 40h12M32 32V20"/>
-      <circle class="fl" cx="46" cy="44" r="7"/><circle class="o" cx="46" cy="44" r="7"/>
-      <path class="o" d="M46 37v14M39 44h14M41 39l10 10M51 39L41 49"/>
-    </symbol>
-    <symbol id="i-spark" viewBox="0 0 64 64">
-      <path class="ss" d="M32 4c2 16 6 22 28 28-22 6-26 12-28 28-2-16-6-22-28-28 22-6 26-12 28-28z"/>
-      <path class="o" d="M32 4c2 16 6 22 28 28-22 6-26 12-28 28-2-16-6-22-28-28 22-6 26-12 28-28z"/>
-    </symbol>
-    <symbol id="i-paw" viewBox="0 0 64 64">
-      <path class="fr" d="M32 30c9 0 17 10 17 18 0 7-7 8-17 8s-17-1-17-8c0-8 8-18 17-18z"/>
-      <path class="o" d="M32 30c9 0 17 10 17 18 0 7-7 8-17 8s-17-1-17-8c0-8 8-18 17-18z"/>
-      <ellipse class="fr" cx="13" cy="28" rx="5" ry="7" transform="rotate(-20 13 28)"/><ellipse class="o" cx="13" cy="28" rx="5" ry="7" transform="rotate(-20 13 28)"/>
-      <ellipse class="fr" cx="24" cy="14" rx="5" ry="7"/><ellipse class="o" cx="24" cy="14" rx="5" ry="7"/>
-      <ellipse class="fr" cx="40" cy="14" rx="5" ry="7"/><ellipse class="o" cx="40" cy="14" rx="5" ry="7"/>
-      <ellipse class="fr" cx="51" cy="28" rx="5" ry="7" transform="rotate(20 51 28)"/><ellipse class="o" cx="51" cy="28" rx="5" ry="7" transform="rotate(20 51 28)"/>
-    </symbol>
-    <symbol id="i-plane" viewBox="0 0 64 64">
-      <path class="fl" d="M4 30L60 6 42 56 30 36z"/>
-      <path class="o" d="M4 30L60 6 42 56 30 36zM30 36L60 6M30 36l-2 14 8-8"/>
-      <path class="o kr" d="M2 46c6 4 12 2 16-2" stroke-dasharray="3 4"/>
-    </symbol>
-    <symbol id="i-shoe" viewBox="0 0 64 64">
-      <path class="fr" d="M6 44c0-8 2-18 6-22 5 1 9 4 12 9 8 2 16 4 24 6 7 2 10 6 10 11v2H6z"/>
-      <path class="o" d="M6 44c0-8 2-18 6-22 5 1 9 4 12 9 8 2 16 4 24 6 7 2 10 6 10 11v2H6z"/>
-      <path class="o" d="M6 50h52M22 32l4-4M28 35l4-4M34 37l4-3"/>
-      <path class="o km" d="M2 30h-0M-4 36h6M-2 42h4"/>
-    </symbol>
-    <symbol id="i-grad" viewBox="0 0 64 64">
-      <path class="fl" d="M2 24L32 12l30 12-30 12z"/><path class="o" d="M2 24L32 12l30 12-30 12z"/>
-      <path class="o" d="M14 29v12c0 4 8 8 18 8s18-4 18-8V29"/>
-      <path class="o kr" d="M56 26v16"/><circle class="sr" cx="56" cy="44" r="3"/>
-    </symbol>
-    <symbol id="i-brief" viewBox="0 0 64 64">
-      <rect class="fm" x="6" y="18" width="52" height="36" rx="5"/><rect class="o" x="6" y="18" width="52" height="36" rx="5"/>
-      <path class="o" d="M24 18v-5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v5M6 32h52"/>
-      <rect class="ss" x="28" y="28" width="8" height="8" rx="2"/><rect class="o" x="28" y="28" width="8" height="8" rx="2"/>
-    </symbol>
-    <symbol id="i-book" viewBox="0 0 64 64">
-      <path class="fr" d="M32 14C24 8 12 8 4 10v40c8-2 20-2 28 4z"/><path class="fl" d="M32 14c8-6 20-6 28-4v40c-8-2-20-2-28 4z"/>
-      <path class="o" d="M32 14C24 8 12 8 4 10v40c8-2 20-2 28 4zM32 14c8-6 20-6 28-4v40c-8-2-20-2-28 4zM32 14v40"/>
-      <path class="o" d="M10 20c6-1 12-1 16 1M10 28c6-1 12-1 16 1M38 21c4-2 10-2 16-1M38 29c4-2 10-2 16-1"/>
-    </symbol>
-    <symbol id="i-heart" viewBox="0 0 64 64">
-      <path class="sr" d="M32 54C14 42 6 32 6 22c0-8 6-14 13-14 6 0 10 4 13 9 3-5 7-9 13-9 7 0 13 6 13 14 0 10-8 20-26 32z"/>
-      <path class="o" d="M32 54C14 42 6 32 6 22c0-8 6-14 13-14 6 0 10 4 13 9 3-5 7-9 13-9 7 0 13 6 13 14 0 10-8 20-26 32z"/>
-    </symbol>
-  </defs>
-</svg>
-
-<header class="bar">
-  <div class="wrap">
-    <a class="brand" href="#top"><svg viewBox="0 0 64 64" aria-hidden="true" class="dd" style="position:static"><use href="#i-dna"/></svg>Aathma</a>
-    <nav aria-label="Sections">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#publications">Publications</a>
-      <a href="#life">Outside the lab</a>
-      <a href="learning.html">Learning</a>
+<header class="top">
+  <div class="toolbar">
+    <a class="brand" href="#top">aathma<b>.</b>genome</a>
+    <form class="locus" id="locus" role="search">
+      <label for="q" class="visually-hidden" style="position:absolute;left:-9999px">Locus or search</label>
+      <input id="q" name="q" spellcheck="false" autocomplete="off" autocapitalize="off" value="aathma:1-1,000">
+      <button type="submit">Go</button>
+    </form>
+    <span class="hint">try <b>phd</b> · <b>industry</b> · <b>projects</b> · <b>contact</b></span>
+    <nav class="links" aria-label="Elsewhere">
+      <a href="mailto:aathmamerinbejoy@gmail.com">email</a>
+      <a href="https://github.com/AatsBioinfo">github</a>
+      <a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">linkedin</a>
+      <a href="learning.html">learning</a>
     </nav>
   </div>
+  <div class="status" id="status" aria-live="polite"></div>
+  <nav class="ideo" aria-label="Sections">
+    <div class="chrom" id="chrom"></div>
+    <div class="win" id="win" aria-hidden="true"></div>
+    <div class="blabels" id="blabels"></div>
+  </nav>
 </header>
 
 <main>
-<section class="hero" id="top">
-  <svg class="dd float c hide-sm" style="--s:46px; left:3%; top:12%" aria-hidden="true"><use href="#i-spark"/></svg>
-  <div class="wrap">
-    <div class="intro">
-      <div>
-        <p class="hi">hallo, I'm</p>
-        <h1>Aathma Merin <em>Bejoy</em></h1>
-        <p class="role">bioinformatician · <b>Max Delbrück Center</b> · Berlin</p>
-      </div>
-      <div>
-        <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I know the biology behind the data, because I have made it at the bench too. Next I want to build the methods themselves, in a PhD in machine learning for genomics or a bioinformatics team that works on hard data.</p>
-        <ul class="contact">
-          <li><a href="mailto:aathmamerinbejoy@gmail.com">✉ Email</a></li>
-          <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
-        </ul>
+<!-- ===== profile + tracks ===== -->
+<div id="top" data-band="profile" data-g="g1">
+  <section class="track" aria-label="Profile">
+    <div class="tl"><span class="f">profile</span><span class="d">aathma merin bejoy</span></div>
+    <div class="td">
+      <div class="prof">
+        <div>
+          <h1>Aathma Merin Bejoy</h1>
+          <p class="role">bioinformatician · <span>Max Delbrück Center</span> · Berlin</p>
+        </div>
+        <div>
+          <p class="lead">I build pipelines that turn sequencing data into results a lab can use. I know the biology behind the data, because I have made it at the bench too. Next I want to build the methods themselves, in a PhD in machine learning for genomics or a bioinformatics team that works on hard data.</p>
+          <ul class="contact">
+            <li><a href="mailto:aathmamerinbejoy@gmail.com">aathmamerinbejoy@gmail.com</a></li>
+            <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="ide-wrap">
-      <svg class="dd float" style="--s:66px; left:-30px; top:-40px; z-index:3" aria-hidden="true"><use href="#i-dna"/></svg>
-      <svg class="dd float b" style="--s:58px; right:-18px; top:-44px; z-index:3" aria-hidden="true"><use href="#i-pipette"/></svg>
-      <svg class="dd float c" style="--s:60px; left:-26px; bottom:-30px; z-index:3" aria-hidden="true"><use href="#i-petri"/></svg>
-      <div class="ide" role="group" aria-label="Animated code editor: my profile written as a Python class, and its output, reads aligned to a genome">
-        <div class="ide-bar">
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="tab on">aathma.py</span><span class="tab">reads.bam</span>
-          <button type="button" class="skip" id="skip">skip ▸▸</button>
-        </div>
-        <div class="ide-body">
-          <div class="editor"><div class="gutter" id="gutter" aria-hidden="true"></div><pre class="code" id="code"># aathma.py · who I am, written as code
-from mdc_berlin import MobileDNALab
-from the_bench import pcr, cell_culture, crispr, qpcr
-
-class Aathma(Bioinformatician):
-    """Knows the biology. Writes the code."""
-
-    def __init__(self):
-        self.lab     = MobileDNALab(city="Berlin")
-        self.studied = ["bioinformatics", "molecular biotech"]
-        self.bench   = [pcr, cell_culture, crispr, qpcr]
-        self.data    = ["WGS", "RNA-seq", "ChIP-seq"]
-        self.speaks  = ["Python", "R", "Bash"]
-        self.trusts  = "results I can defend"
-
-    def next_step(self):
-        return "machine learning for genomics"
-
-me = Aathma()
-me.align(reads)  # output →</pre></div>
-          <div class="out">
-            <div class="out-bar">OUTPUT</div>
-            <div class="out-log mono"><span class="p">$</span> python aathma.py</div>
-            <div class="browser" id="browser">
-              <div class="locus mono">chr7 : 1,204,880 – 1,205,440 · coverage</div>
-              <svg class="cover" viewBox="0 0 560 372" role="img" aria-label="Illustration of sequencing reads aligned to a genome, with the coverage above them">
+  </section>
+  <div class="track thin hide-sm" aria-hidden="true">
+    <div class="tl"><span class="f">ruler</span></div>
+    <div class="td"><svg class="ruler" viewBox="0 0 1000 30" preserveAspectRatio="none"><line class="ln" x1="0" x2="1000" y1="24" y2="24"/><line class="tk" x1="0" x2="0" y1="14" y2="24"/><line class="tk" x1="25" x2="25" y1="20" y2="24"/><line class="tk" x1="50" x2="50" y1="20" y2="24"/><line class="tk" x1="75" x2="75" y1="20" y2="24"/><line class="tk" x1="100" x2="100" y1="14" y2="24"/><line class="tk" x1="125" x2="125" y1="20" y2="24"/><line class="tk" x1="150" x2="150" y1="20" y2="24"/><line class="tk" x1="175" x2="175" y1="20" y2="24"/><line class="tk" x1="200" x2="200" y1="14" y2="24"/><text x="200" y="10" text-anchor="middle">200 bp</text><line class="tk" x1="225" x2="225" y1="20" y2="24"/><line class="tk" x1="250" x2="250" y1="20" y2="24"/><line class="tk" x1="275" x2="275" y1="20" y2="24"/><line class="tk" x1="300" x2="300" y1="14" y2="24"/><line class="tk" x1="325" x2="325" y1="20" y2="24"/><line class="tk" x1="350" x2="350" y1="20" y2="24"/><line class="tk" x1="375" x2="375" y1="20" y2="24"/><line class="tk" x1="400" x2="400" y1="14" y2="24"/><text x="400" y="10" text-anchor="middle">400 bp</text><line class="tk" x1="425" x2="425" y1="20" y2="24"/><line class="tk" x1="450" x2="450" y1="20" y2="24"/><line class="tk" x1="475" x2="475" y1="20" y2="24"/><line class="tk" x1="500" x2="500" y1="14" y2="24"/><line class="tk" x1="525" x2="525" y1="20" y2="24"/><line class="tk" x1="550" x2="550" y1="20" y2="24"/><line class="tk" x1="575" x2="575" y1="20" y2="24"/><line class="tk" x1="600" x2="600" y1="14" y2="24"/><text x="600" y="10" text-anchor="middle">600 bp</text><line class="tk" x1="625" x2="625" y1="20" y2="24"/><line class="tk" x1="650" x2="650" y1="20" y2="24"/><line class="tk" x1="675" x2="675" y1="20" y2="24"/><line class="tk" x1="700" x2="700" y1="14" y2="24"/><line class="tk" x1="725" x2="725" y1="20" y2="24"/><line class="tk" x1="750" x2="750" y1="20" y2="24"/><line class="tk" x1="775" x2="775" y1="20" y2="24"/><line class="tk" x1="800" x2="800" y1="14" y2="24"/><text x="800" y="10" text-anchor="middle">800 bp</text><line class="tk" x1="825" x2="825" y1="20" y2="24"/><line class="tk" x1="850" x2="850" y1="20" y2="24"/><line class="tk" x1="875" x2="875" y1="20" y2="24"/><line class="tk" x1="900" x2="900" y1="14" y2="24"/><line class="tk" x1="925" x2="925" y1="20" y2="24"/><line class="tk" x1="950" x2="950" y1="20" y2="24"/><line class="tk" x1="975" x2="975" y1="20" y2="24"/><line class="tk" x1="1000" x2="1000" y1="14" y2="24"/><text x="2" y="10">aathma</text></svg></div>
+  </div>
+  <div class="track thin">
+    <div class="tl"><span class="f">genes.gtf</span><span class="d">what I do, 5′ → 3′</span></div>
+    <div class="td genewrap"><svg class="gene" viewBox="0 0 1000 86" role="img" aria-label="Gene model of what I do: bench, sequencing, pipelines, statistics, machine learning, and next a dashed 3 prime end"><line class="ln" x1="16" x2="984" y1="46" y2="46"/><path class="chev" d="M70 42l4 4-4 4"/><path class="chev" d="M96 42l4 4-4 4"/><path class="chev" d="M122 42l4 4-4 4"/><path class="chev" d="M148 42l4 4-4 4"/><path class="chev" d="M174 42l4 4-4 4"/><path class="chev" d="M200 42l4 4-4 4"/><path class="chev" d="M226 42l4 4-4 4"/><path class="chev" d="M252 42l4 4-4 4"/><path class="chev" d="M278 42l4 4-4 4"/><path class="chev" d="M304 42l4 4-4 4"/><path class="chev" d="M330 42l4 4-4 4"/><path class="chev" d="M356 42l4 4-4 4"/><path class="chev" d="M382 42l4 4-4 4"/><path class="chev" d="M408 42l4 4-4 4"/><path class="chev" d="M434 42l4 4-4 4"/><path class="chev" d="M460 42l4 4-4 4"/><path class="chev" d="M486 42l4 4-4 4"/><path class="chev" d="M512 42l4 4-4 4"/><path class="chev" d="M538 42l4 4-4 4"/><path class="chev" d="M564 42l4 4-4 4"/><path class="chev" d="M590 42l4 4-4 4"/><path class="chev" d="M616 42l4 4-4 4"/><path class="chev" d="M642 42l4 4-4 4"/><path class="chev" d="M668 42l4 4-4 4"/><path class="chev" d="M694 42l4 4-4 4"/><path class="chev" d="M720 42l4 4-4 4"/><path class="chev" d="M746 42l4 4-4 4"/><path class="chev" d="M772 42l4 4-4 4"/><path class="chev" d="M798 42l4 4-4 4"/><path class="chev" d="M824 42l4 4-4 4"/><path class="chev" d="M850 42l4 4-4 4"/><path class="chev" d="M876 42l4 4-4 4"/><rect class="ex" x="16" y="42.0" width="24" height="8"/><rect class="ex" x="96" y="35.0" width="54" height="22"/><text x="123.0" y="24" text-anchor="middle">bench</text><rect class="ex" x="226" y="35.0" width="120" height="22"/><text x="286.0" y="24" text-anchor="middle">sequencing</text><rect class="ex" x="410" y="35.0" width="130" height="22"/><text x="475.0" y="24" text-anchor="middle">pipelines</text><rect class="ex" x="604" y="35.0" width="90" height="22"/><text x="649.0" y="24" text-anchor="middle">statistics</text><rect class="ex" x="758" y="35.0" width="122" height="22"/><text x="819.0" y="24" text-anchor="middle">machine learning</text><rect class="utr3" x="900" y="40" width="84" height="12"/><text class="nx" x="942" y="24" text-anchor="middle">next →</text><text class="sub" x="16" y="80">AATHMA · + strand · bench → code → methods</text></svg></div>
+  </div>
+  <div class="track thin">
+    <div class="tl"><span class="f">reads.bam</span><span class="d">coverage + alignments</span></div>
+    <div class="td">
+      <svg class="cover" preserveAspectRatio="none" aria-hidden="true" viewBox="0 0 560 372">
 <path class="cov" d="M8,88 L8,83.6 L12,83.6 L12,83.6 L16,83.6 L16,83.6 L20,83.6 L20,83.6 L24,83.6 L24,83.6 L28,83.6 L28,74.9 L32,74.9 L32,74.9 L36,74.9 L36,74.9 L40,74.9 L40,70.6 L44,70.6 L44,70.6 L48,70.6 L48,66.2 L52,66.2 L52,66.2 L56,66.2 L56,66.2 L60,66.2 L60,66.2 L64,66.2 L64,66.2 L68,66.2 L68,66.2 L72,66.2 L72,61.9 L76,61.9 L76,61.9 L80,61.9 L80,61.9 L84,61.9 L84,57.5 L88,57.5 L88,57.5 L92,57.5 L92,57.5 L96,57.5 L96,66.2 L100,66.2 L100,66.2 L104,66.2 L104,61.9 L108,61.9 L108,61.9 L112,61.9 L112,61.9 L116,61.9 L116,70.6 L120,70.6 L120,70.6 L124,70.6 L124,70.6 L128,70.6 L128,70.6 L132,70.6 L132,74.9 L136,74.9 L136,70.6 L140,70.6 L140,66.2 L144,66.2 L144,66.2 L148,66.2 L148,66.2 L152,66.2 L152,61.9 L156,61.9 L156,57.5 L160,57.5 L160,57.5 L164,57.5 L164,61.9 L168,61.9 L168,53.2 L172,53.2 L172,53.2 L176,53.2 L176,48.8 L180,48.8 L180,48.8 L184,48.8 L184,48.8 L188,48.8 L188,48.8 L192,48.8 L192,44.5 L196,44.5 L196,40.1 L200,40.1 L200,40.1 L204,40.1 L204,31.4 L208,31.4 L208,27.1 L212,27.1 L212,31.4 L216,31.4 L216,27.1 L220,27.1 L220,27.1 L224,27.1 L224,31.4 L228,31.4 L228,22.7 L232,22.7 L232,14.0 L236,14.0 L236,14.0 L240,14.0 L240,18.4 L244,18.4 L244,27.1 L248,27.1 L248,27.1 L252,27.1 L252,27.1 L256,27.1 L256,22.7 L260,22.7 L260,18.4 L264,18.4 L264,18.4 L268,18.4 L268,14.0 L272,14.0 L272,14.0 L276,14.0 L276,18.4 L280,18.4 L280,18.4 L284,18.4 L284,27.1 L288,27.1 L288,27.1 L292,27.1 L292,22.7 L296,22.7 L296,31.4 L300,31.4 L300,27.1 L304,27.1 L304,31.4 L308,31.4 L308,40.1 L312,40.1 L312,35.8 L316,35.8 L316,35.8 L320,35.8 L320,35.8 L324,35.8 L324,35.8 L328,35.8 L328,40.1 L332,40.1 L332,31.4 L336,31.4 L336,27.1 L340,27.1 L340,27.1 L344,27.1 L344,27.1 L348,27.1 L348,27.1 L352,27.1 L352,27.1 L356,27.1 L356,27.1 L360,27.1 L360,31.4 L364,31.4 L364,31.4 L368,31.4 L368,27.1 L372,27.1 L372,22.7 L376,22.7 L376,18.4 L380,18.4 L380,14.0 L384,14.0 L384,18.4 L388,18.4 L388,18.4 L392,18.4 L392,27.1 L396,27.1 L396,31.4 L400,31.4 L400,31.4 L404,31.4 L404,35.8 L408,35.8 L408,27.1 L412,27.1 L412,27.1 L416,27.1 L416,31.4 L420,31.4 L420,35.8 L424,35.8 L424,31.4 L428,31.4 L428,35.8 L432,35.8 L432,35.8 L436,35.8 L436,44.5 L440,44.5 L440,40.1 L444,40.1 L444,44.5 L448,44.5 L448,44.5 L452,44.5 L452,44.5 L456,44.5 L456,44.5 L460,44.5 L460,44.5 L464,44.5 L464,44.5 L468,44.5 L468,44.5 L472,44.5 L472,53.2 L476,53.2 L476,48.8 L480,48.8 L480,44.5 L484,44.5 L484,44.5 L488,44.5 L488,44.5 L492,44.5 L492,48.8 L496,48.8 L496,48.8 L500,48.8 L500,57.5 L504,57.5 L504,57.5 L508,57.5 L508,57.5 L512,57.5 L512,57.5 L516,57.5 L516,57.5 L520,57.5 L520,61.9 L524,61.9 L524,61.9 L528,61.9 L528,61.9 L532,61.9 L532,61.9 L536,61.9 L536,61.9 L540,61.9 L540,61.9 L544,61.9 L544,66.2 L548,66.2 L548,70.6 L552,70.6 L552,88 Z"/>
 <line class="ref" x1="8" x2="552" y1="100" y2="100"/>
 <line class="ref" x1="8" x2="8" y1="96" y2="104"/>
@@ -557,127 +361,132 @@ me.align(reads)  # output →</pre></div>
 <line class="ref" x1="484" x2="484" y1="96" y2="104"/>
 <line class="ref" x1="518" x2="518" y1="96" y2="104"/>
 <line class="ref" x1="552" x2="552" y1="96" y2="104"/>
-<rect class="rf" x="8" y="118.0" width="87" height="10" rx="3"/>
-<rect class="rf" x="30" y="132.5" width="66" height="10" rx="3"/>
-<rect class="rf" x="30" y="147.0" width="84" height="10" rx="3"/>
+<rect class="rf" x="8" y="118.0" width="87" height="10" rx="1"/>
+<rect class="rf" x="30" y="132.5" width="66" height="10" rx="1"/>
+<rect class="rf" x="30" y="147.0" width="84" height="10" rx="1"/>
 <rect class="mm" x="59" y="147.0" width="3" height="10"/>
-<rect class="rf" x="41" y="161.5" width="73" height="10" rx="3"/>
-<rect class="rf" x="51" y="176.0" width="81" height="10" rx="3"/>
-<rect class="rf" x="75" y="190.5" width="86" height="10" rx="3"/>
-<rect class="rr" x="87" y="205.0" width="62" height="10" rx="3"/>
-<rect class="rf" x="104" y="118.0" width="59" height="10" rx="3"/>
-<rect class="rr" x="138" y="132.5" width="63" height="10" rx="3"/>
-<rect class="rf" x="143" y="147.0" width="69" height="10" rx="3"/>
-<rect class="rr" x="151" y="161.5" width="72" height="10" rx="3"/>
-<rect class="rr" x="154" y="176.0" width="73" height="10" rx="3"/>
-<rect class="rr" x="158" y="205.0" width="92" height="10" rx="3"/>
-<rect class="rr" x="162" y="219.5" width="80" height="10" rx="3"/>
-<rect class="rf" x="168" y="190.5" width="70" height="10" rx="3"/>
+<rect class="rf" x="41" y="161.5" width="73" height="10" rx="1"/>
+<rect class="rf" x="51" y="176.0" width="81" height="10" rx="1"/>
+<rect class="rf" x="75" y="190.5" width="86" height="10" rx="1"/>
+<rect class="rr" x="87" y="205.0" width="62" height="10" rx="1"/>
+<rect class="rf" x="104" y="118.0" width="59" height="10" rx="1"/>
+<rect class="rr" x="138" y="132.5" width="63" height="10" rx="1"/>
+<rect class="rf" x="143" y="147.0" width="69" height="10" rx="1"/>
+<rect class="rr" x="151" y="161.5" width="72" height="10" rx="1"/>
+<rect class="rr" x="154" y="176.0" width="73" height="10" rx="1"/>
+<rect class="rr" x="158" y="205.0" width="92" height="10" rx="1"/>
+<rect class="rr" x="162" y="219.5" width="80" height="10" rx="1"/>
+<rect class="rf" x="168" y="190.5" width="70" height="10" rx="1"/>
 <rect class="mm" x="218" y="190.5" width="3" height="10"/>
-<rect class="rr" x="168" y="234.0" width="73" height="10" rx="3"/>
-<rect class="rr" x="176" y="118.0" width="67" height="10" rx="3"/>
-<rect class="rr" x="193" y="248.5" width="90" height="10" rx="3"/>
-<rect class="rf" x="198" y="263.0" width="75" height="10" rx="3"/>
+<rect class="rr" x="168" y="234.0" width="73" height="10" rx="1"/>
+<rect class="rr" x="176" y="118.0" width="67" height="10" rx="1"/>
+<rect class="rr" x="193" y="248.5" width="90" height="10" rx="1"/>
+<rect class="rf" x="198" y="263.0" width="75" height="10" rx="1"/>
 <rect class="mm" x="215" y="263.0" width="3" height="10"/>
-<rect class="rr" x="202" y="277.5" width="88" height="10" rx="3"/>
-<rect class="rr" x="206" y="292.0" width="77" height="10" rx="3"/>
-<rect class="rr" x="207" y="306.5" width="88" height="10" rx="3"/>
-<rect class="rr" x="211" y="132.5" width="80" height="10" rx="3"/>
+<rect class="rr" x="202" y="277.5" width="88" height="10" rx="1"/>
+<rect class="rr" x="206" y="292.0" width="77" height="10" rx="1"/>
+<rect class="rr" x="207" y="306.5" width="88" height="10" rx="1"/>
+<rect class="rr" x="211" y="132.5" width="80" height="10" rx="1"/>
 <rect class="mm" x="232" y="132.5" width="3" height="10"/>
-<rect class="rf" x="217" y="321.0" width="88" height="10" rx="3"/>
-<rect class="rf" x="227" y="147.0" width="78" height="10" rx="3"/>
-<rect class="rr" x="228" y="335.5" width="58" height="10" rx="3"/>
-<rect class="rr" x="229" y="350.0" width="70" height="10" rx="3"/>
-<rect class="rr" x="232" y="161.5" width="72" height="10" rx="3"/>
-<rect class="rf" x="234" y="176.0" width="62" height="10" rx="3"/>
-<rect class="rf" x="247" y="190.5" width="89" height="10" rx="3"/>
-<rect class="rf" x="250" y="118.0" width="90" height="10" rx="3"/>
+<rect class="rf" x="217" y="321.0" width="88" height="10" rx="1"/>
+<rect class="rf" x="227" y="147.0" width="78" height="10" rx="1"/>
+<rect class="rr" x="228" y="335.5" width="58" height="10" rx="1"/>
+<rect class="rr" x="229" y="350.0" width="70" height="10" rx="1"/>
+<rect class="rr" x="232" y="161.5" width="72" height="10" rx="1"/>
+<rect class="rf" x="234" y="176.0" width="62" height="10" rx="1"/>
+<rect class="rf" x="247" y="190.5" width="89" height="10" rx="1"/>
+<rect class="rf" x="250" y="118.0" width="90" height="10" rx="1"/>
 <rect class="mm" x="321.5" y="118.0" width="3" height="10"/>
-<rect class="rf" x="257" y="205.0" width="87" height="10" rx="3"/>
+<rect class="rf" x="257" y="205.0" width="87" height="10" rx="1"/>
 <rect class="mm" x="321.5" y="205.0" width="3" height="10"/>
-<rect class="rf" x="260" y="219.5" width="66" height="10" rx="3"/>
+<rect class="rf" x="260" y="219.5" width="66" height="10" rx="1"/>
 <rect class="mm" x="278" y="219.5" width="3" height="10"/>
-<rect class="rr" x="268" y="234.0" width="88" height="10" rx="3"/>
-<rect class="rr" x="286" y="263.0" width="84" height="10" rx="3"/>
-<rect class="rf" x="291" y="248.5" width="68" height="10" rx="3"/>
+<rect class="rr" x="268" y="234.0" width="88" height="10" rx="1"/>
+<rect class="rr" x="286" y="263.0" width="84" height="10" rx="1"/>
+<rect class="rf" x="291" y="248.5" width="68" height="10" rx="1"/>
 <rect class="mm" x="321.5" y="248.5" width="3" height="10"/>
-<rect class="rf" x="292" y="292.0" width="70" height="10" rx="3"/>
-<rect class="rr" x="294" y="335.5" width="65" height="10" rx="3"/>
-<rect class="rf" x="300" y="132.5" width="89" height="10" rx="3"/>
+<rect class="rf" x="292" y="292.0" width="70" height="10" rx="1"/>
+<rect class="rr" x="294" y="335.5" width="65" height="10" rx="1"/>
+<rect class="rf" x="300" y="132.5" width="89" height="10" rx="1"/>
 <rect class="mm" x="321.5" y="132.5" width="3" height="10"/>
-<rect class="rr" x="302" y="277.5" width="70" height="10" rx="3"/>
+<rect class="rr" x="302" y="277.5" width="70" height="10" rx="1"/>
 <rect class="mm" x="321.5" y="277.5" width="3" height="10"/>
-<rect class="rf" x="312" y="147.0" width="71" height="10" rx="3"/>
-<rect class="rr" x="332" y="161.5" width="59" height="10" rx="3"/>
-<rect class="rf" x="333" y="176.0" width="61" height="10" rx="3"/>
-<rect class="rr" x="338" y="219.5" width="65" height="10" rx="3"/>
-<rect class="rr" x="338" y="306.5" width="82" height="10" rx="3"/>
-<rect class="rf" x="340" y="321.0" width="70" height="10" rx="3"/>
-<rect class="rf" x="347" y="118.0" width="69" height="10" rx="3"/>
-<rect class="rf" x="357" y="190.5" width="87" height="10" rx="3"/>
-<rect class="rf" x="360" y="205.0" width="58" height="10" rx="3"/>
-<rect class="rf" x="367" y="234.0" width="59" height="10" rx="3"/>
-<rect class="rr" x="368" y="248.5" width="68" height="10" rx="3"/>
-<rect class="rr" x="372" y="292.0" width="88" height="10" rx="3"/>
-<rect class="rr" x="373" y="335.5" width="62" height="10" rx="3"/>
-<rect class="rf" x="373" y="350.0" width="73" height="10" rx="3"/>
-<rect class="rf" x="379" y="263.0" width="92" height="10" rx="3"/>
-<rect class="rr" x="382" y="277.5" width="86" height="10" rx="3"/>
-<rect class="rr" x="409" y="132.5" width="72" height="10" rx="3"/>
-<rect class="rr" x="410" y="147.0" width="61" height="10" rx="3"/>
-<rect class="rf" x="411" y="161.5" width="86" height="10" rx="3"/>
-<rect class="rf" x="421" y="176.0" width="71" height="10" rx="3"/>
-<rect class="rr" x="424" y="118.0" width="75" height="10" rx="3"/>
+<rect class="rf" x="312" y="147.0" width="71" height="10" rx="1"/>
+<rect class="rr" x="332" y="161.5" width="59" height="10" rx="1"/>
+<rect class="rf" x="333" y="176.0" width="61" height="10" rx="1"/>
+<rect class="rr" x="338" y="219.5" width="65" height="10" rx="1"/>
+<rect class="rr" x="338" y="306.5" width="82" height="10" rx="1"/>
+<rect class="rf" x="340" y="321.0" width="70" height="10" rx="1"/>
+<rect class="rf" x="347" y="118.0" width="69" height="10" rx="1"/>
+<rect class="rf" x="357" y="190.5" width="87" height="10" rx="1"/>
+<rect class="rf" x="360" y="205.0" width="58" height="10" rx="1"/>
+<rect class="rf" x="367" y="234.0" width="59" height="10" rx="1"/>
+<rect class="rr" x="368" y="248.5" width="68" height="10" rx="1"/>
+<rect class="rr" x="372" y="292.0" width="88" height="10" rx="1"/>
+<rect class="rr" x="373" y="335.5" width="62" height="10" rx="1"/>
+<rect class="rf" x="373" y="350.0" width="73" height="10" rx="1"/>
+<rect class="rf" x="379" y="263.0" width="92" height="10" rx="1"/>
+<rect class="rr" x="382" y="277.5" width="86" height="10" rx="1"/>
+<rect class="rr" x="409" y="132.5" width="72" height="10" rx="1"/>
+<rect class="rr" x="410" y="147.0" width="61" height="10" rx="1"/>
+<rect class="rf" x="411" y="161.5" width="86" height="10" rx="1"/>
+<rect class="rf" x="421" y="176.0" width="71" height="10" rx="1"/>
+<rect class="rr" x="424" y="118.0" width="75" height="10" rx="1"/>
 <rect class="mm" x="462" y="118.0" width="3" height="10"/>
-<rect class="rf" x="440" y="205.0" width="80" height="10" rx="3"/>
-<rect class="rf" x="450" y="219.5" width="91" height="10" rx="3"/>
+<rect class="rf" x="440" y="205.0" width="80" height="10" rx="1"/>
+<rect class="rf" x="450" y="219.5" width="91" height="10" rx="1"/>
 <rect class="mm" x="504" y="219.5" width="3" height="10"/>
-<rect class="rf" x="461" y="190.5" width="86" height="10" rx="3"/>
-<rect class="rf" x="469" y="234.0" width="83" height="10" rx="3"/>
-<rect class="rr" x="478" y="147.0" width="74" height="10" rx="3"/>
-<rect class="rr" x="480" y="248.5" width="72" height="10" rx="3"/>
-<rect class="rf" x="482" y="263.0" width="69" height="10" rx="3"/>
+<rect class="rf" x="461" y="190.5" width="86" height="10" rx="1"/>
+<rect class="rf" x="469" y="234.0" width="83" height="10" rx="1"/>
+<rect class="rr" x="478" y="147.0" width="74" height="10" rx="1"/>
+<rect class="rr" x="480" y="248.5" width="72" height="10" rx="1"/>
+<rect class="rf" x="482" y="263.0" width="69" height="10" rx="1"/>
 </svg>
-            </div>
-            <div class="out-log mono" id="outmsg"><span class="m">waiting for me.align(reads) …</span></div>
+      <div class="readcap" id="readcap">&nbsp;</div>
+    </div>
+  </div>
+  <div class="track thin hide-sm" aria-hidden="true">
+    <div class="tl"><span class="f">sequence</span><span class="d">TA sites marked</span></div>
+    <div class="td"><div class="seq"><span class="seqtrack">CGATTCAAATGACGGCAGCAGGCCGGGAGTCCCTGAGAGGCTTGTTCCGGAAATGTGCCATCTGCGTGCGAACGCAGCG<span class="ta">T</span><span class="ta">A</span>AGAGGAGGGC<span class="ta">T</span><span class="ta">A</span>GCTGCGTCGAGATCGGGATCTCAAAACCATCGAAGTCTCCTT<span class="ta">T</span><span class="ta">A</span>CTTCTCTCAAGGCCCTGCGAGA<span class="ta">T</span><span class="ta">A</span>T<span class="ta">T</span><span class="ta">A</span>TCCGGTGTCGGT<span class="ta">T</span><span class="ta">A</span>GCATCGACTTTTCACCAGATTCACCGT<span class="ta">T</span><span class="ta">A</span>AAATGCAGAAGGAATTCGTCT<span class="ta">T</span><span class="ta">A</span>AAGTT<span class="ta">T</span><span class="ta">A</span>CGTCGATTCAAATGACGGCAGCAGGCCGGGAGTCCCTGAGAGGCTTGTTCCGGAAATGTGCCATCTGCGTGCGAACGCAGCG<span class="ta">T</span><span class="ta">A</span>AGAGGAGGGC<span class="ta">T</span><span class="ta">A</span>GCTGCGTCGAGATCGGGATCTCAAAACCATCGAAGTCTCCTT<span class="ta">T</span><span class="ta">A</span>CTTCTCTCAAGGCCCTGCGAGA<span class="ta">T</span><span class="ta">A</span>T<span class="ta">T</span><span class="ta">A</span>TCCGGTGTCGGT<span class="ta">T</span><span class="ta">A</span>GCATCGACTTTTCACCAGATTCACCGT<span class="ta">T</span><span class="ta">A</span>AAATGCAGAAGGAATTCGTCT<span class="ta">T</span><span class="ta">A</span>AAGTT<span class="ta">T</span><span class="ta">A</span>CGT</span></div></div>
+  </div>
+  <section class="track" id="audience" aria-label="For the reader">
+    <div class="tl"><span class="f">audience.bed</span><span class="d">2 features · click to collapse</span></div>
+    <div class="td">
+      <div class="feats">
+        <div class="feat" id="f-phd">
+          <button class="fbar" aria-expanded="true" aria-controls="fl-phd"><span>for_phd_groups</span><span class="ar">›››</span></button>
+          <div id="fl-phd">
+            <ul>
+              <li>Two master's degrees: bioinformatics first, then molecular biotechnology at the bench, so I know how the data is made.</li>
+              <li>My master's thesis at the Max Planck Institute in Dortmund became part of a paper in <i>RNA Biology</i> (2025).</li>
+              <li>My first machine learning project tested a pretrained transformer honestly against a simple baseline, and reported that the baseline won.</li>
+              <li>What I want: one question in depth, building methods for genomics, with healthcare as the long-term aim.</li>
+            </ul>
+            <p class="go"><a href="#about">why a PhD →</a></p>
+          </div>
+        </div>
+        <div class="feat" id="f-ind">
+          <button class="fbar" aria-expanded="true" aria-controls="fl-ind"><span>for_industry</span><span class="ar">›››</span></button>
+          <div id="fl-ind">
+            <ul>
+              <li>Every day: whole-genome sequencing, bulk RNA-seq, ChIP-seq and transposon integration mapping on an HPC cluster with SLURM.</li>
+              <li>I run and maintain pipelines that other people depend on, and I write them so someone else can run them again.</li>
+              <li>Python, R and shell; Apptainer containers and micromamba environments; standard NGS tools from alignment to statistics.</li>
+              <li>Six analyses taken from raw reads to a result, each with its limitations written down.</li>
+            </ul>
+            <p class="go"><a href="#projects">see the projects →</a></p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<section class="who" aria-label="Ask me something">
-  <div class="wrap">
-    <div class="shell">
-      <div class="shell-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="mono">guest@aathma: ~</span></div>
-      <div class="log mono" id="log" aria-live="polite">
-        <div class="line m">Welcome! Who's reading? Run a command, or tap one below.</div>
-      </div>
-      <form class="prompt mono" id="prompt" autocomplete="off">
-        <label for="cmd"><span class="p">guest@aathma</span>:<span class="c">~</span>$</label>
-        <input id="cmd" name="cmd" spellcheck="false" autocapitalize="off" placeholder="type help">
-      </form>
-      <div class="cmds" id="cmds">
-        <button type="button" data-cmd="./for_phd_groups.sh">./for_phd_groups.sh</button>
-        <button type="button" data-cmd="./for_industry.sh">./for_industry.sh</button>
-        <button type="button" data-cmd="ls projects/">ls projects/</button>
-        <button type="button" data-cmd="cat contact.txt">cat contact.txt</button>
-        <button type="button" data-cmd="cat dogs.txt">cat dogs.txt</button>
-        <button type="button" data-cmd="help">help</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="seqbar" data-label="&gt;sleeping_beauty_target · TA sites highlighted" aria-hidden="true"></div>
-
-<section class="band alt" id="about">
-  <svg class="dd float hide-sm" style="--s:80px; right:4%; top:2.5rem" aria-hidden="true"><use href="#i-cell"/></svg>
-  <svg class="dd float c hide-sm" style="--s:40px; left:2%; bottom:3rem" aria-hidden="true"><use href="#i-spark"/></svg>
-  <div class="wrap">
-    <p class="kick">// about</p>
-    <h2>A bioinformatician who <span class="hl">knows the bench</span></h2>
+<!-- ===== about ===== -->
+<section class="track sec" id="about" data-band="about" data-g="g0">
+  <div class="tl sticky"><div><span class="f">about.txt</span><span class="d">who, and why</span></div></div>
+  <div class="td">
+    <h2>A bioinformatician who knows the bench</h2>
     <div class="about">
       <div>
         <p class="big">I am a bioinformatician at the Max Delbrück Center in Berlin. I work with sequencing data every day: whole-genome sequencing, RNA-seq, ChIP-seq, and mapping where transposons integrate in the genome.</p>
@@ -685,8 +494,7 @@ me.align(reads)  # output →</pre></div>
         <p>I learn a lot from people who teach in public, such as Ming "Tommy" Tang and Manolis Kellis. Tommy Tang's writing convinced me that a bioinformatician has to understand the biology behind the data.</p>
         <p>I care about results that can be trusted. I would rather report that a method did not work than present a result I cannot defend, and I write my analyses so that someone else can run them again.</p>
       </div>
-      <div class="pull">
-        <svg class="dd" style="--s:54px; right:-14px; top:-26px" aria-hidden="true"><use href="#i-net"/></svg>
+      <div class="why">
         <h3>Why a PhD</h3>
         <p>I have spent the past years learning to analyse data well. The next step is to build the methods themselves. I am looking for a PhD in machine learning for genomics, where I can work on one question in depth alongside people who develop such methods.</p>
         <p>In the long run I want to build tools that are useful in healthcare, where a patient's molecular data helps to understand their disease or choose their treatment.</p>
@@ -695,110 +503,46 @@ me.align(reads)  # output →</pre></div>
   </div>
 </section>
 
-<section class="band tint" id="skills">
-  <div class="wrap">
-    <p class="kick">// skills</p>
-    <h2>Both sides of the <span class="hl">experiment</span></h2>
-    <div class="sides">
-      <div class="side">
-        <svg class="ic dd" aria-hidden="true"><use href="#i-micro"/></svg>
-        <h3>At the bench</h3>
-        <p>Two years back in the lab to see how sequencing data is really made.</p>
-        <ul class="chips"><li>PCR</li><li>qPCR</li><li>Cell culture</li><li>CRISPR</li><li>Knockdown experiments</li><li>CLIP-seq and RNA-seq from the bench side</li></ul>
-      </div>
-      <div class="side code">
-        <svg class="ic dd" aria-hidden="true"><use href="#i-laptop"/></svg>
-        <h3>At the terminal</h3>
-        <h4>Languages and compute</h4>
-        <ul class="chips"><li>Python</li><li>R</li><li>Bash</li><li>SLURM</li><li>Apptainer</li><li>micromamba</li></ul>
-        <h4>Sequencing data</h4>
-        <ul class="chips"><li>WGS</li><li>bulk RNA-seq</li><li>ChIP-seq</li><li>CLIP-seq</li><li>metagenomics</li><li>integration sites</li></ul>
-        <h4>Tools</h4>
-        <ul class="chips"><li>BWA</li><li>STAR</li><li>Salmon</li><li>samtools</li><li>bedtools</li><li>MACS3</li><li>deepTools</li><li>HOMER</li><li>DESeq2</li><li>MultiQC</li></ul>
-        <h4>Machine learning</h4>
-        <ul class="chips"><li>scikit-learn</li><li>JAX / Haiku</li><li>learning PyTorch</li></ul>
-      </div>
-    </div>
-    <p class="bridge">the bench tells me what to expect, the code tells me whether it happened</p>
+<!-- ===== skills ===== -->
+<section class="track sec" id="skills" data-band="skills" data-g="g2">
+  <div class="tl sticky"><div><span class="f">skills.vcf</span><span class="d">bench and terminal</span></div></div>
+  <div class="td">
+    <h2>Both sides of the experiment</h2>
+    <div class="srow"><span class="k">bench</span><ul class="blocks"><li>PCR</li><li>qPCR</li><li>cell culture</li><li>CRISPR</li><li>knockdown experiments</li></ul></div>
+    <div class="srow"><span class="k">languages</span><ul class="blocks"><li>Python</li><li>R</li><li>Bash</li></ul></div>
+    <div class="srow"><span class="k">compute</span><ul class="blocks"><li>SLURM / HPC</li><li>Apptainer</li><li>micromamba</li></ul></div>
+    <div class="srow"><span class="k">data types</span><ul class="blocks"><li>WGS</li><li>bulk RNA-seq</li><li>ChIP-seq</li><li>CLIP-seq</li><li>metagenomics</li><li>integration sites</li></ul></div>
+    <div class="srow"><span class="k">tools</span><ul class="blocks"><li>BWA</li><li>STAR</li><li>Salmon</li><li>samtools</li><li>bedtools</li><li>MACS3</li><li>deepTools</li><li>HOMER</li><li>DESeq2</li><li>FastQC / MultiQC</li></ul></div>
+    <div class="srow"><span class="k">machine learning</span><ul class="blocks"><li>scikit-learn</li><li>JAX / Haiku</li><li class="lr">PyTorch</li></ul></div>
+    <p class="legend"><i></i>in use <i class="lr"></i>learning now</p>
   </div>
 </section>
 
-<div class="seqbar rev" data-label="&gt;chip_peaks.fa" aria-hidden="true"></div>
+<!-- ===== projects ===== -->
+<section class="track sec" id="projects" data-band="projects" data-g="g3">
+  <div class="tl sticky"><div><span class="f">projects.bam</span><span class="d">6 reads · click one</span></div></div>
+  <div class="td">
+    <h2>Projects</h2>
+    <div class="pile" id="pile">
+      <button style="--r:0; --x:0%; --w:47%; --mm:91%" data-p="p1" aria-pressed="true"><span class="n">1</span>BulkRNABert embeddings · 2026</button>
+      <button class="rev" style="--r:0; --x:50%; --w:50%; --mm:91%" data-p="p2" aria-pressed="false"><span class="n">2</span>Sleeping Beauty integration sites</button>
+      <button style="--r:1; --x:9%; --w:40%; --mm:91%" data-p="p3" aria-pressed="false"><span class="n">3</span>ChIP-seq in hESC · 2026</button>
+      <button class="rev" style="--r:1; --x:53%; --w:38%; --mm:91%" data-p="p4" aria-pressed="false"><span class="n">4</span>Rat tumour RNA-seq</button>
+      <button style="--r:2; --x:3%; --w:43%; --mm:91%" data-p="p5" aria-pressed="false"><span class="n">5</span>GAPDH in AML · 2024–25</button>
+      <button class="rev" style="--r:2; --x:49%; --w:44%; --mm:91%" data-p="p6" aria-pressed="false"><span class="n">6</span>Plant virome · 2021</button>
+    </div>
+    <p class="pnote">each read is one project · click one to open it</p>
 
-<section class="band" id="projects">
-  <svg class="dd float b hide-sm" style="--s:56px; left:3%; top:4rem" aria-hidden="true"><use href="#i-flask"/></svg>
-  <svg class="dd float hide-sm" style="--s:44px; right:5%; top:5rem" aria-hidden="true"><use href="#i-spark"/></svg>
-  <div class="wrap bookwrap">
-    <p class="kick">// projects</p>
-    <h2>My project <span class="hl">notebook</span></h2>
-    <p style="max-width:40rem">Six analyses, each from raw data to a result, with what I learned and what the analysis cannot show. Turn the pages, or jump to a chapter from the contents.</p>
-
-    <div class="book" id="book" aria-roledescription="book" aria-label="Project notebook">
-      <span class="ribbon" aria-hidden="true"></span>
-      <div class="stage">
-
-        <!-- 0: contents + cover -->
-        <article class="spread on" data-title="Contents">
-          <div class="page l">
-            <p class="ch">contents</p>
-            <h3>What's inside</h3>
-            <ol class="toc">
-              <li><button data-go="1"><span class="n">1</span><span class="tt">BulkRNABert embeddings and tissue of origin<small>ML · Python · JAX</small></span><span class="pg">p. 3</span></button></li>
-              <li><button data-go="3"><span class="n">2</span><span class="tt">Where a transposon lands, and whether it is switched on<small>Sleeping Beauty · Python · R</small></span><span class="pg">p. 7</span></button></li>
-              <li><button data-go="4"><span class="n">3</span><span class="tt">ChIP-seq in human embryonic stem cells<small>MACS3 · HOMER · repeats</small></span><span class="pg">p. 9</span></button></li>
-              <li><button data-go="5"><span class="n">4</span><span class="tt">Differential expression in a rat tumour model<small>Salmon · DESeq2</small></span><span class="pg">p. 11</span></button></li>
-              <li><button data-go="6"><span class="n">5</span><span class="tt">GAPDH as an RNA-binding protein in AML<small>CLIP-seq · RNA-seq · qPCR</small></span><span class="pg">p. 13</span></button></li>
-              <li><button data-go="7"><span class="n">6</span><span class="tt">Looking for viruses in a plant metagenome<small>metaSPAdes · BLAST</small></span><span class="pg">p. 15</span></button></li>
-            </ol>
-            <span class="num">1</span>
-          </div>
-          <div class="page r coverpg">
-            <p class="ch">lab notebook · 2021 to 2026</p>
-            <h3>Projects</h3>
-            <p class="by">Aathma M. Bejoy</p>
-            <div class="art" aria-hidden="true">
-              <svg class="dd" style="--s:96px; left:62px; top:40px"><use href="#i-book"/></svg>
-              <svg class="dd float" style="--s:54px; left:0; top:0"><use href="#i-dna"/></svg>
-              <svg class="dd float b" style="--s:50px; right:0; top:6px"><use href="#i-tube"/></svg>
-              <svg class="dd float c" style="--s:52px; left:6px; bottom:0"><use href="#i-chromo"/></svg>
-              <svg class="dd float" style="--s:52px; right:4px; bottom:4px"><use href="#i-net"/></svg>
-            </div>
-            <p class="hint">turn the page →</p>
-            <span class="num">2</span>
-          </div>
-        </article>
-
-        <!-- 1: BulkRNABert (a) -->
-        <article class="spread" data-title="1 · BulkRNABert">
-          <div class="page l">
-            <p class="ch">chapter 1 · machine learning</p>
-            <h3>Do BulkRNABert embeddings know which tissue a cell line comes from?</h3>
-            <p class="meta">Machine learning side project at the MDC, 2026</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:86px; left:0; top:12px"><use href="#i-net"/></svg>
-              <svg class="dd" style="--s:70px; left:110px; top:22px"><use href="#i-petri"/></svg>
-              <svg class="dd" style="--s:40px; left:200px; top:6px"><use href="#i-spark"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>BulkRNABert is a transformer model pretrained on tumour RNA-seq data. I ran it on 1,657 cancer cell lines from DepMap and asked whether its embeddings separate the 26 tissue lineages better than plain PCA on gene expression. A colleague set me this task to test my skills, and I did it alongside my lab work.</p>
-            <span class="num">3</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>Python (NumPy, pandas, scikit-learn), model inference in JAX/Haiku, Apptainer containers, SLURM. New for me: running a pretrained transformer, matching my data to a model's fixed gene vocabulary, and evaluating embeddings with cross-validation against a simple baseline.</p>
-            <h4>Outcome</h4>
-            <p>The embeddings are worse than the baseline. With a kNN classifier they reach a balanced accuracy of 0.40, and PCA on the 2,000 most variable genes reaches 0.60. The gap depends strongly on the lineage: lymphoid and lung cell lines are classified almost equally well by both, whereas pancreas, kidney and pleura are lost in the embedding.</p>
-            <p class="sticky">plain PCA won. worth knowing before trusting a big model.</p>
-            <span class="num">4</span>
-          </div>
-        </article>
-
-        <!-- 2: BulkRNABert (b) figure -->
-        <article class="spread" data-title="1 · BulkRNABert, results">
-          <div class="page l">
-            <p class="ch">chapter 1 · figure</p>
-            <figure>
-              <svg class="fig" viewBox="0 0 484 516" role="img" aria-labelledby="figt figd">
+    <article class="proj on" id="p1">
+      <header><h3>Do BulkRNABert embeddings know which tissue a cell line comes from?</h3><span class="m">Machine learning side project at the MDC, 2026</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>BulkRNABert is a transformer model pretrained on tumour RNA-seq data. I ran it on 1,657 cancer cell lines from DepMap and asked whether its embeddings separate the 26 tissue lineages better than plain PCA on gene expression. A colleague set me this task to test my skills, and I did it alongside my lab work.</p></div>
+        <div><h4>Skills I used and learned</h4><p>Python (NumPy, pandas, scikit-learn), model inference in JAX/Haiku, Apptainer containers, SLURM. New for me: running a pretrained transformer, matching my data to a model's fixed gene vocabulary, and evaluating embeddings with cross-validation against a simple baseline.</p></div>
+        <div><h4>Outcome</h4><p>The embeddings are worse than the baseline. With a kNN classifier they reach a balanced accuracy of 0.40, and PCA on the 2,000 most variable genes reaches 0.60. The gap depends strongly on the lineage: lymphoid and lung cell lines are classified almost equally well by both, whereas pancreas, kidney and pleura are lost in the embedding.</p></div>
+        <div><h4>Limitations</h4><p>I only ran the model; I did not train or fine-tune it. I tested one way of pooling the embeddings and one layer, and one task. The model was trained on tumours and I applied it to cell lines, which may explain part of the gap.</p></div>
+      </div>
+      <div class="extra">
+        <figure><svg class="fig" viewBox="0 0 484 516" role="img" aria-labelledby="figt figd">
 <title id="figt">Recall per lineage for BulkRNABert embeddings and expression PCA</title>
 <desc id="figd">Expression PCA classifies 23 of 26 lineages better than the embeddings.</desc>
 <circle class="e" cx="173" cy="12" r="4.5"/><text class="t" x="182" y="16">BulkRNABert embeddings</text>
@@ -839,191 +583,85 @@ me.align(reads)  # output →</pre></div>
 <g><title>Biliary tract (43 cell lines): embeddings 0.19, expression PCA 0.16</title><text class="t" x="158" y="447.5" text-anchor="end">Biliary tract</text><line class="c" x1="223.8" x2="216.9" y1="443.5" y2="443.5"/><circle class="e" cx="223.8" cy="443.5" r="4.5"/><circle class="h" cx="216.9" cy="443.5" r="4.5"/></g>
 <g><title>Thyroid (22 cell lines): embeddings 0.00, expression PCA 0.04</title><text class="t" x="158" y="464.5" text-anchor="end">Thyroid</text><line class="c" x1="168.0" x2="181.5" y1="460.5" y2="460.5"/><circle class="e" cx="168.0" cy="460.5" r="4.5"/><circle class="h" cx="181.5" cy="460.5" r="4.5"/></g>
 <g><title>Prostate (13 cell lines): embeddings 0.08, expression PCA 0.00</title><text class="t" x="158" y="481.5" text-anchor="end">Prostate</text><line class="c" x1="191.1" x2="168.0" y1="477.5" y2="477.5"/><circle class="e" cx="191.1" cy="477.5" r="4.5"/><circle class="h" cx="168.0" cy="477.5" r="4.5"/></g>
-</svg>
-            </figure>
-            <span class="num">5</span>
-          </div>
-          <div class="page r">
-            <figure style="margin:0"><figcaption style="font-size:.98rem; color:var(--ink)">Share of each lineage's cell lines classified correctly (recall, 5-fold cross-validation). Expression PCA is ahead in 23 of 26 lineages.</figcaption></figure>
-            <h4>Limitations</h4>
-            <p>I only ran the model; I did not train or fine-tune it. I tested one way of pooling the embeddings and one layer, and one task. The model was trained on tumours and I applied it to cell lines, which may explain part of the gap.</p>
-            <ul class="tags"><li>Python</li><li>JAX</li><li>scikit-learn</li><li>DepMap</li><li>Apptainer</li><li>SLURM</li></ul>
-            <p style="margin-top:1.2rem"><a class="lnk" href="https://github.com/AatsBioinfo/depmap-bulkrnabert">Code, methods and full results on GitHub →</a></p>
-            <span class="num">6</span>
-          </div>
-        </article>
-
-        <!-- 3: Sleeping Beauty -->
-        <article class="spread" data-title="2 · Transposon integration">
-          <div class="page l">
-            <p class="ch">chapter 2 · mobile DNA</p>
-            <h3>Does it matter where a transposon lands? Linking integration sites to reporter expression</h3>
-            <p class="meta">Mobile DNA lab, MDC</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:84px; left:0; top:14px"><use href="#i-cut"/></svg>
-              <svg class="dd" style="--s:70px; left:104px; top:20px"><use href="#i-chromo"/></svg>
-              <svg class="dd" style="--s:60px; left:190px; top:30px"><use href="#i-dna"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>In a barcoded Sleeping Beauty reporter assay, every integration carries a reporter gene and a unique barcode. The barcode is read in DNA to find where the transposon landed, and in RNA to see whether the reporter is switched on. I built the pipeline from raw reads to the final call set: require the exact transposon end, align the genomic flank to the human genome, read the barcode, and count it in RNA. I then annotated each site with its gene context and tested enrichment against randomly shuffled sites.</p>
-            <span class="num">7</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>Python, R, SLURM, bedtools, GENCODE annotation, permutation tests and chi-square tests. I removed index hopping between samples, and I accepted weak calls only when independent evidence supported them, not by lowering a threshold. I also used the transposon's own biology as a quality check: Sleeping Beauty integrates at TA sites, so genuine calls should sit on one.</p>
-            <h4>Outcome</h4>
-            <p>A validated set of integration sites, each with a location and an on/off call, for the lab's further analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p>
-            <h4>Limitations</h4>
-            <p>The sites are recovered by PCR, which favours some regions of the genome over others. The analysis asks whether a site is on or off given where it landed, not where the transposon prefers to land. Expression is a yes/no call that depends on a threshold.</p>
-            <p class="sticky pink">real calls sit on a TA site. the biology is the QC.</p>
-            <span class="num">8</span>
-          </div>
-        </article>
-
-        <!-- 4: ChIP-seq -->
-        <article class="spread" data-title="3 · ChIP-seq">
-          <div class="page l">
-            <p class="ch">chapter 3 · gene regulation</p>
-            <h3>ChIP-seq of a transcription factor in human embryonic stem cells</h3>
-            <p class="meta">Mobile DNA lab, MDC, 2026</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:80px; left:0; top:14px"><use href="#i-cell"/></svg>
-              <svg class="dd" style="--s:70px; left:100px; top:18px"><use href="#i-dna"/></svg>
-              <svg class="dd" style="--s:62px; left:184px; top:30px"><use href="#i-laptop"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>I built the analysis for a ChIP-seq experiment from raw reads to annotated binding sites: alignment, quality control, peak calling on replicates, consensus peaks, annotation against genes and repeat families, and motif analysis. Because the lab studies repeats, I kept reads that map to several places in a separate track instead of discarding them.</p>
-            <ul class="tags"><li>BWA</li><li>samtools</li><li>MACS3</li><li>deepTools</li><li>HOMER</li><li>bedtools</li></ul>
-            <span class="num">9</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>BWA, samtools, MACS3, deepTools, HOMER, bedtools, SLURM, micromamba environments. New for me: judging whether a weak ChIP is real. I learned to use a failed replicate as a control for library bias, to compare against shuffled regions, and to let the motif result decide when promoter peaks could be artefacts.</p>
-            <h4>Outcome</h4>
-            <p>A documented pipeline with one script per step and a decision log, which the lab can rerun on the next round of samples. The biological results are unpublished and belong to the lab, so I do not describe them here.</p>
-            <h4>Limitations</h4>
-            <p>The experiment had no IgG control and the enrichment was low, so the conclusions rest on replicate agreement and motif enrichment. Reproducibility between replicates was judged by overlap, without a formal IDR analysis.</p>
-            <span class="num">10</span>
-          </div>
-        </article>
-
-        <!-- 5: Rat RNA-seq -->
-        <article class="spread" data-title="4 · Rat tumour RNA-seq">
-          <div class="page l">
-            <p class="ch">chapter 4 · transcriptomics</p>
-            <h3>Differential gene expression in a rat tumour model</h3>
-            <p class="meta">Bulk RNA-seq, MDC</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:70px; left:0; top:20px"><use href="#i-tube"/></svg>
-              <svg class="dd" style="--s:76px; left:80px; top:14px"><use href="#i-flask"/></svg>
-              <svg class="dd" style="--s:66px; left:176px; top:26px"><use href="#i-cell"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>I compared bulk RNA-seq libraries from tumour and normal tissue: read quality control, alignment with STAR as a cross-check, quantification with Salmon using a decoy-aware index and bias correction, and differential expression with DESeq2. I exported a ranked gene list for gene set enrichment analysis.</p>
-            <p class="sticky">first check: are the replicates really replicates?</p>
-            <span class="num">11</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>FastQC, MultiQC, STAR, Salmon, tximport, DESeq2 with fold-change shrinkage, R. Before trusting the comparison I checked by sample correlation that the tumour libraries were independent replicates and not repeated samples of one tumour.</p>
-            <h4>Outcome</h4>
-            <p>A differential expression table and a ranked gene list ready for enrichment analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p>
-            <h4>Limitations</h4>
-            <p>There were few samples per group, so only large differences can be detected. Bulk tissue mixes tumour, stroma and immune cells, and there was no purity estimate to correct for that. Non-coding RNAs were not quantified.</p>
-            <ul class="tags"><li>STAR</li><li>Salmon</li><li>tximport</li><li>DESeq2</li><li>R</li></ul>
-            <span class="num">12</span>
-          </div>
-        </article>
-
-        <!-- 6: GAPDH -->
-        <article class="spread" data-title="5 · GAPDH in AML">
-          <div class="page l">
-            <p class="ch">chapter 5 · RNA biology</p>
-            <h3>GAPDH as an RNA-binding protein in acute myeloid leukemia</h3>
-            <p class="meta">Master's thesis, Max Planck Institute of Molecular Physiology, 2024 to 2025</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:76px; left:0; top:16px"><use href="#i-pipette"/></svg>
-              <svg class="dd" style="--s:72px; left:84px; top:20px"><use href="#i-petri"/></svg>
-              <svg class="dd" style="--s:66px; left:176px; top:24px"><use href="#i-micro"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>GAPDH is known as a metabolic enzyme, but it also binds RNA. In my thesis I combined CLIP-seq data, which shows which RNAs GAPDH binds, with RNA-seq data after GAPDH knockdown, which shows which RNAs change, and followed up selected targets by qPCR.</p>
-            <p class="sticky pink">bench and code, one question.</p>
-            <span class="num">13</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>R workflows for RNA-seq and CLIP-seq, differential expression, qPCR, cell culture. New for me: working on one question with both bench and computer, and taking an analysis through to a published figure.</p>
-            <h4>Outcome</h4>
-            <p>The work is part of a paper in <i>RNA Biology</i> (2025). The study found that GAPDH binds its targets mainly in the 5' untranslated region, including its own mRNA, and stabilises them.</p>
-            <h4>Limitations</h4>
-            <p>The experiments were done in leukemia cell lines, not in patient samples.</p>
-            <p><a class="lnk" href="https://doi.org/10.1080/15476286.2025.2580180">Read the paper →</a></p>
-            <span class="num">14</span>
-          </div>
-        </article>
-
-        <!-- 7: Plant virome -->
-        <article class="spread" data-title="6 · Plant metagenome">
-          <div class="page l">
-            <p class="ch">chapter 6 · where it started</p>
-            <h3>Looking for viruses in a plant metagenome</h3>
-            <p class="meta">Master's dissertation, Rajiv Gandhi Centre for Biotechnology and Manipal, 2021</p>
-            <div class="pic" aria-hidden="true">
-              <svg class="dd" style="--s:80px; left:0; top:14px"><use href="#i-leaf"/></svg>
-              <svg class="dd" style="--s:66px; left:96px; top:24px"><use href="#i-laptop"/></svg>
-              <svg class="dd" style="--s:40px; left:180px; top:10px"><use href="#i-spark"/></svg>
-            </div>
-            <h4>What I did</h4>
-            <p>I took a public shotgun sequencing dataset of wild <i>Arabidopsis thaliana</i> leaves and searched it for viral sequences: quality control and trimming, removal of plant reads, de novo assembly, BLASTx against a viral protein database, and taxonomic classification. I also compiled a list of new plant viruses reported in metagenomic studies from 2015 to 2021.</p>
-            <span class="num">15</span>
-          </div>
-          <div class="page r">
-            <h4>Skills I used and learned</h4>
-            <p>FastQC, Trimmomatic, Bowtie2, metaSPAdes, BLAST+, MEGAN, Galaxy. This was my first complete analysis from raw reads to a result. When the search was too large for Galaxy, I learned to set up a cloud server and run BLAST from the command line.</p>
-            <h4>Outcome</h4>
-            <p>Of 55,364 assembled contigs, 4,132 were assigned to viruses, covering 13 families. With a strict score threshold three families remained, two of them bacteriophages. I found no new virus.</p>
-            <h4>Limitations</h4>
-            <p>I analysed one of the samples in the study, mostly with default settings, and nothing was validated in the lab. The data was DNA sequencing, which cannot detect the RNA viruses that make up most plant viruses.</p>
-            <p class="sticky">my first raw-reads-to-result. no new virus, a lot learned.</p>
-            <span class="num">16</span>
-          </div>
-        </article>
-
+</svg><figcaption>Share of each lineage's cell lines classified correctly (recall, 5-fold cross-validation). Expression PCA is ahead in 23 of 26 lineages.</figcaption></figure>
+        <a class="ln" href="https://github.com/AatsBioinfo/depmap-bulkrnabert">code, methods and full results on GitHub →</a>
       </div>
-    </div>
-    <div class="ctrl">
-      <button type="button" id="prev" aria-label="Previous page">← back</button>
-      <div><div class="where" id="where" aria-live="polite">Contents</div><div class="pips" id="pips" aria-hidden="true"></div></div>
-      <button type="button" id="next" aria-label="Next page">next →</button>
-    </div>
+    </article>
+
+    <article class="proj" id="p2">
+      <header><h3>Does it matter where a transposon lands? Linking integration sites to reporter expression</h3><span class="m">Mobile DNA lab, MDC</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>In a barcoded Sleeping Beauty reporter assay, every integration carries a reporter gene and a unique barcode. The barcode is read in DNA to find where the transposon landed, and in RNA to see whether the reporter is switched on. I built the pipeline from raw reads to the final call set: require the exact transposon end, align the genomic flank to the human genome, read the barcode, and count it in RNA. I then annotated each site with its gene context and tested enrichment against randomly shuffled sites.</p></div>
+        <div><h4>Skills I used and learned</h4><p>Python, R, SLURM, bedtools, GENCODE annotation, permutation tests and chi-square tests. I removed index hopping between samples, and I accepted weak calls only when independent evidence supported them, not by lowering a threshold. I also used the transposon's own biology as a quality check: Sleeping Beauty integrates at TA sites, so genuine calls should sit on one.</p></div>
+        <div><h4>Outcome</h4><p>A validated set of integration sites, each with a location and an on/off call, for the lab's further analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p></div>
+        <div><h4>Limitations</h4><p>The sites are recovered by PCR, which favours some regions of the genome over others. The analysis asks whether a site is on or off given where it landed, not where the transposon prefers to land. Expression is a yes/no call that depends on a threshold.</p></div>
+      </div>
+    </article>
+
+    <article class="proj" id="p3">
+      <header><h3>ChIP-seq of a transcription factor in human embryonic stem cells</h3><span class="m">Mobile DNA lab, MDC, 2026</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>I built the analysis for a ChIP-seq experiment from raw reads to annotated binding sites: alignment, quality control, peak calling on replicates, consensus peaks, annotation against genes and repeat families, and motif analysis. Because the lab studies repeats, I kept reads that map to several places in a separate track instead of discarding them.</p></div>
+        <div><h4>Skills I used and learned</h4><p>BWA, samtools, MACS3, deepTools, HOMER, bedtools, SLURM, micromamba environments. New for me: judging whether a weak ChIP is real. I learned to use a failed replicate as a control for library bias, to compare against shuffled regions, and to let the motif result decide when promoter peaks could be artefacts.</p></div>
+        <div><h4>Outcome</h4><p>A documented pipeline with one script per step and a decision log, which the lab can rerun on the next round of samples. The biological results are unpublished and belong to the lab, so I do not describe them here.</p></div>
+        <div><h4>Limitations</h4><p>The experiment had no IgG control and the enrichment was low, so the conclusions rest on replicate agreement and motif enrichment. Reproducibility between replicates was judged by overlap, without a formal IDR analysis.</p></div>
+      </div>
+    </article>
+
+    <article class="proj" id="p4">
+      <header><h3>Differential gene expression in a rat tumour model</h3><span class="m">Bulk RNA-seq, MDC</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>I compared bulk RNA-seq libraries from tumour and normal tissue: read quality control, alignment with STAR as a cross-check, quantification with Salmon using a decoy-aware index and bias correction, and differential expression with DESeq2. I exported a ranked gene list for gene set enrichment analysis.</p></div>
+        <div><h4>Skills I used and learned</h4><p>FastQC, MultiQC, STAR, Salmon, tximport, DESeq2 with fold-change shrinkage, R. Before trusting the comparison I checked by sample correlation that the tumour libraries were independent replicates and not repeated samples of one tumour.</p></div>
+        <div><h4>Outcome</h4><p>A differential expression table and a ranked gene list ready for enrichment analysis. The results are unpublished and belong to the lab, so I do not describe them here.</p></div>
+        <div><h4>Limitations</h4><p>There were few samples per group, so only large differences can be detected. Bulk tissue mixes tumour, stroma and immune cells, and there was no purity estimate to correct for that. Non-coding RNAs were not quantified.</p></div>
+      </div>
+    </article>
+
+    <article class="proj" id="p5">
+      <header><h3>GAPDH as an RNA-binding protein in acute myeloid leukemia</h3><span class="m">Master's thesis, Max Planck Institute of Molecular Physiology, 2024 to 2025</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>GAPDH is known as a metabolic enzyme, but it also binds RNA. In my thesis I combined CLIP-seq data, which shows which RNAs GAPDH binds, with RNA-seq data after GAPDH knockdown, which shows which RNAs change, and followed up selected targets by qPCR.</p></div>
+        <div><h4>Skills I used and learned</h4><p>R workflows for RNA-seq and CLIP-seq, differential expression, qPCR, cell culture. New for me: working on one question with both bench and computer, and taking an analysis through to a published figure.</p></div>
+        <div><h4>Outcome</h4><p>The work is part of a paper in <i>RNA Biology</i> (2025). The study found that GAPDH binds its targets mainly in the 5' untranslated region, including its own mRNA, and stabilises them.</p></div>
+        <div><h4>Limitations</h4><p>The experiments were done in leukemia cell lines, not in patient samples.</p></div>
+      </div>
+      <div class="extra"><a class="ln" href="https://doi.org/10.1080/15476286.2025.2580180">read the paper →</a></div>
+    </article>
+
+    <article class="proj" id="p6">
+      <header><h3>Looking for viruses in a plant metagenome</h3><span class="m">Master's dissertation, Rajiv Gandhi Centre for Biotechnology and Manipal, 2021</span></header>
+      <div class="cols">
+        <div><h4>What I did</h4><p>I took a public shotgun sequencing dataset of wild <i>Arabidopsis thaliana</i> leaves and searched it for viral sequences: quality control and trimming, removal of plant reads, de novo assembly, BLASTx against a viral protein database, and taxonomic classification. I also compiled a list of new plant viruses reported in metagenomic studies from 2015 to 2021.</p></div>
+        <div><h4>Skills I used and learned</h4><p>FastQC, Trimmomatic, Bowtie2, metaSPAdes, BLAST+, MEGAN, Galaxy. This was my first complete analysis from raw reads to a result. When the search was too large for Galaxy, I learned to set up a cloud server and run BLAST from the command line.</p></div>
+        <div><h4>Outcome</h4><p>Of 55,364 assembled contigs, 4,132 were assigned to viruses, covering 13 families. With a strict score threshold three families remained, two of them bacteriophages. I found no new virus.</p></div>
+        <div><h4>Limitations</h4><p>I analysed one of the samples in the study, mostly with default settings, and nothing was validated in the lab. The data was DNA sequencing, which cannot detect the RNA viruses that make up most plant viruses.</p></div>
+      </div>
+    </article>
   </div>
 </section>
 
-<div class="seqbar rev" data-label="&gt;reads_R1.fastq" aria-hidden="true"></div>
-
-<section class="band alt" id="publications">
-  <svg class="dd float b hide-sm" style="--s:64px; right:5%; top:4rem" aria-hidden="true"><use href="#i-book"/></svg>
-  <div class="wrap">
-    <p class="kick">// publications</p>
-    <h2>In <span class="hl">print</span></h2>
+<!-- ===== papers ===== -->
+<section class="track sec" id="publications" data-band="papers" data-g="g4">
+  <div class="tl sticky"><div><span class="f">papers.bib</span><span class="d">3 entries</span></div></div>
+  <div class="td">
+    <h2>Publications</h2>
     <ol class="pubs">
-      <li><span class="yr">2025</span>Shamloo S, Schloßhauer JL, […], <b>Bejoy AM</b>, […], Imig J. RNA binding of GAPDH controls transcript stability and protein translation in acute myeloid leukemia. <i>RNA Biology</i>, 2025. <a href="https://doi.org/10.1080/15476286.2025.2580180">doi:10.1080/15476286.2025.2580180</a></li>
-      <li><span class="yr">2025</span>Schlösser V, Lightfoot HL, Leemann C, Banijamali SE, <b>Bejoy AM</b>, et al. Anti-HIV-1 effect of the fluoroquinolone Enoxacin and modulation of pro-viral hsa-miR-132 processing in CEM-SS cells. <i>Non-Coding RNA</i>, 2025. <a href="https://doi.org/10.3390/ncrna11010008">doi:10.3390/ncrna11010008</a></li>
-      <li><span class="yr">2021</span><b>Bejoy AM</b>, et al. An insight on advances and applications of 3D bioprinting: a review. <i>Bioprinting</i>, 2021.</li>
+      <li><span class="y">2025</span><span>Shamloo S, Schloßhauer JL, […], <b>Bejoy AM</b>, […], Imig J. RNA binding of GAPDH controls transcript stability and protein translation in acute myeloid leukemia. <i>RNA Biology</i>, 2025. <a href="https://doi.org/10.1080/15476286.2025.2580180">doi:10.1080/15476286.2025.2580180</a></span></li>
+      <li><span class="y">2025</span><span>Schlösser V, Lightfoot HL, Leemann C, Banijamali SE, <b>Bejoy AM</b>, et al. Anti-HIV-1 effect of the fluoroquinolone Enoxacin and modulation of pro-viral hsa-miR-132 processing in CEM-SS cells. <i>Non-Coding RNA</i>, 2025. <a href="https://doi.org/10.3390/ncrna11010008">doi:10.3390/ncrna11010008</a></span></li>
+      <li><span class="y">2021</span><span><b>Bejoy AM</b>, et al. An insight on advances and applications of 3D bioprinting: a review. <i>Bioprinting</i>, 2021.</span></li>
     </ol>
   </div>
 </section>
 
-<section class="band life" id="life">
-  <svg class="dd float hide-sm" style="--s:60px; right:7%; top:5rem" aria-hidden="true"><use href="#i-heart"/></svg>
-  <div class="wrap">
-    <p class="kick">// outside the lab</p>
-    <h2>Away from the <span class="hl">cluster</span></h2>
-    <div class="lifegrid">
+<!-- ===== life ===== -->
+<section class="track sec" id="life" data-band="life" data-g="g1">
+  <div class="tl sticky"><div><span class="f">life.jpg</span><span class="d">outside the lab</span></div></div>
+  <div class="td">
+    <h2>Outside the lab</h2>
+    <div class="life">
       <p class="big">Getting here took a few hurdles and several part-time jobs, at McDonald's, Subway, Kamps and Amazon. Through all of it I have kept enjoying life: being out in nature, around dogs, and on the way to somewhere new.</p>
-
-      <h3><svg viewBox="0 0 64 64" class="dd inl" style="position:static" aria-hidden="true"><use href="#i-paw"/></svg>Dogs</h3>
+      <h3>Dogs</h3>
       <p>I love dogs. The Labrador is my own. The others are dogs I looked after while I was studying in Germany.</p>
       <div class="dogs">
         <figure class="ph big"><img src="photos/dog-lab.jpg" width="780" height="1040" loading="lazy" draggable="false" alt="Aathma sitting on a lawn with her yellow Labrador"><span class="guard"></span></figure>
@@ -1032,8 +670,7 @@ me.align(reads)  # output →</pre></div>
         <figure class="ph"><img src="photos/dog-3.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on a bench with a small white poodle on her lap"><span class="guard"></span></figure>
         <figure class="ph"><img src="photos/dog-4.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on the floor playing with a long-haired dog"><span class="guard"></span></figure>
       </div>
-
-      <h3><svg viewBox="0 0 64 64" class="dd inl" style="position:static" aria-hidden="true"><use href="#i-plane"/></svg>Travel</h3>
+      <h3>Travel</h3>
       <p>So far: Switzerland, the Netherlands, Belgium, Poland, Qatar, Italy, Vatican City, Austria and Luxembourg. The list will continue.</p>
       <div class="dogs">
         <figure class="ph big low"><img src="photos/travel-2.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma on a mountain ridge with rocky peaks behind her"><span class="guard"></span></figure>
@@ -1042,45 +679,209 @@ me.align(reads)  # output →</pre></div>
         <figure class="ph"><img src="photos/travel-5.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma with a backpack and camera on a snowy mountain path"><span class="guard"></span></figure>
         <figure class="ph"><img src="photos/travel-6.jpg" width="600" height="800" loading="lazy" draggable="false" alt="Aathma in front of the painted Lennon Wall"><span class="guard"></span></figure>
       </div>
-
-      <div class="goal">
-        <svg viewBox="0 0 64 64" class="dd" style="position:static" aria-hidden="true"><use href="#i-shoe"/></svg>
-        <p><b>Next goal:</b> to run a marathon.</p>
-      </div>
+      <p class="goal">next goal: <b>run a marathon</b></p>
     </div>
   </div>
 </section>
 </main>
 
 <footer>
-  <svg class="dd float" style="--s:90px; right:4%; top:-10px; opacity:.5; --line:#efe6f5" aria-hidden="true"><use href="#i-dna"/></svg>
-  <div class="wrap">
-    <p class="say">Let's talk science, or data.</p>
-    <ul>
-      <li><a href="mailto:aathmamerinbejoy@gmail.com">Email</a></li>
-      <li><a href="https://github.com/AatsBioinfo">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">LinkedIn</a></li>
-    </ul>
-    <small>Berlin, 2026</small>
-  </div>
+  <span id="foot-locus">aathma:1-1,000</span><span class="sep">│</span><span>6 projects</span><span class="sep">│</span><span>3 papers</span><span class="sep">│</span><span>Berlin, 2026</span>
+  <span class="r"><a href="mailto:aathmamerinbejoy@gmail.com">email</a><a href="https://github.com/AatsBioinfo">github</a><a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">linkedin</a></span>
 </footer>
 
 <script>
 (function () {
-  // highlight the menu entry of the section being read
-  var links = Array.prototype.slice.call(document.querySelectorAll('.bar nav a'));
-  var byId = {};
-  links.forEach(function (a) { var h = a.getAttribute('href'); if (h.charAt(0) === '#') byId[h.slice(1)] = a; });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        links.forEach(function (a) { a.removeAttribute('aria-current'); });
-        var a = byId[en.target.id];
-        if (a) a.setAttribute('aria-current', 'true');
-      });
-    }, { rootMargin: '-35% 0px -60% 0px' });
-    document.querySelectorAll('section[id]').forEach(function (s) { io.observe(s); });
+  var GENOME = 12400;
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var q = document.getElementById('q'), statusEl = document.getElementById('status');
+  var bands = Array.prototype.slice.call(document.querySelectorAll('[data-band]'));
+  var chrom = document.getElementById('chrom'), win = document.getElementById('win'), blabels = document.getElementById('blabels');
+  var footLocus = document.getElementById('foot-locus');
+  function fmt(n) { return Math.max(1, Math.round(n)).toLocaleString('en-US'); }
+
+  // ideogram: one band per section, width proportional to its height
+  function layout() {
+    var total = document.documentElement.scrollHeight;
+    chrom.innerHTML = ''; blabels.innerHTML = '';
+    bands.forEach(function (b, i) {
+      var h = (i === bands.length - 1 ? total - b.offsetTop : bands[i + 1].offsetTop - b.offsetTop);
+      var pct = (i === 0 ? h + b.offsetTop : h) / total * 100;
+      var id = b.id;
+      var a = document.createElement('a'); a.href = '#' + id; a.className = b.getAttribute('data-g'); a.style.width = pct + '%';
+      a.title = b.getAttribute('data-band'); a.setAttribute('aria-label', b.getAttribute('data-band'));
+      chrom.appendChild(a);
+      var l = document.createElement('a'); l.href = '#' + id; l.textContent = b.getAttribute('data-band'); l.style.width = pct + '%'; l.tabIndex = -1;
+      blabels.appendChild(l);
+    });
+    track();
+  }
+  var lastLocus = '';
+  function track() {
+    var total = document.documentElement.scrollHeight, y = window.scrollY, vh = window.innerHeight;
+    var cw = chrom.getBoundingClientRect().width, cx = chrom.offsetLeft;
+    var f0 = y / total, f1 = Math.min(1, (y + vh) / total);
+    win.style.left = (cx + f0 * cw) + 'px'; win.style.width = Math.max(6, (f1 - f0) * cw) + 'px';
+    var loc = 'aathma:' + fmt(f0 * GENOME) + '-' + fmt(f1 * GENOME);
+    if (loc !== lastLocus) {
+      lastLocus = loc; footLocus.textContent = loc;
+      if (document.activeElement !== q) q.value = loc;
+    }
+    var mid = y + vh * .35, on = 0;
+    bands.forEach(function (b, i) { if (b.offsetTop <= mid) on = i; });
+    Array.prototype.forEach.call(blabels.children, function (l, i) { l.classList.toggle('on', i === on); });
+  }
+  window.addEventListener('scroll', track, { passive: true });
+  window.addEventListener('resize', layout);
+  window.addEventListener('load', layout);
+  layout();
+
+  // locus box = search
+  function go(id, msg) {
+    var el = document.getElementById(id); if (!el) return;
+    el.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+    statusEl.textContent = msg || '';
+  }
+  function openFeat(id) {
+    var f = document.getElementById(id), b = f.querySelector('.fbar');
+    b.setAttribute('aria-expanded', 'true'); document.getElementById(b.getAttribute('aria-controls')).hidden = false;
+  }
+  var map = {
+    phd: function () { openFeat('f-phd'); go('f-phd', 'jumped to feature for_phd_groups'); },
+    industry: function () { openFeat('f-ind'); go('f-ind', 'jumped to feature for_industry'); },
+    about: function () { go('about'); }, skills: function () { go('skills'); },
+    projects: function () { go('projects'); }, papers: function () { go('publications'); },
+    publications: function () { go('publications'); }, life: function () { go('life'); },
+    dogs: function () { go('life', 'dogs: 1 Labrador of my own, many more looked after'); },
+    contact: function () { statusEl.innerHTML = 'aathmamerinbejoy@gmail.com · <a href="https://github.com/AatsBioinfo">github</a> · <a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">linkedin</a>'; },
+    help: function () { statusEl.textContent = 'search: phd · industry · about · skills · projects · papers · life · contact · or a project name (gapdh, chip, bulkrnabert …)'; }
+  };
+  var projKeys = { bulkrnabert: 'p1', ml: 'p1', transformer: 'p1', 'sleeping beauty': 'p2', transposon: 'p2', integration: 'p2', sb: 'p2',
+    chip: 'p3', 'chip-seq': 'p3', chipseq: 'p3', rat: 'p4', 'rna-seq': 'p4', rnaseq: 'p4', deseq2: 'p4', gapdh: 'p5', aml: 'p5', clip: 'p5', virus: 'p6', virome: 'p6', plant: 'p6', metagenome: 'p6' };
+  document.getElementById('locus').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = q.value.trim().toLowerCase().replace(/^\.\/|\.sh$/g, '').replace(/^for_/, '');
+    statusEl.textContent = '';
+    if (/^aathma:/.test(v) || !v) { var m = v.match(/:([\d,]+)/); if (m) { var n = +m[1].replace(/,/g, ''); window.scrollTo({ top: n / GENOME * document.documentElement.scrollHeight, behavior: calm ? 'auto' : 'smooth' }); } q.blur(); return; }
+    if (/^sudo\b/.test(v)) { statusEl.innerHTML = 'permission denied: this needs a supervisor. are you one? → <a href="mailto:aathmamerinbejoy@gmail.com">email me</a>'; return; }
+    if (map[v]) { map[v](); q.blur(); return; }
+    for (var k in projKeys) if (v.indexOf(k) !== -1) { pick(projKeys[k]); go('projects', 'found in projects.bam: read ' + projKeys[k].slice(1)); q.blur(); return; }
+    statusEl.textContent = 'no feature named "' + q.value.trim() + '" · try phd, industry, projects, contact, help';
+  });
+  q.addEventListener('focus', function () { q.select(); });
+  q.addEventListener('blur', function () { setTimeout(function () { if (document.activeElement !== q) q.value = lastLocus; }, 0); });
+
+  // collapsible features
+  document.querySelectorAll('.fbar').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var open = b.getAttribute('aria-expanded') === 'true';
+      b.setAttribute('aria-expanded', open ? 'false' : 'true');
+      document.getElementById(b.getAttribute('aria-controls')).hidden = open;
+      layout();
+    });
+  });
+
+  // projects as reads
+  var reads = Array.prototype.slice.call(document.querySelectorAll('#pile button[data-p]:not(.ghost)'));
+  function pick(id) {
+    reads.forEach(function (r) { r.setAttribute('aria-pressed', r.getAttribute('data-p') === id ? 'true' : 'false'); });
+    document.querySelectorAll('.proj').forEach(function (p) { p.classList.toggle('on', p.id === id); });
+    if (id === 'p1' && figReplay && fig.classList.contains('in')) figReplay();
+    layout();
+  }
+  reads.forEach(function (r) { r.addEventListener('click', function () { pick(r.getAttribute('data-p')); }); });
+
+  // opening animation: gene model and reads
+  var gene = document.querySelector('svg.gene'), cover = document.querySelector('svg.cover');
+  var rects = Array.prototype.slice.call(cover.querySelectorAll('rect'));
+  var nR = 0, nM = 0;
+  rects.forEach(function (r) {
+    var mm = r.classList.contains('mm'); if (mm) nM++; else nR++;
+    var x = +r.getAttribute('x');
+    r.style.setProperty('--d', (x / 560 * 1.3 + (mm ? .75 : 0)).toFixed(2) + 's');
+    if (!mm) r.style.setProperty('--dx', r.classList.contains('rr') ? '45px' : '-45px');
+  });
+  gene.querySelectorAll('.ex').forEach(function (e, i) { e.style.setProperty('--d', (i * .12) + 's'); });
+  function start() {
+    gene.classList.add('go'); cover.classList.add('go'); chrom.classList.add('go');
+    if (!calm) callName();
+    document.getElementById('readcap').innerHTML = nR + ' reads · <b>' + nM + ' mismatches</b> · my everyday view';
+  }
+  if (calm) start(); else setTimeout(start, 250);
+
+  // ---------- motion ----------
+  // name is "base-called": each letter flickers through A/C/G/T, then settles
+  function callName() {
+    var h1 = document.querySelector('h1'), text = h1.textContent.trim();
+    h1.setAttribute('aria-label', text);
+    h1.innerHTML = text.split(' ').map(function (w) {
+      return '<span class="word" aria-hidden="true">' + w.split('').map(function (c) { return '<span class="ch">' + c + '</span>'; }).join('') + '</span>';
+    }).join(' ');
+    var chs = Array.prototype.slice.call(h1.querySelectorAll('.ch')), left = chs.length;
+    chs.forEach(function (el, i) {
+      var fin = el.textContent, t0 = performance.now(), end = 300 + i * 60;
+      el.style.width = el.getBoundingClientRect().width + 'px';
+      el.classList.add('call');
+      (function tick() {
+        if (performance.now() - t0 >= end) {
+          el.textContent = fin; el.classList.remove('call');
+          if (--left === 0) chs.forEach(function (c) { c.style.width = ''; });
+          return;
+        }
+        el.textContent = 'ACGT'.charAt(Math.floor(Math.random() * 4));
+        setTimeout(tick, 48);
+      })();
+    });
+  }
+
+  // things that animate when they scroll into view
+  function idx(list, prop) { Array.prototype.forEach.call(list, function (el, i) { el.style.setProperty(prop, i); }); }
+  document.querySelectorAll('.sec h2').forEach(function (h) { h.innerHTML = '<span>' + h.innerHTML + '</span>'; });
+  ['.prof .role', '.prof .lead', '.prof .contact', '.about > div:first-child > p', '.why', '.srow', '.legend', '.pubs li', '.life > p', '.life h3', '.pnote']
+    .forEach(function (s) { document.querySelectorAll(s).forEach(function (el) { el.classList.add('rv'); }); });
+  idx(document.querySelectorAll('.prof .role, .prof .lead, .prof .contact'), '--i');
+  idx(document.querySelectorAll('.about > div:first-child > p'), '--i');
+  idx(document.querySelectorAll('.pubs li'), '--i');
+  idx(document.querySelectorAll('.feat'), '--i');
+  document.querySelectorAll('.feat').forEach(function (f) { idx(f.querySelectorAll('li'), '--j'); });
+  document.querySelectorAll('.blocks').forEach(function (b) { idx(b.children, '--j'); });
+  document.querySelectorAll('.dogs').forEach(function (d) { idx(d.children, '--i'); });
+  idx(reads, '--k');
+  var fig = document.querySelector('svg.fig');
+  Array.prototype.forEach.call(fig.querySelectorAll('g'), function (g, i) {
+    g.style.setProperty('--g', i);
+    g.querySelectorAll('circle').forEach(function (c) { c.style.setProperty('--tx', (168 - (+c.getAttribute('cx'))) + 'px'); });
+  });
+  var figReplay = function () { fig.classList.remove('in'); void fig.getBoundingClientRect(); fig.classList.add('in'); };
+  var pile = document.getElementById('pile');
+  var watched = document.querySelectorAll('.rv, .sec h2, .tl, .feat, .srow, .dogs, #pile, svg.fig');
+  function reveal(el) {
+    el.classList.add('in');
+    if (el === pile) setTimeout(function () { pile.classList.add('done'); }, 1500);
+  }
+  if ('IntersectionObserver' in window && !calm) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { reveal(en.target); io.unobserve(en.target); } });
+    }, { threshold: .15, rootMargin: '0px 0px -6% 0px' });
+    Array.prototype.forEach.call(watched, function (el) { io.observe(el); });
+  } else Array.prototype.forEach.call(watched, reveal);
+
+  // crosshair over the tracks, like a genome browser
+  var topEl = document.getElementById('top'), guide = document.createElement('div');
+  guide.className = 'guide'; guide.setAttribute('aria-hidden', 'true'); guide.innerHTML = '<span></span>';
+  topEl.appendChild(guide);
+  if (window.matchMedia('(hover: hover)').matches) {
+    topEl.addEventListener('mousemove', function (e) {
+      var thin = Array.prototype.filter.call(topEl.querySelectorAll('.thin'), function (t) { return t.offsetParent !== null; });
+      var ref = cover.getBoundingClientRect(), tr = topEl.getBoundingClientRect();
+      var y0 = thin[0].getBoundingClientRect().top, y1 = thin[thin.length - 1].getBoundingClientRect().bottom;
+      if (e.clientY < y0 || e.clientY > y1 || e.clientX < ref.left || e.clientX > ref.right) { guide.classList.remove('on'); return; }
+      guide.style.left = (e.clientX - tr.left) + 'px'; guide.style.top = (y0 - tr.top) + 'px'; guide.style.height = (y1 - y0) + 'px';
+      guide.firstChild.textContent = 'aathma:' + fmt((e.clientX - ref.left) / ref.width * 1000);
+      guide.classList.add('on');
+    });
+    topEl.addEventListener('mouseleave', function () { guide.classList.remove('on'); });
   }
 
   // photos: no menu on right-click or long-press, no dragging
@@ -1088,216 +889,6 @@ me.align(reads)  # output →</pre></div>
     f.addEventListener('contextmenu', function (e) { e.preventDefault(); });
     f.addEventListener('dragstart', function (e) { e.preventDefault(); });
   });
-
-  // ---------- live code editor ----------
-  var calmNow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var codeEl = document.getElementById('code'), gutter = document.getElementById('gutter');
-  var browser = document.getElementById('browser'), outmsg = document.getElementById('outmsg');
-  var src = codeEl.textContent.replace(/\s+$/, '');
-  var KW = /^(from|import|class|def|return|self|None|True|False)$/;
-  function tokenize(line) {
-    var out = [], m, re = /(#.*$)|("""[^"]*"""|"[^"]*")|([A-Za-z_][A-Za-z0-9_]*)|(\s+)|([^\sA-Za-z_"#]+)/g, prev = '';
-    while ((m = re.exec(line))) {
-      if (m[1]) out.push(['cm', m[1]]);
-      else if (m[2]) out.push(['s', m[2]]);
-      else if (m[3]) {
-        var w = m[3], c = '';
-        if (KW.test(w)) c = 'k';
-        else if (prev === 'class') c = 'n';
-        else if (prev === 'def') c = 'f';
-        else if (line.charAt(m.index + w.length) === '(') c = 'b';
-        out.push([c, w]); prev = w;
-        continue;
-      } else out.push(['', m[4] || m[5]]);
-      if (!m[4]) prev = '';
-    }
-    return out;
-  }
-  var lines = src.split('\n').map(tokenize);
-  gutter.innerHTML = lines.map(function (_, i) { return '<div>' + (i + 1) + '</div>'; }).join('');
-  var gl = gutter.children;
-  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-  function render(li, ci, caret) {
-    var html = '';
-    for (var i = 0; i <= li && i < lines.length; i++) {
-      var left = i < li ? Infinity : ci;
-      lines[i].forEach(function (seg) {
-        if (left <= 0) return;
-        var t = seg[1].slice(0, left); left -= seg[1].length;
-        html += seg[0] ? '<span class="' + seg[0] + '">' + esc(t) + '</span>' : esc(t);
-      });
-      if (i === li && caret) html += '<span class="caret"></span>';
-      if (i < li) html += '\n';
-    }
-    codeEl.innerHTML = html;
-    for (var g = 0; g < gl.length; g++) gl[g].className = g === li ? 'on' : '';
-  }
-  // reads slide in from alternating sides, left to right
-  var reads = Array.prototype.slice.call(browser.querySelectorAll('svg.cover rect'));
-  var nReads = 0, nMis = 0;
-  reads.forEach(function (r) {
-    var x = +r.getAttribute('x');
-    var mm = r.classList.contains('mm');
-    if (mm) nMis++; else nReads++;
-    r.style.setProperty('--d', (x / 560 * 1.3 + (mm ? .5 : 0)).toFixed(2) + 's');
-    r.style.setProperty('--dx', (r.classList.contains('rr') ? '-' : '') + '50px');
-  });
-  var finished = false;
-  function finish() {
-    if (finished) return; finished = true;
-    render(lines.length - 1, Infinity, true);
-    browser.classList.add('go');
-    outmsg.innerHTML = '<span class="ok">✓</span> ' + nReads + ' reads aligned · <span class="w">' + nMis + ' mismatches flagged</span> · ready for questions';
-    document.getElementById('skip').hidden = true;
-  }
-  document.getElementById('skip').addEventListener('click', finish);
-  if (calmNow) finish();
-  else {
-    var li = 0, ci = 0, lens = lines.map(function (l) { return l.reduce(function (a, s) { return a + s[1].length; }, 0); });
-    (function step() {
-      if (finished) return;
-      if (li >= lines.length) { finish(); return; }
-      if (ci === 0) { var ind = (src.split('\n')[li].match(/^\s*/) || [''])[0].length; ci = ind; }
-      ci += 1;
-      render(li, ci, true);
-      var delay = 9 + Math.random() * 14;
-      if (ci >= lens[li]) { li++; ci = 0; delay = lens[li - 1] === 0 ? 40 : 110; }
-      setTimeout(step, delay);
-    })();
-  }
-
-  // ---------- interactive shell ----------
-  var log = document.getElementById('log'), form = document.getElementById('prompt'), cmd = document.getElementById('cmd');
-  var R = {
-    help: '<div class="line m">commands you can run:</div><div class="line"><span class="y">./for_phd_groups.sh</span>   what a PhD group should know\n<span class="y">./for_industry.sh</span>     what a company or core facility should know\n<span class="y">whoami</span>                the one-line version\n<span class="y">ls projects/</span>          my project notebook\n<span class="y">cat skills.txt</span>        bench and terminal\n<span class="y">cat papers.bib</span>        publications\n<span class="y">cat contact.txt</span>       how to reach me\n<span class="y">cat dogs.txt</span>          important\n<span class="y">clear</span>                 start over</div>',
-    phd: '<div class="line ok">Running for_phd_groups.sh …</div><ul>' +
-      '<li>Two master\'s degrees: bioinformatics first, then molecular biotechnology at the bench, so I know how the data is made.</li>' +
-      '<li>My master\'s thesis at the Max Planck Institute in Dortmund became part of a paper in <i>RNA Biology</i> (2025).</li>' +
-      '<li>My first machine learning project tested a pretrained transformer honestly against a simple baseline, and reported that the baseline won.</li>' +
-      '<li>What I want: one question in depth, building methods for genomics, with healthcare as the long-term aim.</li></ul>' +
-      '<div class="line m">→ <a href="#about">read why I want a PhD</a></div>',
-    ind: '<div class="line ok">Running for_industry.sh …</div><ul>' +
-      '<li>Every day: whole-genome sequencing, bulk RNA-seq, ChIP-seq and transposon integration mapping on an HPC cluster with SLURM.</li>' +
-      '<li>I run and maintain pipelines that other people depend on, and I write them so someone else can run them again.</li>' +
-      '<li>Python, R and shell; Apptainer containers and micromamba environments; standard NGS tools from alignment to statistics.</li>' +
-      '<li>Six analyses taken from raw reads to a result, each with its limitations written down.</li></ul>' +
-      '<div class="line m">→ <a href="#projects">open the project notebook</a></div>',
-    whoami: '<div class="line">aathma · bioinformatician in Berlin · knows the biology, writes the code</div>',
-    ls: '<div class="line"><span class="n">ch1_bulkrnabert_embeddings/</span>   <span class="m">ML · Python · JAX</span>\n<span class="n">ch2_transposon_integration/</span>   <span class="m">Sleeping Beauty · Python · R</span>\n<span class="n">ch3_chipseq_hesc/</span>             <span class="m">MACS3 · HOMER</span>\n<span class="n">ch4_rat_tumour_rnaseq/</span>        <span class="m">Salmon · DESeq2</span>\n<span class="n">ch5_gapdh_aml/</span>                <span class="m">CLIP-seq · qPCR</span>\n<span class="n">ch6_plant_virome/</span>             <span class="m">metaSPAdes · BLAST</span></div><div class="line m">→ <a href="#projects">open them as a book</a></div>',
-    skills: '<div class="line"><span class="y">bench   </span> PCR · qPCR · cell culture · CRISPR · knockdowns\n<span class="y">code    </span> Python · R · Bash · SLURM · Apptainer\n<span class="y">data    </span> WGS · RNA-seq · ChIP-seq · CLIP-seq · integration sites\n<span class="y">ml      </span> scikit-learn · JAX · learning PyTorch</div>',
-    papers: '<div class="line">@article{shamloo2025, journal = {<span class="ok">RNA Biology</span>}, year = 2025, title = {RNA binding of GAPDH …}}\n@article{schloesser2025, journal = {<span class="ok">Non-Coding RNA</span>}, year = 2025, title = {Anti-HIV-1 effect of Enoxacin …}}\n@article{bejoy2021, journal = {<span class="ok">Bioprinting</span>}, year = 2021, title = {3D bioprinting: a review}}</div><div class="line m">→ <a href="#publications">full list</a></div>',
-    contact: '<div class="line">email    <a href="mailto:aathmamerinbejoy@gmail.com">aathmamerinbejoy@gmail.com</a>\ngithub   <a href="https://github.com/AatsBioinfo">github.com/AatsBioinfo</a>\nlinkedin <a href="https://www.linkedin.com/in/aathma-merin-bejoy-b41064189">aathma-merin-bejoy</a>\nbased in Berlin, Germany</div>',
-    dogs: '<div class="line">1 Labrador of my own, and many more I looked after while I was studying in Germany.\n<span class="w">♥</span> <a href="#life">see the photos</a></div>',
-    sudo: '<div class="line w">permission denied: this needs a supervisor.</div><div class="line m">are you one? → cat contact.txt</div>'
-  };
-  var alias = { './for_phd_groups.sh': 'phd', 'phd': 'phd', './for_industry.sh': 'ind', 'industry': 'ind',
-    'ls': 'ls', 'ls projects/': 'ls', 'ls projects': 'ls', 'projects': 'ls', 'cat skills.txt': 'skills', 'skills': 'skills',
-    'cat papers.bib': 'papers', 'papers': 'papers', 'publications': 'papers', 'cat contact.txt': 'contact', 'contact': 'contact',
-    'cat dogs.txt': 'dogs', 'dogs': 'dogs', 'whoami': 'whoami', 'help': 'help', '?': 'help' };
-  function run(c) {
-    c = c.trim().replace(/\s+/g, ' ');
-    if (!c) return;
-    var echo = document.createElement('div'); echo.className = 'line echo';
-    echo.innerHTML = '<span class="p">guest@aathma</span>:<span class="c">~</span>$ ' + esc(c);
-    if (c === 'clear') { log.innerHTML = ''; return; }
-    log.appendChild(echo);
-    var key = alias[c.toLowerCase()] || (/^sudo\b/.test(c) ? 'sudo' : null);
-    var box = document.createElement('div');
-    box.innerHTML = key ? R[key] : '<div class="line w">command not found: ' + esc(c.split(' ')[0]) + '</div><div class="line m">try <span class="y">help</span></div>';
-    log.appendChild(box);
-    log.scrollTop = log.scrollHeight;
-  }
-  form.addEventListener('submit', function (e) { e.preventDefault(); run(cmd.value); cmd.value = ''; });
-  document.getElementById('cmds').addEventListener('click', function (e) {
-    var b = e.target.closest('[data-cmd]'); if (b) run(b.getAttribute('data-cmd'));
-  });
-
-  // ---------- scrolling sequence strips ----------
-  var seed = 7;
-  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
-  document.querySelectorAll('.seqbar').forEach(function (bar) {
-    var s = '';
-    for (var i = 0; i < 160; i++) s += 'ACGT'.charAt(Math.floor(rnd() * 4));
-    var html = s.replace(/TA|[ACGT]/g, function (b) {
-      return b === 'TA' ? '<span class="ta"><span class="T">T</span><span class="A">A</span></span>' : '<span class="' + b + '">' + b + '</span>';
-    });
-    var hd = '<span class="hd">' + bar.getAttribute('data-label') + '</span>';
-    bar.innerHTML = '<span class="track">' + hd + html + ' ' + hd + html + ' </span>';
-  });
-
-  // the project book
-  var book = document.getElementById('book');
-  var stage = book.querySelector('.stage');
-  var spreads = Array.prototype.slice.call(stage.querySelectorAll('.spread'));
-  var prev = document.getElementById('prev'), next = document.getElementById('next');
-  var where = document.getElementById('where'), pips = document.getElementById('pips');
-  var cur = 0, busy = false;
-  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var narrow = window.matchMedia('(max-width: 60rem)');
-  spreads.forEach(function () { pips.appendChild(document.createElement('i')); });
-
-  function show(i) {
-    spreads.forEach(function (s, k) {
-      var on = k === i;
-      s.classList.toggle('on', on);
-      s.setAttribute('aria-hidden', on ? 'false' : 'true');
-      if ('inert' in s) s.inert = !on;
-    });
-    cur = i;
-    prev.disabled = i === 0; next.disabled = i === spreads.length - 1;
-    where.textContent = spreads[i].getAttribute('data-title') + '  ·  ' + (i + 1) + ' / ' + spreads.length;
-    Array.prototype.forEach.call(pips.children, function (p, k) { p.classList.toggle('on', k === i); });
-  }
-  function copy(el) {
-    var c = el.cloneNode(true);
-    c.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
-    return c;
-  }
-  function turn(to) {
-    if (busy || to === cur || to < 0 || to >= spreads.length) return;
-    var from = spreads[cur], dest = spreads[to], fwd = to > cur;
-    if (calm.matches || narrow.matches) {
-      show(to);
-      dest.classList.remove('fade'); void dest.offsetWidth; dest.classList.add('fade');
-      if (narrow.matches) book.scrollIntoView({ block: 'start' });
-      return;
-    }
-    busy = true;
-    var fp = from.children, dp = dest.children;
-    var under = document.createElement('div'); under.className = 'ov ' + (fwd ? 'L' : 'R');
-    under.appendChild(copy(fwd ? fp[0] : fp[1]));
-    var leaf = document.createElement('div'); leaf.className = 'leaf ' + (fwd ? 'R' : 'L');
-    var front = document.createElement('div'); front.className = 'face front'; front.appendChild(copy(fwd ? fp[1] : fp[0]));
-    var back = document.createElement('div'); back.className = 'face back'; back.appendChild(copy(fwd ? dp[0] : dp[1]));
-    leaf.appendChild(front); leaf.appendChild(back);
-    show(to);
-    stage.appendChild(under); stage.appendChild(leaf);
-    var done = function () { under.remove(); leaf.remove(); busy = false; };
-    requestAnimationFrame(function () { requestAnimationFrame(function () { leaf.classList.add('go'); }); });
-    leaf.addEventListener('transitionend', function (e) { if (e.target === leaf) done(); });
-    setTimeout(function () { if (busy) done(); }, 1400);
-  }
-  prev.addEventListener('click', function () { turn(cur - 1); });
-  next.addEventListener('click', function () { turn(cur + 1); });
-  stage.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-go]');
-    if (b) turn(+b.getAttribute('data-go'));
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.target.closest && e.target.closest('input, textarea, [role="tab"]')) return;
-    var r = book.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > window.innerHeight) return;
-    if (e.key === 'ArrowRight') turn(cur + 1);
-    if (e.key === 'ArrowLeft') turn(cur - 1);
-  });
-  var sx = null;
-  book.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
-  book.addEventListener('touchend', function (e) {
-    if (sx === null) return;
-    var dx = e.changedTouches[0].clientX - sx; sx = null;
-    if (Math.abs(dx) > 60) turn(cur + (dx < 0 ? 1 : -1));
-  });
-  show(0);
 })();
 </script>
 </body>
