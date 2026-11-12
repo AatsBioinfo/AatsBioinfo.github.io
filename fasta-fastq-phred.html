@@ -1,157 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FASTA, FASTQ &amp; the Secret Code in Your DNA Files — Aathma M. Bejoy</title>
-<meta name="description" content="A beginner-friendly guide to FASTA, FASTQ, and Phred+33 ASCII quality encoding.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FASTA, FASTQ and the code hidden in your read files | Aathma Merin Bejoy</title>
+<meta name="description" content="The first two file types anyone meets in sequencing, what each line means, and how one character like I or 5 stores the quality of a base.">
+<meta name="author" content="Aathma Merin Bejoy">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aatsbioinfo.github.io/fasta-fastq-phred.html">
+<link rel="canonical" href="https://aatsbioinfo.github.io/fasta-fastq-phred.html">
+<meta property="og:title" content="FASTA, FASTQ and the code hidden in your read files">
+<meta property="og:description" content="The first two file types anyone meets in sequencing, what each line means, and how one character like I or 5 stores the quality of a base.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --coral:#ff7a59;--pink:#ff6b9d;--violet:#7c5cff;--teal:#22c6a6;
-    --ink:#2c2436;--muted:#6d6478;--bg:#fff8f4;--card:#fff;--line:#f0e6ea;
-    --shadow-sm:0 6px 20px -10px rgba(70,40,90,.25);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
-  h1,h2,h3,.brand{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.02em}
-  a{color:var(--violet);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:740px;margin:0 auto;padding:0 22px}
+:root {
+  --bg: #ffffff; --panel: #f5f5f4; --ink: #111111; --soft: #5f5f5f; --rule: #e2e2e0;
+  --acc: #d1006b; --acc-soft: #fbe3ef; --pos: #1f5fbf; --pos-soft: #e3ecfa; --neg: #d1006b;
+  --h2a: #f2b134; --h2b: #ef7b45; --h3: #3a86c8; --h4: #8a5cc2; --h1: #6e6e6e; --dna: #111111;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --serif: "IBM Plex Serif", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f0f10; --panel: #18181a; --ink: #ececea; --soft: #a3a3a0; --rule: #2c2c30;
+          --acc: #ff4fa3; --acc-soft: #3a1428; --pos: #6fa8ff; --pos-soft: #16243d; --dna: #ececea; --h1: #9a9a98; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.06rem/1.7 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--acc); text-underline-offset: .18em; }
+a:hover { color: var(--acc); }
+::selection { background: var(--acc); color: #fff; }
 
-  nav{position:sticky;top:0;z-index:20;background:rgba(255,248,244,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav-inner{max-width:740px;margin:0 auto;padding:0 22px;height:64px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink)}
-  .brand .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--coral),var(--violet));display:grid;place-items:center;color:#fff}
-  .back{font-weight:600;font-size:.9rem;color:var(--muted)}
-  .back:hover{color:var(--ink);text-decoration:none}
+/* reading progress: a chromosome bar */
+.chr { position: fixed; top: 0; left: 0; right: 0; height: 30px; background: var(--bg); border-bottom: 1px solid var(--rule); z-index: 50; display: flex; align-items: center; gap: .8rem; padding: 0 1rem; font: 500 .72rem var(--mono); }
+.chr .lbl { color: var(--soft); white-space: nowrap; }
+.chr .bar { position: relative; flex: 1; height: 10px; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; display: flex; }
+.chr .bar a { flex: 1; border-right: 1px solid var(--ink); text-decoration: none; }
+.chr .bar a:nth-child(odd) { background: var(--panel); }
+.chr .bar a:last-child { border-right: 0; }
+.chr .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--acc); opacity: .85; pointer-events: none; }
+.chr .pos { color: var(--acc); min-width: 6.5em; text-align: right; }
+@media (max-width: 640px) { .chr .lbl { display: none; } }
 
-  .hero{padding:56px 0 30px;position:relative;overflow:hidden}
-  .hero .tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:#fff;background:linear-gradient(135deg,var(--coral),var(--violet));padding:5px 12px;border-radius:999px;margin-bottom:18px}
-  .hero h1{font-size:clamp(1.9rem,5vw,2.7rem);font-weight:800;line-height:1.1;margin-bottom:16px}
-  .hero .meta{color:var(--muted);font-size:.92rem;font-weight:500}
+main { max-width: 46rem; margin: 0 auto; padding: 4.5rem 1.25rem 4rem; }
+.wide { width: min(64rem, calc(100vw - 2.5rem)); margin-left: calc((100% - min(64rem, calc(100vw - 2.5rem))) / 2); }
+body { overflow-x: hidden; }
 
-  article{padding:20px 0 70px}
-  article p{margin:0 0 20px;font-size:1.05rem}
-  article h2{font-size:1.5rem;font-weight:800;margin:44px 0 14px}
-  article h3{font-size:1.15rem;font-weight:700;margin:30px 0 10px}
-  article strong{color:var(--ink)}
-  article ul,article ol{margin:0 0 20px;padding-left:24px}
-  article li{margin-bottom:8px}
-  blockquote{border-left:4px solid var(--coral);background:#fff3ee;padding:14px 20px;border-radius:0 12px 12px 0;margin:0 0 22px;color:#6b4a4a;font-size:.98rem}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f3ecf8;color:#7c4bc0;padding:2px 7px;border-radius:6px;font-size:.9em}
-  pre{background:#2c2436;color:#f7f2ff;padding:20px;border-radius:14px;overflow-x:auto;margin:0 0 24px;box-shadow:var(--shadow-sm)}
-  pre code{background:none;color:inherit;padding:0;font-size:.9rem;line-height:1.6}
-  table{width:100%;border-collapse:collapse;margin:0 0 26px;font-size:.95rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm)}
-  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line)}
-  th{background:linear-gradient(135deg,#fff2ec,#f6efff);font-family:'Plus Jakarta Sans';font-weight:700;font-size:.85rem}
-  tr:last-child td{border-bottom:0}
-  .formula{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;text-align:center;
-    font-family:ui-monospace,monospace;font-size:1.05rem;color:var(--ink);margin:0 0 24px;box-shadow:var(--shadow-sm)}
-  .end{margin-top:40px;padding-top:26px;border-top:1px solid var(--line);text-align:center;color:var(--muted)}
-  .end a{font-weight:700}
-  footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+/* hero */
+.back { font: 500 .8rem var(--mono); margin: 1rem 0 0; color: var(--soft); }
+.back a { text-decoration: none; }
+.back a:hover { color: var(--acc); }
+.kicker { font: 500 .78rem var(--mono); color: var(--acc); letter-spacing: .04em; text-transform: uppercase; margin: 1.5rem 0 .6rem; }
+h1 { font: 700 clamp(2.1rem, 5.4vw, 3.3rem)/1.08 var(--sans); letter-spacing: -.02em; margin: 0 0 1rem; }
+h1 em { font-style: normal; color: var(--acc); }
+.dek { font: italic 400 1.22rem/1.55 var(--serif); color: var(--soft); margin: 0 0 1.4rem; }
+.meta { font: .8rem var(--mono); color: var(--soft); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: .6rem 0; display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+.meta b { color: var(--ink); font-weight: 500; }
+
+h2 { font: 700 1.65rem/1.25 var(--sans); letter-spacing: -.01em; margin: 3.6rem 0 .3rem; scroll-margin-top: 3rem; }
+h2 .n { display: block; font: 500 .75rem var(--mono); color: var(--acc); letter-spacing: .06em; margin-bottom: .35rem; }
+h3 { font: 600 1.15rem/1.35 var(--sans); margin: 2rem 0 .4rem; }
+p { margin: 0 0 1.1rem; }
+sup.c { font: 500 .66rem var(--mono); margin-left: 1px; }
+sup.c a { text-decoration: none; color: var(--acc); }
+sup.c a:hover { text-decoration: underline; }
+.note { font-size: .92rem; color: var(--soft); }
+code, .m { font: .92em var(--mono); background: var(--panel); padding: .05em .3em; border-radius: 3px; }
+
+/* contents */
+.toc { margin: 2rem 0 0; padding: 1rem 1.2rem; background: var(--panel); border-left: 3px solid var(--acc); }
+.toc p { font: 500 .75rem var(--mono); color: var(--soft); margin: 0 0 .4rem; text-transform: uppercase; letter-spacing: .05em; }
+.toc ol { margin: 0; padding-left: 1.3rem; columns: 2; column-gap: 2rem; font-size: .95rem; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* figures */
+figure { margin: 2rem 0; }
+figcaption { font: .82rem/1.5 var(--sans); color: var(--soft); margin-top: .6rem; }
+figcaption b { color: var(--ink); font-weight: 600; }
+.panel { border: 1px solid var(--rule); background: var(--panel); border-radius: 6px; padding: 1rem; }
+svg text { font-family: var(--mono); }
+img.pdb { width: 100%; max-width: 420px; display: block; margin: 0 auto; border-radius: 4px; background: #fff; }
+
+/* latest findings */
+.latest { margin: 2rem 0; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; }
+.latest > header { background: var(--ink); color: var(--bg); font: 600 .78rem var(--mono); padding: .5rem .9rem; letter-spacing: .04em; display: flex; justify-content: space-between; gap: 1rem; }
+.latest > header span:last-child { opacity: .7; font-weight: 400; }
+.latest ul { list-style: none; margin: 0; padding: 0; }
+.latest li { padding: .85rem .9rem; border-top: 1px solid var(--rule); font-size: .95rem; line-height: 1.55; }
+.latest li:first-child { border-top: 0; }
+.latest .src { display: block; font: .74rem var(--mono); color: var(--soft); margin-bottom: .15rem; }
+.latest .src .tag { display: inline-block; padding: 0 .4em; margin-right: .4em; border: 1px solid var(--acc); color: var(--acc); border-radius: 3px; }
+.latest .src .tag.pre { border-color: var(--soft); color: var(--soft); }
+.latest li b { font-weight: 600; }
+
+/* callouts */
+.twist { margin: 2rem 0; padding: 1.1rem 1.2rem; border-left: 4px solid var(--acc); background: var(--acc-soft); }
+.twist p:last-child { margin: 0; }
+.twist .t { font: 600 .78rem var(--mono); color: var(--acc); letter-spacing: .05em; text-transform: uppercase; margin-bottom: .3rem; display: block; }
+blockquote { margin: 1.6rem 0; padding: 0 0 0 1.1rem; border-left: 2px solid var(--ink); font: italic 1.12rem/1.55 var(--serif); }
+blockquote cite { display: block; font: normal .78rem var(--mono); color: var(--soft); margin-top: .4rem; }
+
+/* tables */
+table { width: 100%; border-collapse: collapse; font-size: .92rem; margin: 1.4rem 0; }
+th, td { text-align: left; padding: .55rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 .74rem var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--soft); border-bottom: 1px solid var(--ink); }
+td:first-child { font: 600 .9rem var(--mono); white-space: nowrap; }
+
+/* buttons */
+.btns { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 .8rem; }
+button.t { font: 500 .8rem var(--mono); padding: .4rem .8rem; border: 1px solid var(--ink); background: var(--bg); color: var(--ink); border-radius: 4px; cursor: pointer; }
+button.t[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+button.t:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+
+/* ---------- figure 1: scale ladder ---------- */
+.ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.rung { border: 1px solid var(--rule); border-radius: 6px; padding: .8rem .7rem; background: var(--bg); transition: border-color .4s, transform .4s; text-align: center; }
+.rung .u { font: 700 1.5rem var(--mono); }
+.rung .w { font: .78rem/1.4 var(--sans); color: var(--soft); min-height: 3.2em; }
+.rung svg { width: 100%; height: 64px; }
+.rung.on { border-color: var(--acc); transform: translateY(-3px); }
+.rung.on .u { color: var(--acc); }
+.arrowrow { display: flex; justify-content: space-between; font: .72rem var(--mono); color: var(--soft); margin-top: .5rem; }
+@media (max-width: 640px) { .ladder { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- figure 2: nucleosome ---------- */
+#nuc .dna { fill: none; stroke: var(--dna); stroke-width: 5; stroke-linecap: round; }
+#nuc .dna.back { opacity: .35; }
+#nuc .draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; }
+.seen #nuc .draw { animation: draw 3.2s ease-out forwards; }
+.seen #nuc .draw.d2 { animation-delay: .9s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+#nuc .hist circle { stroke: var(--bg); stroke-width: 2; }
+#nuc .hist { opacity: 0; transform-origin: 300px 150px; transform: scale(.6); }
+.seen #nuc .hist { animation: pop .7s cubic-bezier(.3,1.5,.5,1) forwards; }
+@keyframes pop { to { opacity: 1; transform: scale(1); } }
+#nuc .tail { fill: none; stroke-width: 3; stroke-linecap: round; transform-box: fill-box; }
+@media (prefers-reduced-motion: no-preference) {
+  #nuc .tail { animation: wig 2.4s ease-in-out infinite alternate; }
+  #nuc .tail:nth-of-type(2n) { animation-duration: 3.1s; }
+  #nuc .tail:nth-of-type(3n) { animation-duration: 2s; animation-delay: -.7s; }
+}
+@keyframes wig { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+#nuc text { font-size: 12px; fill: var(--ink); }
+#nuc .hl text { fill: #111; font-weight: 600; font-size: 13px; }
+
+/* ---------- figure 3: phosphate ---------- */
+#phos text { font-size: 15px; fill: var(--ink); }
+#phos .bond { stroke: var(--ink); stroke-width: 2; }
+#phos .H { transition: transform 1.4s ease-in, opacity 1.4s ease-in; }
+#phos.go .H { transform: translate(110px, -60px); opacity: 0; }
+#phos .minus { opacity: 0; transition: opacity .6s 1.1s; }
+#phos.go .minus { opacity: 1; }
+#phos .minus circle { fill: var(--neg); }
+#phos .minus text { fill: #fff; font-weight: 700; }
+#phos .Hc { fill: var(--pos); }
+#phos .Hc + text { fill: #fff; }
+
+/* ---------- figure 4: two views ---------- */
+.views { display: grid; grid-template-columns: 1fr; }
+.views > div { grid-area: 1 / 1; transition: opacity .5s; }
+.views > div[hidden] { display: block; opacity: 0; pointer-events: none; }
+.bars { display: grid; gap: .45rem; margin: .4rem 0 .2rem; }
+.bars .r { display: grid; grid-template-columns: 11rem 1fr; gap: .7rem; align-items: center; font-size: .88rem; }
+.bars .track { height: 14px; background: var(--bg); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+.bars .track i { display: block; height: 100%; background: var(--acc); width: 0; transition: width 1s ease; }
+.bars .track i.b { background: var(--pos); }
+@media (max-width: 640px) { .bars .r { grid-template-columns: 1fr; gap: .2rem; } }
+
+/* ---------- figure 5: decoder ---------- */
+.decoder { font: 700 clamp(2.4rem, 9vw, 4rem) var(--mono); display: flex; justify-content: center; gap: .1em; margin: .5rem 0 .2rem; user-select: none; }
+.decoder span { padding: 0 .12em; border-radius: 6px; cursor: pointer; transition: background .25s, color .25s; border-bottom: 4px solid transparent; }
+.decoder span[data-k="h"] { border-color: var(--h3); }
+.decoder span[data-k="k"] { border-color: var(--h2b); }
+.decoder span[data-k="p"] { border-color: var(--h4); }
+.decoder span[data-k="m"] { border-color: var(--acc); }
+.decoder span.on { background: var(--ink); color: var(--bg); }
+.decode-out { text-align: center; font-size: .98rem; min-height: 3.2em; color: var(--soft); }
+.decode-out b { color: var(--ink); }
+
+/* ---------- figure 6: genome browser ---------- */
+.igv { border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--bg); }
+.igv .top { display: flex; gap: .8rem; align-items: center; padding: .45rem .7rem; border-bottom: 1px solid var(--ink); font: .74rem var(--mono); background: var(--panel); flex-wrap: wrap; }
+.igv .top .loc { border: 1px solid var(--rule); background: var(--bg); padding: .1rem .5rem; border-radius: 3px; }
+.igv .row { display: grid; grid-template-columns: 7.5rem 1fr; border-bottom: 1px solid var(--rule); min-height: 40px; }
+.igv .row:last-child { border-bottom: 0; }
+.igv .lab { font: 500 .72rem var(--mono); padding: .5rem .6rem; border-right: 1px solid var(--rule); color: var(--soft); display: flex; flex-direction: column; justify-content: center; }
+.igv .lab b { color: var(--ink); font-weight: 600; }
+.igv .tr { position: relative; }
+.igv .tr svg { display: block; width: 100%; height: 40px; }
+.igv .sig { transform-origin: bottom; transform: scaleY(0); }
+.seen .igv .sig { animation: grow .9s ease-out forwards; }
+@keyframes grow { to { transform: scaleY(1); } }
+.igv .row.dim .tr { opacity: .15; }
+.igv .row { transition: background .3s; }
+.igv .row.hot { background: var(--acc-soft); }
+@media (max-width: 640px) { .igv .row { grid-template-columns: 5.5rem 1fr; } }
+
+/* ---------- figure 7: methods ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; counter-reset: s; }
+.steps div { border: 1px solid var(--rule); background: var(--bg); border-radius: 6px; padding: .7rem; font-size: .86rem; line-height: 1.45; position: relative; opacity: .35; transition: opacity .4s, border-color .4s; }
+.steps div::before { counter-increment: s; content: counter(s); font: 700 .75rem var(--mono); color: var(--acc); display: block; }
+.steps div.on { opacity: 1; border-color: var(--acc); }
+.steps svg { width: 100%; height: 54px; display: block; margin: .3rem 0; }
+@media (max-width: 640px) { .steps { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- figure 8: chaperone relay ---------- */
+#relay text { font-size: 12px; fill: var(--ink); }
+#relay .box { fill: var(--bg); stroke: var(--ink); stroke-width: 1.3; }
+#relay .cargo { transition: transform 1.1s cubic-bezier(.6,0,.3,1); }
+#relay .lab2 { font-size: 10.5px; fill: var(--soft); }
+
+/* ---------- figure 9: open / closed ---------- */
+#oc .nucl { transition: transform 1.1s cubic-bezier(.6,0,.3,1); }
+#oc .tf { transition: opacity .6s .8s, transform .8s .8s; opacity: 0; transform: translateY(-20px); }
+#oc.open .tf { opacity: 1; transform: none; }
+#oc .gene { transition: fill .6s .9s; fill: var(--rule); }
+#oc.open .gene { fill: var(--acc); }
+#oc text { font-size: 12px; fill: var(--ink); }
+
+/* reveal */
+.rv { opacity: 0; transform: translateY(14px); transition: opacity .7s, transform .7s; }
+.rv.seen { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+  #nuc .draw { stroke-dashoffset: 0; animation: none !important; }
+  #nuc .hist { opacity: 1; transform: none; animation: none !important; }
+  .igv .sig { transform: none; animation: none !important; }
+  * { transition-duration: .01s !important; }
+}
+
+/* open questions */
+.qs { counter-reset: q; display: grid; gap: .8rem; margin: 1.5rem 0; }
+.q { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.1rem 1rem 3.4rem; position: relative; }
+.q::before { counter-increment: q; content: "?" counter(q); position: absolute; left: 1rem; top: .95rem; font: 700 1rem var(--mono); color: var(--acc); }
+.q h3 { margin: 0 0 .35rem; font-size: 1.04rem; }
+.q p { margin: 0 0 .45rem; font-size: .95rem; }
+.q .go { font: .78rem/1.5 var(--mono); color: var(--soft); margin: 0; }
+.q .go b { color: var(--ink); font-weight: 500; }
+
+/* references */
+.refs { font-size: .84rem; line-height: 1.5; padding-left: 1.8rem; }
+.refs li { margin-bottom: .5rem; scroll-margin-top: 3rem; }
+.refs li:target { background: var(--acc-soft); outline: 4px solid var(--acc-soft); }
+.refs .y { font-family: var(--mono); color: var(--acc); }
+footer { border-top: 1px solid var(--ink); margin-top: 3rem; padding-top: 1.2rem; font: .82rem/1.6 var(--mono); color: var(--soft); }
+footer a { color: var(--ink); }
+.share { display: inline-block; margin-top: .6rem; padding: .45rem .9rem; border: 1px solid var(--ink); border-radius: 4px; text-decoration: none; font-weight: 500; color: var(--ink); }
+.share:hover { background: var(--ink); color: var(--bg); }
+
+.series { margin: 1.8rem 0 0; border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; }
+.series p { font: 500 .74rem var(--mono); color: var(--soft); margin: 0 0 .3rem; text-transform: uppercase; letter-spacing: .05em; }
+.series ol { list-style: none; margin: 0; padding: 0; font-size: .95rem; }
+.series li { padding: .15rem 0; }
+.series li[aria-current] { color: var(--acc); }
+.series a { text-decoration: none; }
+.series a:hover b { color: var(--acc); }
+.nextup { margin: 3rem 0 0; padding: 1.3rem 1.3rem; border: 1px solid var(--ink); border-radius: 6px; }
+.nextup .t { font: 600 .76rem var(--mono); color: var(--acc); text-transform: uppercase; letter-spacing: .05em; }
+.nextup h3 { margin: .3rem 0 .4rem; }
+.nextup p { margin: 0 0 .6rem; }
+
+pre.rec { font: .95rem/1.7 var(--mono); background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: .9rem 1rem; margin: 0; overflow-x: auto; }
+pre.rec .ln { display: inline-block; padding: 0 .3rem; border-radius: 3px; transition: background .3s, color .3s; }
+pre.rec .ln.on { background: var(--acc-soft); color: var(--acc); }
+ol.lines { list-style: none; padding: 0; margin: .8rem 0 0; display: grid; gap: .35rem; font-size: .93rem; }
+ol.lines li { padding: .35rem .6rem; border-left: 3px solid var(--rule); transition: border-color .3s, background .3s; cursor: default; }
+ol.lines li.on { border-color: var(--acc); background: var(--bg); }
+.formula { font: 600 1.05rem var(--mono); text-align: center; padding: 1rem; margin: 1.2rem 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.dlab { font: 500 .78rem var(--mono); color: var(--soft); display: block; margin-bottom: .3rem; }
+.qin { width: 100%; font: 600 1.15rem var(--mono); padding: .55rem .7rem; border: 1px solid var(--ink); border-radius: 4px; background: var(--bg); color: var(--ink); letter-spacing: .08em; }
+.qin:focus { outline: 2px solid var(--acc); outline-offset: 1px; }
+.dec { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 1rem; min-height: 9rem; align-items: flex-end; }
+.dec .c { width: 2.3rem; text-align: center; font: .68rem/1.3 var(--mono); color: var(--soft); }
+.dec .c b { display: block; font-size: 1.05rem; color: var(--ink); }
+.dec .bar { height: 0; margin: 0 auto .25rem; width: 70%; border-radius: 2px 2px 0 0; transition: height .6s cubic-bezier(.3,1.3,.5,1); }
+.dec .g { background: #2e9e5b; } .dec .y { background: #e0a526; } .dec .r { background: #d1006b; }
+.dec .qv { color: var(--ink); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="brand"><span class="dot">🧬</span>&nbsp;Aathma M. Bejoy</a>
-    <a href="blog.html" class="back">← All posts</a>
+<nav class="chr" aria-label="Sections">
+  <span class="lbl">chrBlog · basics</span>
+  <div class="bar" id="chrbar">
+    <a href="#s1" title="FASTA" aria-label="FASTA"></a>
+    <a href="#s2" title="FASTQ" aria-label="FASTQ"></a>
+    <a href="#s3" title="Quality scores" aria-label="Quality scores"></a>
+    <a href="#s4" title="Phred+33" aria-label="Phred+33"></a>
+    <a href="#s5" title="Real files today" aria-label="Real files today"></a>
+    <span class="fill" id="fill"></span>
   </div>
+  <span class="pos" id="pos">0 bp</span>
 </nav>
 
-<header class="hero">
-  <div class="wrap">
-    <span class="tag">Bioinformatics basics</span>
-    <h1>FASTA, FASTQ &amp; the Secret Code in Your DNA Files</h1>
-    <p class="meta">By Aathma Merin Bejoy · August 6, 2026 · 6 min read</p>
-  </div>
-</header>
-
+<main>
 <article>
-  <div class="wrap">
-    <p>If you're stepping into bioinformatics for the first time, two file types will show up almost immediately: <strong>FASTA</strong> and <strong>FASTQ</strong>. They look cryptic at first — walls of A's, C's, G's, and T's, sprinkled with punctuation that seems random. But once you understand what each line is doing, they're genuinely simple. Let's walk through them together, no prior knowledge assumed.</p>
-
-    <h2>FASTA: the plain and simple one</h2>
-    <p>Think of <strong>FASTA</strong> as the "just the text, please" format. It stores a biological sequence — DNA, RNA, or protein — and almost nothing else.</p>
-    <p>A FASTA record is only two parts:</p>
-    <pre><code>&gt;my_first_sequence some optional description
-GATTACAGATTACAGATTACAGATTACA</code></pre>
-    <p>The first line always starts with a <code>&gt;</code> (greater-than sign). That's the <strong>header</strong> — a name for the sequence, plus any description you feel like adding. Every line after it, until the next <code>&gt;</code>, is the sequence itself.</p>
-    <p>That's the whole format. A FASTA file can hold one sequence or a million of them, each introduced by its own <code>&gt;</code> header. It's perfect when all you care about is <em>what</em> the sequence is — for example, a reference genome you want to compare your data against.</p>
-    <p>But FASTA has a blind spot. When a DNA sequencing machine reads a real biological sample, it isn't equally sure about every letter. Some bases it reads crisply and confidently; others are a blurry guess. FASTA has no way to record that confidence. Every letter looks equally trustworthy, even when it isn't.</p>
-    <p>That's exactly the gap FASTQ fills.</p>
-
-    <h2>FASTQ: FASTA's smarter cousin</h2>
-    <p><strong>FASTQ</strong> stores the same sequence letters, but adds a <strong>quality score for every single base</strong> — a note on how confident the machine was about each letter it read. This is the format that comes straight out of modern sequencers like Illumina, and it's where most real analysis begins.</p>
-    <p>The magic number to remember: a FASTQ record is always <strong>exactly four lines</strong>.</p>
-    <pre><code>@read_001 instrument info here
-GATTACAGATTACAGATTACAGATTACA
-+
-IIIIIIIIIIIIIII?5+!!!!!!!!!!</code></pre>
-    <p>Here's what each line does:</p>
-    <ol>
-      <li><strong>Line 1 — the ID.</strong> Starts with <code>@</code>. It's the name of the read, usually with machine details tacked on. (Note: <code>@</code> here, <code>&gt;</code> in FASTA — an easy way to tell the two files apart at a glance.)</li>
-      <li><strong>Line 2 — the sequence.</strong> The actual bases: A, C, G, T, and sometimes <strong>N</strong> (which means "I couldn't tell").</li>
-      <li><strong>Line 3 — the separator.</strong> Just a <code>+</code> sign, marking the boundary between the sequence and the quality scores.</li>
-      <li><strong>Line 4 — the quality string.</strong> One character per base, describing how confident the machine was about each letter above it.</li>
-    </ol>
-    <p>The single most important rule of FASTQ: <strong>line 2 and line 4 must be the same length.</strong> Every base gets exactly one quality character sitting beneath it, like a caption under each letter.</p>
-
-    <h2>The idea behind quality scores</h2>
-    <p>So what does that weird string on line 4 actually mean? Each character is a compact way of writing a <strong>Phred quality score</strong> — a number that tells you how likely the base call is to be <em>wrong</em>.</p>
-    <p>The rule is simple once you see it: <strong>higher score = more confident.</strong> Scientists express it with this formula:</p>
-    <div class="formula">Q = &minus;10 × log₁₀(P<sub>error</sub>)</div>
-    <p>Don't let the log scare you. All it's really saying is: <em>every time the error rate drops by 10×, the quality score goes up by 10.</em> Here's the whole idea in a small table:</p>
-    <table>
-      <thead><tr><th>Quality (Q)</th><th>Chance the base is wrong</th><th>Accuracy</th></tr></thead>
-      <tbody>
-        <tr><td>10</td><td>1 in 10</td><td>90%</td></tr>
-        <tr><td>20</td><td>1 in 100</td><td>99%</td></tr>
-        <tr><td>30</td><td>1 in 1,000</td><td>99.9%</td></tr>
-        <tr><td>40</td><td>1 in 10,000</td><td>99.99%</td></tr>
-      </tbody>
-    </table>
-    <p><strong>Q30</strong> is the number you'll hear thrown around as "good quality." It means there's only a 1-in-1,000 chance that base is a mistake.</p>
-
-    <h2>Phred+33: turning a number into a character</h2>
-    <p>Now for the part that confuses almost every beginner. If quality scores are numbers like 30 and 40, why does line 4 look like <code>IIIII?5+!</code> instead of digits?</p>
-    <p>Because of that one strict rule: <strong>one character per base.</strong> If we wrote "30" that's two characters, and the alignment with the sequence would fall apart instantly. So we need a way to squeeze <em>any</em> score into a <em>single</em> character.</p>
-    <p>The trick is to borrow from <strong>ASCII</strong>, the standard table that gives every keyboard character a number. In ASCII, <code>!</code> is 33, <code>+</code> is 43, <code>5</code> is 53, <code>?</code> is 63, and <code>I</code> is 73. The recipe is beautifully simple:</p>
-    <div class="formula">character's ASCII number = quality score + 33</div>
-    <p>That "+ 33" is why the format is called <strong>Phred+33</strong>. Why add 33? Because the ASCII numbers below 33 are invisible control characters (spaces, tabs, line breaks) that would corrupt a text file. Adding 33 shifts every score up into the safe, printable zone, starting at <code>!</code>.</p>
-    <p>Let's decode a real example. Take this quality string:</p>
-    <pre><code>I ? 5 + !</code></pre>
-    <p>Subtract 33 from each character's ASCII value:</p>
-    <ul>
-      <li><code>I</code> → 73 − 33 = <strong>Q40</strong> (superb)</li>
-      <li><code>?</code> → 63 − 33 = <strong>Q30</strong> (great)</li>
-      <li><code>5</code> → 53 − 33 = <strong>Q20</strong> (okay)</li>
-      <li><code>+</code> → 43 − 33 = <strong>Q10</strong> (shaky)</li>
-      <li><code>!</code> → 33 − 33 = <strong>Q0</strong> (basically a coin flip)</li>
-    </ul>
-    <p>Watch out for one sneaky trap: that <code>5</code> means <strong>Q20</strong>, <em>not</em> the number five! It's an ASCII code that happens to look like a digit. This exact mix-up trips up nearly everyone at first, so now you're ahead of the game.</p>
-    <p>Notice the pattern in the decoded scores, too — they start high and fade to garbage. That's completely normal: sequencing reads tend to get less reliable toward their tail end, which is why quality often drops off near the finish.</p>
-
-    <h2>Putting it all together</h2>
-    <p>Here's the whole story in one breath. <strong>FASTA</strong> stores sequences and nothing else — clean and minimal. <strong>FASTQ</strong> adds a quality score for every base, packed into four tidy lines. And <strong>Phred+33</strong> is the clever shorthand that shrinks each score into a single printable character by adding 33 and reading it off the ASCII table.</p>
-    <p>Master these three ideas and you've unlocked the front door of bioinformatics — because nearly every sequencing analysis, from quality checks to genome assembly, starts right here.</p>
-    <p><em>Happy sequencing!</em> 🧬</p>
-
-    <div class="end">
-      <p>← <a href="index.html#blog">Back to all posts</a> &nbsp;·&nbsp; <a href="index.html#roadmap">See the full roadmap</a></p>
-    </div>
+  <p class="back"><a href="blog.html">← All posts</a> · <a href="index.html">Home</a></p>
+  <p class="kicker">Bioinformatics basics</p>
+  <h1>FASTA, FASTQ and the code hidden in <em>your read files</em></h1>
+  <p class="dek">The first two file types anyone meets in sequencing, what each line means, and how a single character like <code>I</code> or <code>5</code> stores the quality of a base.</p>
+  <div class="meta">
+    <span>By <b>Aathma Merin Bejoy</b></span>
+    <span>Bioinformatician, Berlin</span>
+    <span>6 Aug 2026</span>
+    <span>~7 min read</span>
   </div>
-</article>
 
-<footer>
-  <div class="wrap">© 2026 Aathma Merin Bejoy · Learning bioinformatics in public 🧬</div>
-</footer>
+  <p style="margin-top:1.6rem">When you start in bioinformatics, two file types show up almost immediately: FASTA and FASTQ. At first they look like walls of A, C, G and T with random punctuation in between. Once you know what each line does, they are simple. This post goes through both, and then through the part that confuses almost everyone: the quality scores.</p>
+
+  <nav class="toc" aria-label="Contents"><p>In this post</p><ol>
+    <li><a href="#s1">FASTA: sequence only</a></li>
+    <li><a href="#s2">FASTQ: four lines per read</a></li>
+    <li><a href="#s3">What a quality score means</a></li>
+    <li><a href="#s4">Phred+33: a number as one character</a></li>
+    <li><a href="#s5">What you see in real files today</a></li>
+  </ol></nav>
+
+  <h2 id="s1"><span class="n">01 · FASTA</span>Sequence only</h2>
+  <p>FASTA stores a biological sequence (DNA, RNA or protein) and almost nothing else. A record has two parts:</p>
+  <figure class="panel rv">
+    <pre class="rec"><span class="ln l1">&gt;my_first_sequence some optional description</span>
+<span class="ln l2">GATTACAGATTACAGATTACAGATTACA</span></pre>
+    <figcaption><b>Figure 1.</b> A FASTA record. The header line starts with <code>&gt;</code>; every line after it, until the next <code>&gt;</code>, is sequence.</figcaption>
+  </figure>
+  <p>The first line always starts with <code>&gt;</code>. That is the header: a name for the sequence plus any description. A FASTA file can hold one sequence or millions, each with its own header. It is the right format when you only care about what the sequence is, for example a reference genome you align your reads to.</p>
+  <p>FASTA has one blind spot. A sequencer is not equally sure about every base it reads. Some it reads clearly, others are close to a guess, and FASTA has no place to record that. That is the gap FASTQ fills.</p>
+
+  <h2 id="s2"><span class="n">02 · FASTQ</span>Four lines per read</h2>
+  <p>FASTQ stores the same sequence letters plus a quality score for every base. It started at the Wellcome Trust Sanger Institute and was used for years without a formal definition, in several incompatible variants, until a 2010 paper wrote down the standard.<sup class="c"><a href="#r1">1</a></sup> It is what comes out of Illumina sequencers, and where most analyses begin. A FASTQ record is always four lines:</p>
+  <figure class="panel rv" id="fq">
+    <pre class="rec"><span class="ln l1" data-i="1">@read_001 instrument info here</span>
+<span class="ln l2" data-i="2">GATTACAGATTACAGATTACAGATTACA</span>
+<span class="ln l3" data-i="3">+</span>
+<span class="ln l4" data-i="4">IIIIIIIIIIIIIII?5+!!!!!!!!!!</span></pre>
+    <ol class="lines">
+      <li data-i="1"><b>Line 1 · the ID.</b> Starts with <code>@</code> (FASTA uses <code>&gt;</code>, an easy way to tell them apart). The read name, usually with instrument details.</li>
+      <li data-i="2"><b>Line 2 · the sequence.</b> A, C, G, T, and <code>N</code> where the base could not be called.</li>
+      <li data-i="3"><b>Line 3 · the separator.</b> A <code>+</code>, sometimes followed by the ID again.</li>
+      <li data-i="4"><b>Line 4 · the quality string.</b> One character per base, saying how sure the machine was.</li>
+    </ol>
+    <figcaption><b>Figure 2.</b> A FASTQ record. Hover a line to see what it does. The lines light up one by one.</figcaption>
+  </figure>
+  <p>The one rule to remember: <b>line 2 and line 4 have the same length.</b> Every base has exactly one quality character under it.</p>
+
+  <h2 id="s3"><span class="n">03 · QUALITY SCORES</span>What a quality score means</h2>
+  <p>Each character on line 4 encodes a Phred quality score, a number for how likely the base call is to be wrong. The idea comes from the base-calling program phred, written for Sanger sequencing in the 1990s by Brent Ewing and Phil Green. It estimated an error probability for every base call, and those estimates matched the real error rates.<sup class="c"><a href="#r2">2</a></sup> Illumina still assigns its quality scores with a phred-like algorithm.<sup class="c"><a href="#r3">3</a></sup></p>
+  <div class="formula">Q = −10 × log<sub>10</sub>(P<sub>error</sub>)</div>
+  <p>In words: every time the error probability drops ten-fold, Q goes up by 10. A base with a 1 in 1,000 chance of being wrong has Q30.<sup class="c"><a href="#r2">2</a></sup></p>
+  <table>
+    <thead><tr><th>Q</th><th>Chance the base is wrong</th><th>Accuracy</th></tr></thead>
+    <tbody>
+      <tr><td>10</td><td>1 in 10</td><td>90%</td></tr>
+      <tr><td>20</td><td>1 in 100</td><td>99%</td></tr>
+      <tr><td>30</td><td>1 in 1,000</td><td>99.9%</td></tr>
+      <tr><td>40</td><td>1 in 10,000</td><td>99.99%</td></tr>
+    </tbody>
+  </table>
+  <p>Q30 is the number people quote for "good quality". Illumina reports that the large majority of bases from its instruments score Q30 or higher.<sup class="c"><a href="#r3">3</a></sup></p>
+
+  <h2 id="s4"><span class="n">04 · PHRED+33</span>A number as one character</h2>
+  <p>If the scores are numbers like 30 and 40, why does line 4 look like <code>IIIII?5+!</code>? Because of the one-character-per-base rule. "30" is two characters and would break the alignment with the sequence, so each score has to fit into a single character.</p>
+  <p>The trick is ASCII, the table that gives every keyboard character a number. In FASTQ files, a quality score is stored as the character whose ASCII code equals the score plus 33.<sup class="c"><a href="#r4">4</a></sup> That is why the encoding is called Phred+33. The +33 skips the codes below 33, which are invisible control characters such as tabs and line breaks, so the first usable score, Q0, becomes <code>!</code>.</p>
+  <div class="formula">ASCII code of the character = Q + 33</div>
+
+  <figure class="panel rv">
+    <label class="dlab" for="qin">Type or paste a quality string</label>
+    <input id="qin" class="qin" value="IIII?5+!" spellcheck="false" autocomplete="off" maxlength="60">
+    <div class="btns" style="margin-top:.5rem">
+      <button class="t" data-q="IIII?5+!">example from above</button>
+      <button class="t" data-q="FFFFFFFFF:FFFFF,F:FF">another example</button>
+      <button class="t" data-q="II9II-I99I-III">NovaSeq X-style</button>
+    </div>
+    <div class="dec" id="dec" aria-live="polite"></div>
+    <figcaption><b>Figure 3.</b> A live decoder. Each character is turned into its ASCII code, minus 33, and the bar shows the resulting Q (green ≥ 30, yellow 20–29, red &lt; 20).</figcaption>
+  </figure>
+
+  <p>Decoding the example string by hand:</p>
+  <ul>
+    <li><code>I</code> → 73 − 33 = <b>Q40</b></li>
+    <li><code>?</code> → 63 − 33 = <b>Q30</b></li>
+    <li><code>5</code> → 53 − 33 = <b>Q20</b></li>
+    <li><code>+</code> → 43 − 33 = <b>Q10</b></li>
+    <li><code>!</code> → 33 − 33 = <b>Q0</b></li>
+  </ul>
+  <p>Watch out for <code>5</code>. It means Q20, not five. It is an ASCII character that happens to look like a digit, and this mix-up catches most people at first.</p>
+  <p>One more trap: older Solexa and Illumina pipelines used other variants, including an offset of 64 instead of 33.<sup class="c"><a href="#r1">1</a></sup> If an old dataset has quality strings full of lowercase letters like <code>h</code> and <code>g</code>, check which encoding it uses before trimming or aligning.</p>
+
+  <h2 id="s5"><span class="n">05 · REAL FILES</span>What you see in real files today</h2>
+  <p>If you open a FASTQ from a recent Illumina run, you will notice something odd: the quality line uses only three or four different characters. That is not a bug. Quality scores take up a large share of the storage space of sequencing data, and Illumina found that they can be compressed into a few bins without affecting alignment or variant calling.<sup class="c"><a href="#r5">5</a></sup></p>
+
+  <section class="latest rv" aria-label="Latest on quality scores">
+    <header><span>▸ LATEST · QUALITY SCORES</span><span>2023–2026</span></header>
+    <ul>
+      <li><span class="src"><span class="tag">Illumina · 2023</span>NovaSeq X software v1.2</span><b>Three bins, and Q40 at the top.</b> The NovaSeq X groups its quality scores into three bins. From control software v1.2 on, all scores from 3 to 17 are reported as Q12, 18 to 29 as Q24, and 30 and above as Q40.<sup class="c"><a href="#r6">6</a></sup> With the XLEAP-SBS chemistry the top bin moved from Q37 to Q40, and the middle bin from Q20 to Q24.<sup class="c"><a href="#r7">7</a></sup> So in Phred+33 a NovaSeq X quality line uses mainly <code>-</code> (Q12), <code>9</code> (Q24) and <code>I</code> (Q40). Try the "NovaSeq X-style" button in Figure 3.</li>
+      <li><span class="src"><span class="tag">Illumina · 2023</span>Q-score calibration</span><b>How good are the scores themselves?</b> Illumina reports that the NovaSeq X can produce 85% or more of its output bases with a Q40 score.<sup class="c"><a href="#r7">7</a></sup> Note that this is the manufacturer's own figure.</li>
+    </ul>
+  </section>
+  <p>For everyday work this means two things. A quality line full of <code>I</code> on a new instrument is normal and not suspicious. And any tool that plots per-base quality will show steps instead of smooth curves, because there are only a few possible values.</p>
+
+  <h2 id="end" style="margin-top:3rem"><span class="n">WRAPPING UP</span>The whole thing in three lines</h2>
+  <p><b>FASTA</b> stores sequences and nothing else. <b>FASTQ</b> adds a quality score for every base, in four lines per read. <b>Phred+33</b> turns each score into one printable character by adding 33 and looking it up in the ASCII table.</p>
+  <p>Almost every sequencing analysis I run, from quality checks to alignment, starts with these files, so this is where I started the blog too.</p>
+
+  <h2 id="refs"><span class="n">REFERENCES</span>Papers and sources</h2>
+  <ol class="refs">
+    <li id="r1">Cock PJA, Fields CJ, Goto N, Heuer ML, Rice PM. The Sanger FASTQ file format for sequences with quality scores, and the Solexa/Illumina FASTQ variants. <i>Nucleic Acids Research</i> 38:1767–1771 (<span class="y">2010</span>). <a href="https://doi.org/10.1093/nar/gkp1137">doi:10.1093/nar/gkp1137</a></li>
+    <li id="r2">Ewing B, Green P. Base-calling of automated sequencer traces using phred. II. Error probabilities. <i>Genome Research</i> 8:186–194 (<span class="y">1998</span>). <a href="https://doi.org/10.1101/gr.8.3.186">doi:10.1101/gr.8.3.186</a></li>
+    <li id="r3">Illumina. Sequencing quality scores. <a href="https://www.illumina.com/science/technology/next-generation-sequencing/plan-experiments/quality-scores.html">illumina.com</a></li>
+    <li id="r4">Illumina BaseSpace documentation. Quality scores: quality score encoding. <a href="https://help.connected.illumina.com/basespace/files-used-by-basespace/quality-scores">help.connected.illumina.com</a></li>
+    <li id="r5">Illumina technical note. Understanding Illumina quality scores (quality score binning). <a href="https://sapac.support.illumina.com/content/dam/illumina-marketing/documents/products/technotes/technote_understanding_quality_scores.pdf">PDF</a></li>
+    <li id="r6">Illumina Knowledge Article #8320. RTA4 Q score bin ranges on the NovaSeq X/X Plus. <a href="https://knowledge.illumina.com/instrumentation/novaseq-x-x-plus/instrumentation-novaseq-x-x-plus-reference_material-list/000008320">knowledge.illumina.com</a></li>
+    <li id="r7">Illumina DRAGEN team. NovaSeq X v1.2 software enables sequencing with 80% of bases ≥ Q40 (<span class="y">2023</span>). <a href="https://www.illumina.com/science/genomics-research/articles/data-quality-q-scores.html">illumina.com</a></li>
+  </ol>
+
+  <footer>
+    <p>Written by Aathma Merin Bejoy · bioinformatician in Berlin · <a href="index.html">aatsbioinfo.github.io</a> · <a href="blog.html">all posts</a></p>
+    <a class="share" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faatsbioinfo.github.io%2Ffasta-fastq-phred.html" target="_blank" rel="noopener">Share on LinkedIn ↗</a>
+  </footer>
+</article>
+</main>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fill = document.getElementById('fill'), pos = document.getElementById('pos');
+  function onScroll() {
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    var f = max > 0 ? Math.min(1, h.scrollTop / max) : 0;
+    fill.style.width = (f * 100) + '%';
+    pos.textContent = 'read ' + Math.round(f * 150) + '/150';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // reveal + FASTQ line walk
+  var fq = document.getElementById('fq');
+  function light(i) {
+    fq.querySelectorAll('[data-i]').forEach(function (e) { e.classList.toggle('on', e.dataset.i === String(i)); });
+  }
+  var walked = false;
+  function walk() {
+    if (walked || reduce) return; walked = true; var i = 1;
+    var t = setInterval(function () { light(i); i++; if (i > 5) { clearInterval(t); light(0); } }, 900);
+  }
+  fq.querySelectorAll('[data-i]').forEach(function (e) {
+    e.addEventListener('mouseenter', function () { light(e.dataset.i); });
+    e.addEventListener('mouseleave', function () { light(0); });
+  });
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); if (e.target === fq) walk(); } });
+  }, { threshold: .3 }) : null;
+  document.querySelectorAll('.rv').forEach(function (el) { io ? io.observe(el) : el.classList.add('seen'); });
+
+  // decoder
+  var inp = document.getElementById('qin'), dec = document.getElementById('dec');
+  function esc(c) { return c.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function render() {
+    var s = inp.value, out = '';
+    for (var i = 0; i < s.length; i++) {
+      var code = s.charCodeAt(i), q = code - 33;
+      if (q < 0 || q > 93) { out += '<div class="c"><b>' + esc(s[i]) + '</b>n/a</div>'; continue; }
+      var cls = q >= 30 ? 'g' : q >= 20 ? 'y' : 'r';
+      out += '<div class="c"><div class="bar ' + cls + '" data-h="' + Math.min(q, 45) * 2 + '"></div><b>' + esc(s[i]) + '</b>' + code + '<br><span class="qv">Q' + q + '</span></div>';
+    }
+    dec.innerHTML = out;
+    requestAnimationFrame(function () { dec.querySelectorAll('.bar').forEach(function (b) { b.style.height = b.dataset.h + 'px'; }); });
+  }
+  inp.addEventListener('input', render);
+  document.querySelectorAll('[data-q]').forEach(function (b) { b.addEventListener('click', function () { inp.value = b.dataset.q; render(); }); });
+  render();
+})();
+</script>
 </body>
 </html>
