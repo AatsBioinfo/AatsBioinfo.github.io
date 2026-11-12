@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Two metres of DNA in a six-micrometre nucleus | Aathma Merin Bejoy</title>
-<meta name="description" content="Re-learning biology, part 1: how DNA is packed around histones, why the old 'opposite charges attract' story is only half right, how we read histone marks, and what is still unknown. With papers from 2022 to 2026.">
+<title>Two metres of DNA in a six-micrometre nucleus. How does it fit? | Aathma Merin Bejoy</title>
+<meta name="description" content="I went back to the basics of DNA packing and found that one of the first things I learned, &quot;positive histones stick to negative DNA&quot;, is only half the story.">
 <meta name="author" content="Aathma Merin Bejoy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Two metres of DNA in a six-micrometre nucleus">
-<meta property="og:description" content="Re-learning biology, part 1: nucleosomes, histone charges, histone marks, chaperones, and the open questions, with recent papers (2022–2026).">
+<meta property="og:url" content="https://aatsbioinfo.github.io/dna-packing.html">
+<link rel="canonical" href="https://aatsbioinfo.github.io/dna-packing.html">
+<meta property="og:title" content="Two metres of DNA in a six-micrometre nucleus. How does it fit?">
+<meta property="og:description" content="I went back to the basics of DNA packing and found that one of the first things I learned, &quot;positive histones stick to negative DNA&quot;, is only half the story.">
 <meta property="og:image" content="https://cdn.rcsb.org/images/structures/1aoi_assembly-1.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,6 +252,18 @@ footer { border-top: 1px solid var(--ink); margin-top: 3rem; padding-top: 1.2rem
 footer a { color: var(--ink); }
 .share { display: inline-block; margin-top: .6rem; padding: .45rem .9rem; border: 1px solid var(--ink); border-radius: 4px; text-decoration: none; font-weight: 500; color: var(--ink); }
 .share:hover { background: var(--ink); color: var(--bg); }
+
+.series { margin: 1.8rem 0 0; border: 1px solid var(--rule); border-radius: 6px; padding: .8rem 1rem; }
+.series p { font: 500 .74rem var(--mono); color: var(--soft); margin: 0 0 .3rem; text-transform: uppercase; letter-spacing: .05em; }
+.series ol { list-style: none; margin: 0; padding: 0; font-size: .95rem; }
+.series li { padding: .15rem 0; }
+.series li[aria-current] { color: var(--acc); }
+.series a { text-decoration: none; }
+.series a:hover b { color: var(--acc); }
+.nextup { margin: 3rem 0 0; padding: 1.3rem 1.3rem; border: 1px solid var(--ink); border-radius: 6px; }
+.nextup .t { font: 600 .76rem var(--mono); color: var(--acc); text-transform: uppercase; letter-spacing: .05em; }
+.nextup h3 { margin: .3rem 0 .4rem; }
+.nextup p { margin: 0 0 .6rem; }
 </style>
 </head>
 <body>
@@ -258,14 +272,9 @@ footer a { color: var(--ink); }
   <span class="lbl">chrBlog · part 1</span>
   <div class="bar" id="chrbar">
     <a href="#s1" title="The packing problem" aria-label="The packing problem"></a>
-    <a href="#s2" title="The nucleosome" aria-label="The nucleosome"></a>
-    <a href="#s3" title="Why do they stick?" aria-label="Why do they stick"></a>
-    <a href="#s4" title="The twist" aria-label="The twist"></a>
-    <a href="#s5" title="Histone marks" aria-label="Histone marks"></a>
-    <a href="#s6" title="How we read them" aria-label="How we read them"></a>
-    <a href="#s7" title="Histone chaperones" aria-label="Histone chaperones"></a>
-    <a href="#s8" title="Open and closed" aria-label="Open and closed"></a>
-    <a href="#s9" title="Still unclear" aria-label="Still unclear"></a>
+    <a href="#s2" title="Beads on a string: the nucleosome" aria-label="Beads on a string: the nucleosome"></a>
+    <a href="#s3" title="Why do histones and DNA stick?" aria-label="Why do histones and DNA stick?"></a>
+    <a href="#s4" title="The twist: charge is not the main glue" aria-label="The twist: charge is not the main glue"></a>
     <span class="fill" id="fill"></span>
   </div>
   <span class="pos" id="pos">0 bp</span>
@@ -281,26 +290,13 @@ footer a { color: var(--ink); }
     <span>By <b>Aathma Merin Bejoy</b></span>
     <span>Bioinformatician, Berlin</span>
     <span>12 Nov 2026</span>
-    <span>~15 min read</span>
+    <span>~8 min read</span>
   </div>
 
   <p style="margin-top:1.6rem">I work with sequencing data every day. ChIP-seq peaks, read pileups, coverage tracks. At some point I realised I was very comfortable with the files and much less comfortable with the biology that makes them. So I started re-learning the basics from the beginning, with a notebook and the original papers, and this blog is where I write it up.</p>
-  <p>Part 1 is about the very first problem a cell has: how to pack its DNA. For each topic I start with the textbook picture, then add what papers from the last few years (2022 to 2026) say about it. At the end there is a list of things that are still not understood, in case you are a student looking for a question to work on.</p>
-
-  <nav class="toc" aria-label="Contents">
-    <p>Contents</p>
-    <ol>
-      <li><a href="#s1">The packing problem</a></li>
-      <li><a href="#s2">Beads on a string: the nucleosome</a></li>
-      <li><a href="#s3">Why do histones and DNA stick?</a></li>
-      <li><a href="#s4">The twist: charge is not the main glue</a></li>
-      <li><a href="#s5">Chemical tags on histones</a></li>
-      <li><a href="#s6">How we read the tags</a></li>
-      <li><a href="#s7">Who brings the histones? Chaperones</a></li>
-      <li><a href="#s8">Open and closed chromatin</a></li>
-      <li><a href="#s9">What is still unclear</a></li>
-    </ol>
-  </nav>
+  <p>I start with the very first problem a cell has: how to pack its DNA. It turned into three posts. This first one is about the packing itself and what holds DNA on the histones. For each topic I start with the textbook picture, then add what papers from the last few years (2022 to 2026) say about it.</p>
+  <nav class="series" aria-label="Series"><p>Re-learning biology · a 3-part series</p><ol><li aria-current="page"><b>Part 1</b> · How does 2 m of DNA fit?</li><li><a href="histone-marks.html"><b>Part 2</b> · The tags on the tails</a></li><li><a href="histone-chaperones.html"><b>Part 3</b> · Chaperones and open questions</a></li></ol></nav>
+  <nav class="toc" aria-label="Contents"><p>In this part</p><ol><li><a href="#s1">The packing problem</a></li><li><a href="#s2">Beads on a string: the nucleosome</a></li><li><a href="#s3">Why do histones and DNA stick?</a></li><li><a href="#s4">The twist: charge is not the main glue</a></li></ol></nav>
 
   <!-- 1 -->
   <h2 id="s1"><span class="n">01 · THE PACKING PROBLEM</span>The numbers that don't seem to fit</h2>
@@ -323,7 +319,7 @@ footer a { color: var(--ink); }
         <div class="w">DNA helix ~2 nm wide</div></div>
     </div>
     <div class="arrowrow"><span>m</span><span>→ ×1,000 smaller each step →</span><span>nm</span></div>
-    <figcaption><b>Figure 1.</b> The size ladder from my notes: metre → millimetre → micrometre → nanometre. Each step is a thousand times smaller. Numbers from refs 2–4.</figcaption>
+    <figcaption><b>Figure 1.</b> The size ladder: metre → millimetre → micrometre → nanometre. Each step is a thousand times smaller. Numbers from refs 2–4.</figcaption>
   </figure>
 
   <p>The textbook answer to "how does it fit?" is a hierarchy: DNA wraps around proteins to make beads, the beads fold into a fibre, the fibre folds into loops, and so on. The first step of that hierarchy is very well understood. The higher steps, as we will see, have been redrawn more than once.</p>
@@ -338,7 +334,7 @@ footer a { color: var(--ink); }
 
   <!-- 2 -->
   <h2 id="s2"><span class="n">02 · THE NUCLEOSOME</span>Beads on a string</h2>
-  <p>The first level of packing is the nucleosome. In 1974 Roger Kornberg, then a postdoc at the MRC in Cambridge working with Aaron Klug and Francis Crick, proposed that chromatin is built from a repeating unit of histone proteins and DNA.<sup class="c"><a href="#r6">6</a>,<a href="#r7">7</a></sup> (I had written "Stanford" in my notes, but the 1974 model was proposed while he was at the MRC.)</p>
+  <p>The first level of packing is the nucleosome. In 1974 Roger Kornberg, then a postdoc at the MRC in Cambridge working with Aaron Klug and Francis Crick, proposed that chromatin is built from a repeating unit of histone proteins and DNA.<sup class="c"><a href="#r6">6</a>,<a href="#r7">7</a></sup></p>
   <p>Today we know the core of the nucleosome very precisely. In 1997 Karolin Luger and Tim Richmond's group solved its crystal structure: two copies each of histones <span class="m">H2A</span>, <span class="m">H2B</span>, <span class="m">H3</span> and <span class="m">H4</span> form an octamer, and 145–147 bp of DNA wrap around it.<sup class="c"><a href="#r8">8</a></sup> The DNA between two nucleosomes is called linker DNA, and linker histone <span class="m">H1</span> sits where the DNA enters and leaves.</p>
 
   <figure class="panel rv">
@@ -361,7 +357,7 @@ footer a { color: var(--ink); }
       <text x="390" y="45">histone tails</text><path d="M388 48 l -20 10" stroke="var(--soft)" fill="none"/>
       <text x="445" y="140">~147 bp</text><text x="445" y="154" style="fill:var(--soft)">wrapped</text>
     </svg>
-    <figcaption><b>Figure 2.</b> My redrawing of the nucleosome. The core is an octamer (two each of H2A, H2B, H3, H4), DNA wraps around it, H1 sits at the linker, and each histone has a floppy tail that sticks out. Those tails become important in sections 4 and 5. Schematic, not to scale.</figcaption>
+    <figcaption><b>Figure 2.</b> My redrawing of the nucleosome. The core is an octamer (two each of H2A, H2B, H3, H4), DNA wraps around it, H1 sits at the linker, and each histone has a floppy tail that sticks out. Those tails become important in section 4 and in Part 2. Schematic, not to scale.</figcaption>
   </figure>
 
   <figure class="rv">
@@ -392,7 +388,7 @@ footer a { color: var(--ink); }
       <text x="400" y="120">→ phosphate stays −</text>
     </svg>
     <div class="btns"><button class="t" id="phbtn" aria-pressed="false">▶ release H⁺</button></div>
-    <figcaption><b>Figure 4.</b> What I drew on page 2 of my notes. The –OH on the phosphate gives away its H<sup>+</sup> and leaves its electron behind on the oxygen, which now has an extra electron and a negative charge. Repeat that for every nucleotide and the whole backbone is negative.</figcaption>
+    <figcaption><b>Figure 4.</b> The –OH on the phosphate gives away its H<sup>+</sup> and leaves its electron behind on the oxygen, which now has an extra electron and a negative charge. Repeat that for every nucleotide and the whole backbone is negative.</figcaption>
   </figure>
 
   <p>So the picture seems complete: a positive protein ball, a negative DNA string, electrostatic attraction, done. That is what I believed until I went looking for more recent papers.</p>
@@ -443,191 +439,14 @@ footer a { color: var(--ink); }
       <li><span class="src"><span class="tag">Nature · 2025</span>"Native nucleosomes intrinsically encode genome organization principles"</span><b>Charge and 3D genome.</b> Acetylation on histone tails affected nucleosome condensation much more than acetylation on the core, with the strongest effect on the H4 tail.<sup class="c"><a href="#r17">17</a></sup></li>
     </ul>
   </section>
-  <p>My reading of all this: inside the core, the many specific contacts do most of the holding. The charged tails act more like adjustable hands, loose on their own nucleosome, but able to grab DNA, neighbours, or each other. That is also where the cell puts most of its chemical tags, which brings me to the next part.</p>
+  <p>My reading of all this: inside the core, the many specific contacts do most of the holding. The charged tails act more like adjustable hands, loose on their own nucleosome, but able to grab DNA, neighbours, or each other. That is also where the cell puts most of its chemical tags, which is where Part 2 starts.</p>
 
-  <!-- 5 -->
-  <h2 id="s5"><span class="n">05 · HISTONE MARKS</span>Chemical tags on the tails</h2>
-  <p>Names like <span class="m">H3K9me3</span> or <span class="m">H3K27ac</span> are everywhere in my work. They are chemical groups that the cell's own enzymes attach to histones after the protein is made, which is why they are called post-translational modifications (PTMs). The famous ones are acetylation, methylation, phosphorylation and ubiquitination. Since around 2011, mass spectrometry has added many more: lactylation, crotonylation, succinylation, citrullination, propionylation, butyrylation and others. A 2024 review counts nine of these "novel" types alone.<sup class="c"><a href="#r18">18</a></sup> Lactylation was found on histones in 2019, with 28 sites on the core histones in the first study.<sup class="c"><a href="#r19">19</a></sup></p>
-
-  <h3>Reading the name</h3>
-  <p class="note">Tap or hover each part.</p>
-  <figure class="panel rv" style="margin-top:.4rem">
-    <div class="decoder" id="decoder" role="group" aria-label="H3K4me3 broken into parts">
-      <span data-k="h" tabindex="0">H3</span><span data-k="k" tabindex="0">K</span><span data-k="p" tabindex="0">4</span><span data-k="m" tabindex="0">me3</span>
-    </div>
-    <div class="decode-out" id="decodeOut" aria-live="polite">Pick a part of the name.</div>
-  </figure>
-
-  <h3>Five marks worth knowing first</h3>
-  <p>The NIH Roadmap Epigenomics project used five core marks to describe every one of its epigenomes:<sup class="c"><a href="#r20">20</a>,<a href="#r21">21</a></sup></p>
-  <figure class="wide rv">
-    <div class="igv" id="igv">
-      <div class="top"><b>genome browser</b><span class="loc">chrDemo:10,000–40,000</span><span class="note" style="font-size:.72rem">schematic · not real data</span>
-        <span style="margin-left:auto" class="btns" role="group" aria-label="Highlight a mark">
-          <button class="t" data-m="all" aria-pressed="true">all</button><button class="t" data-m="k4me3" aria-pressed="false">promoter</button><button class="t" data-m="k4me1" aria-pressed="false">enhancer</button><button class="t" data-m="k36" aria-pressed="false">gene body</button><button class="t" data-m="k27" aria-pressed="false">Polycomb</button><button class="t" data-m="k9" aria-pressed="false">heterochromatin</button>
-        </span>
-      </div>
-      <div class="row" data-m="k4me1"><div class="lab"><b>H3K4me1</b>enhancers</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path class="sig" fill="var(--h2b)" d="M0 40 L120 40 L130 22 L150 10 L170 18 L185 40 L520 40 L530 28 L545 14 L560 26 L570 40 L1000 40Z"/></svg></div></div>
-      <div class="row" data-m="k4me3"><div class="lab"><b>H3K4me3</b>promoters</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path class="sig" fill="var(--acc)" d="M0 40 L270 40 L280 12 L295 4 L310 10 L320 40 L1000 40Z"/></svg></div></div>
-      <div class="row" data-m="k36"><div class="lab"><b>H3K36me3</b>transcribed</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path class="sig" fill="var(--h3)" d="M0 40 L330 40 L360 32 L420 26 L500 22 L580 18 L640 16 L680 20 L700 40 L1000 40Z"/></svg></div></div>
-      <div class="row" data-m="k27"><div class="lab"><b>H3K27me3</b>Polycomb</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path class="sig" fill="var(--h4)" d="M0 40 L740 40 L760 20 L800 16 L840 18 L860 40 L1000 40Z"/></svg></div></div>
-      <div class="row" data-m="k9"><div class="lab"><b>H3K9me3</b>heterochromatin</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><path class="sig" fill="var(--h1)" d="M0 40 L0 22 L20 18 L60 20 L95 24 L105 40 L880 40 L890 24 L940 18 L1000 20 L1000 40Z"/></svg></div></div>
-      <div class="row"><div class="lab"><b>genes</b>RefSeq-style</div><div class="tr"><svg viewBox="0 0 1000 40" preserveAspectRatio="none"><line x1="295" y1="20" x2="700" y2="20" stroke="var(--ink)" stroke-width="1.5"/><rect x="295" y="12" width="40" height="16" fill="var(--ink)"/><rect x="430" y="12" width="30" height="16" fill="var(--ink)"/><rect x="560" y="12" width="35" height="16" fill="var(--ink)"/><rect x="660" y="12" width="40" height="16" fill="var(--ink)"/><path d="M380 16 l8 4 l-8 4 M500 16 l8 4 l-8 4 M620 16 l8 4 l-8 4" fill="none" stroke="var(--ink)"/><rect x="770" y="14" width="80" height="12" fill="none" stroke="var(--ink)"/></svg></div></div>
-    </div>
-    <figcaption><b>Figure 6.</b> Where each mark usually sits, drawn the way I see them in a genome browser. An active gene (left, arrows show direction) has H3K4me3 at its promoter, H3K4me1 at a nearby enhancer, and H3K36me3 over its body. A silenced gene (right) is covered by H3K27me3, and repeat-rich regions at the edges carry H3K9me3. The associations come from the Roadmap paper;<sup class="c"><a href="#r21">21</a></sup> the shapes are drawn by me.</figcaption>
-  </figure>
-
-  <p>Roadmap Epigenomics did for the epigenome something like what the Human Genome Project did for the sequence. It published 111 reference human epigenomes in 2015, profiled for histone modifications, DNA accessibility, DNA methylation and RNA expression.<sup class="c"><a href="#r21">21</a></sup> One thing that took me a moment: there is one human reference genome, but there is no single reference epigenome. The epigenome is the full collection of chemical tags and proteins on the DNA and its histones, and it is different in every cell and tissue type. That is why they needed 111.</p>
-
-  <section class="latest rv" aria-label="Latest findings on histone marks">
-    <header><span>▸ LATEST FINDINGS · HISTONE MARKS</span><span>2023–2026</span></header>
-    <ul>
-      <li><span class="src"><span class="tag">Nature · 2023</span>Wang, Fan … Helin</span><b>Does H3K4me3 actually do anything?</b> For years people argued whether H3K4me3 just marks active promoters or helps make them active. By removing it acutely in mouse embryonic stem cells, this study showed it is not needed for transcription to start, but without it RNA polymerase II pauses more and elongates more slowly. H3K4me3 recruits a protein (INTS11) that helps release the paused polymerase.<sup class="c"><a href="#r22">22</a></sup></li>
-      <li><span class="src"><span class="tag">eLife · 2026</span>H3K115ac</span><b>Marks on the core, not only the tails.</b> Acetylation at H3 lysine 115, which sits on the side of the nucleosome near the dyad, is enriched on "fragile" nucleosomes in nucleosome-depleted regions at promoters, active enhancers and CTCF sites, where it coincides with transcription factor binding.<sup class="c"><a href="#r23">23</a></sup></li>
-      <li><span class="src"><span class="tag">Signal Transduct. Target. Ther. · 2024</span>Yao, Hu &amp; Wang (review)</span><b>The new acylations.</b> A good overview of nine newer histone modifications (lactylation, citrullination, crotonylation, succinylation and others) and what is known about their links to disease.<sup class="c"><a href="#r18">18</a></sup></li>
-    </ul>
-  </section>
-
-  <!-- 6 -->
-  <h2 id="s6"><span class="n">06 · METHODS</span>How we read the tags, and the open DNA</h2>
-  <p>This is the part where the biology turns into the files I work with. There are two different questions. <b>Where is a particular mark?</b> That is ChIP-seq, and newer methods like CUT&amp;Tag. <b>Where is the DNA open?</b> That is ATAC-seq.</p>
-
-  <figure class="panel rv">
-    <div class="btns" role="group" aria-label="Choose a method">
-      <button class="t" data-meth="chip" aria-pressed="true">ChIP-seq</button>
-      <button class="t" data-meth="cut" aria-pressed="false">CUT&amp;Tag</button>
-      <button class="t" data-meth="atac" aria-pressed="false">ATAC-seq</button>
-    </div>
-    <div class="steps" id="steps"></div>
-    <figcaption><b>Figure 7.</b> The main steps of each method, as I understand them. Steps light up one after another. ChIP-seq background: ref 24; CUT&amp;Tag: ref 24; ATAC-seq: ref 25.</figcaption>
-  </figure>
-
-  <p><b>ChIP-seq</b> (chromatin immunoprecipitation followed by sequencing) uses an antibody against, for example, H3K4me3, pulls down the DNA fragments carrying it, and sequences them. It works, but it suffers from low signal, high background, epitope masking from cross-linking, and it needs a lot of cells.<sup class="c"><a href="#r24">24</a></sup></p>
-  <p><b>CUT&amp;Tag</b> (2019, Henikoff lab) keeps the antibody but turns the process inside out: the antibody binds in the cell and brings along a protein A–Tn5 transposase fusion, which cuts the DNA right there and inserts sequencing adapters. The result is high resolution and very low background, from small numbers of cells and even single cells.<sup class="c"><a href="#r24">24</a></sup></p>
-  <p><b>ATAC-seq</b> (2013, Greenleaf and Chang labs) uses no antibody at all. Hyperactive Tn5 transposase inserts sequencing adapters into native chromatin wherever it can reach, which means wherever the DNA is open. It needs only 500 to 50,000 cells and also tells you about nucleosome positions and transcription factor binding.<sup class="c"><a href="#r25">25</a></sup> As someone who works in a transposon lab, I love that the key enzyme in ATAC-seq is a bacterial transposase.</p>
-
-  <section class="latest rv" aria-label="Latest findings on methods">
-    <header><span>▸ LATEST FINDINGS · METHODS</span><span>2025</span></header>
-    <ul>
-      <li><span class="src"><span class="tag">Nature · 2025</span>TACIT / CoTACIT</span><b>Single-cell histone marks in early embryos.</b> TACIT gives genome-coverage single-cell profiles of seven histone modifications across mouse early embryos, from zygote to blastocyst.<sup class="c"><a href="#r26">26</a></sup> Its extension CoTACIT maps up to six marks in the same cell.<sup class="c"><a href="#r27">27</a></sup></li>
-      <li><span class="src"><span class="tag">Nature Methods · Sep 2025</span>Geisenberger et al., scEpi²-seq</span><b>Histone marks and DNA methylation on the same molecule.</b> Combines sortChIC with TAPS conversion to measure histone modifications and DNA methylation at the same time in single cells.<sup class="c"><a href="#r28">28</a></sup></li>
-      <li><span class="src"><span class="tag">Science Advances · 2025</span>scMTR-seq</span><b>Six marks plus RNA.</b> Profiles six histone modifications and the transcriptome in the same single cells.<sup class="c"><a href="#r29">29</a></sup></li>
-      <li><span class="src"><span class="tag">Nature Communications · Dec 2025</span>sc-hPTM</span><b>No antibodies at all.</b> A mass-spectrometry method that identifies and quantifies histone modifications in single cells across H1, H2A, H2B, H3 and H4, without choosing the marks in advance.<sup class="c"><a href="#r30">30</a></sup></li>
-    </ul>
-  </section>
-
-  <!-- 7 -->
-  <h2 id="s7"><span class="n">07 · HISTONE CHAPERONES</span>Who brings the histones to the DNA?</h2>
-  <p>So far I covered what makes histones and DNA stick. But a strongly positive protein floating around a nucleus full of negative DNA would stick to the wrong things. Something has to carry it and put it down in the right place. These are the histone chaperones.</p>
-  <p>The idea goes back to 1978, when Ron Laskey's group showed that nucleosomes are assembled by an acidic protein, nucleoplasmin, which binds histones and transfers them to DNA.<sup class="c"><a href="#r31">31</a></sup> The title of that paper is basically the definition of a chaperone. Being acidic (negative) lets a chaperone hold the positive histones safely until the right moment.</p>
-
-  <figure class="panel rv">
-    <svg id="relay" viewBox="0 0 640 230" role="img" aria-labelledby="relT">
-      <title id="relT">Animation: ASF1 carries an H3–H4 dimer and hands H3.1–H4 to CAF-1 at the replication fork, or H3.3–H4 to HIRA or DAXX</title>
-      <rect class="box" x="20" y="90" width="110" height="50" rx="6"/><text x="56" y="113">ASF1</text><text class="lab2" x="34" y="130">carries H3–H4</text>
-      <rect class="box" x="250" y="20" width="175" height="50" rx="6"/><text x="337" y="43" text-anchor="middle">CAF-1</text><text class="lab2" x="337" y="60" text-anchor="middle">H3.1 · replication fork</text>
-      <rect class="box" x="250" y="160" width="175" height="50" rx="6"/><text x="337" y="183" text-anchor="middle">HIRA / DAXX</text><text class="lab2" x="337" y="200" text-anchor="middle">H3.3 · any time</text>
-      <path d="M130 108 C 190 90, 200 50, 248 45" fill="none" stroke="var(--soft)" stroke-dasharray="4 4"/>
-      <path d="M130 122 C 190 140, 200 180, 248 185" fill="none" stroke="var(--soft)" stroke-dasharray="4 4"/>
-      <path d="M425 45 C 470 45, 480 100, 520 110" fill="none" stroke="var(--soft)" stroke-dasharray="4 4"/>
-      <path d="M425 185 C 470 185, 480 130, 520 120" fill="none" stroke="var(--soft)" stroke-dasharray="4 4"/>
-      <path d="M500 140 C 540 100, 600 140, 630 115" fill="none" stroke="var(--dna)" stroke-width="4"/>
-      <text x="545" y="165">DNA</text>
-      <g class="cargo" id="cargo"><circle cx="75" cy="78" r="12" fill="var(--h3)"/><circle cx="96" cy="78" r="12" fill="var(--h4)"/><text x="66" y="82" style="fill:#fff;font-size:9px">H3</text><text x="87" y="82" style="fill:#fff;font-size:9px">H4</text></g>
-    </svg>
-    <div class="btns">
-      <button class="t" data-path="31" aria-pressed="false">▶ H3.1 route</button>
-      <button class="t" data-path="33" aria-pressed="false">▶ H3.3 route</button>
-    </div>
-    <figcaption><b>Figure 8.</b> The relay for H3–H4. ASF1 holds an H3–H4 dimer and hands H3.1–H4 to CAF-1 for assembly behind the replication fork, or H3.3–H4 to HIRA or DAXX for replication-independent assembly.<sup class="c"><a href="#r32">32</a></sup> HIRA mostly works in active euchromatin, DAXX in heterochromatin such as pericentromeres and retrotransposons.<sup class="c"><a href="#r33">33</a></sup></figcaption>
-  </figure>
-
-  <table>
-    <thead><tr><th>Chaperone</th><th>Histones it handles</th><th>Main role</th></tr></thead>
-    <tbody>
-      <tr><td>ASF1</td><td>H3–H4 dimer</td><td>Hands H3–H4 on to CAF-1 or HIRA<sup class="c"><a href="#r32">32</a></sup></td></tr>
-      <tr><td>CAF-1</td><td>H3.1–H4</td><td>Assembly coupled to DNA replication<sup class="c"><a href="#r32">32</a></sup></td></tr>
-      <tr><td>HIRA, DAXX</td><td>H3.3–H4</td><td>Replication-independent assembly; euchromatin vs heterochromatin<sup class="c"><a href="#r33">33</a></sup></td></tr>
-      <tr><td>NAP1</td><td>Mainly H2A–H2B</td><td>Assembly; also tunes chromatin condensates<sup class="c"><a href="#r36">36</a></sup></td></tr>
-      <tr><td>FACT</td><td>H2A–H2B, H3–H4</td><td>Lets RNA polymerase II pass through nucleosomes; recycles parental histones at the replication fork<sup class="c"><a href="#r34">34</a>,<a href="#r35">35</a></sup></td></tr>
-      <tr><td>Nucleoplasmin</td><td>H2A–H2B</td><td>The first chaperone described, from frog eggs<sup class="c"><a href="#r31">31</a></sup></td></tr>
-    </tbody>
-  </table>
-  <p>In my notes I wrote that FACT is "the most important" one. That was too strong. What makes FACT stand out is that it can handle both H2A–H2B and H3–H4, and it works exactly where nucleosomes have to be taken apart and put back: in front of RNA polymerase and at the replication fork.</p>
-
-  <section class="latest rv" aria-label="Latest findings on histone chaperones">
-    <header><span>▸ LATEST FINDINGS · CHAPERONES</span><span>2022–2025</span></header>
-    <ul>
-      <li><span class="src"><span class="tag">Nature · Mar 2024</span>Li, Gao, Zhang … Zhai</span><b>Parental histones caught at the replication fork.</b> Cryo-EM structures of the yeast replisome show FACT at the front, grabbing parental histones from the DNA ahead, together with the histone-binding domain of Mcm2.<sup class="c"><a href="#r35">35</a></sup> This is how old histones, and the marks on them, can be passed to the two new DNA copies.</li>
-      <li><span class="src"><span class="tag">Science · 2022</span>RNAPII elongation complex with FACT</span><b>Watching a nucleosome come apart and go back together.</b> Cryo-EM structures of RNA polymerase II passing through a nucleosome with FACT show how the nucleosome is disassembled ahead of the polymerase and reassembled behind it.<sup class="c"><a href="#r34">34</a></sup></li>
-      <li><span class="src"><span class="tag">Nature Communications · 2025</span>Gao et al.</span><b>A chaperone that changes chromatin droplets.</b> H4 tail lysines drive phase separation of nucleosome arrays, while NAP1 and H3 acetylation make the condensed chromatin more fluid.<sup class="c"><a href="#r36">36</a></sup> A nice link back to section 4.</li>
-    </ul>
-  </section>
-
-  <!-- 8 -->
-  <h2 id="s8"><span class="n">08 · PUTTING IT TOGETHER</span>Open and closed chromatin</h2>
-  <p>Here is how all of this connects to genes being on or off. When nucleosomes are packed tightly over a gene's promoter, the machinery that reads the gene cannot get in. Kornberg and Lorch showed in 1987 that a nucleosome on a promoter prevents transcription from starting, which made the nucleosome a general gene repressor.<sup class="c"><a href="#r37">37</a></sup> When the nucleosomes move or loosen, transcription factors can bind, and the gene can be read.</p>
-
-  <figure class="panel rv">
-    <svg id="oc" viewBox="0 0 640 170" role="img" aria-labelledby="ocT">
-      <title id="ocT">Closed chromatin with nucleosomes packed over a gene, and open chromatin where nucleosomes slide apart and a transcription factor binds</title>
-      <path d="M10 110 L630 110" stroke="var(--dna)" stroke-width="4"/>
-      <rect class="gene" x="300" y="104" width="120" height="12" rx="2"/>
-      <text x="335" y="140">gene</text>
-      <g class="nucl" data-x="-150"><circle cx="230" cy="110" r="26" fill="var(--h3)"/><path class="t1" d="M230 84 q 8 -15 -2 -28" stroke="var(--h3)" stroke-width="3" fill="none"/></g>
-      <g class="nucl" data-x="-110"><circle cx="285" cy="110" r="26" fill="var(--h4)"/></g>
-      <g class="nucl" data-x="130"><circle cx="340" cy="110" r="26" fill="var(--h2a)"/></g>
-      <g class="nucl" data-x="180"><circle cx="395" cy="110" r="26" fill="var(--h2b)"/></g>
-      <g class="tf"><path d="M295 70 h40 l-8 22 h-24 z" fill="var(--acc)"/><text x="300" y="62">TF</text></g>
-      <text x="20" y="30" id="ocLab" style="font-weight:600">closed · gene off</text>
-    </svg>
-    <div class="btns"><button class="t" id="ocbtn" aria-pressed="false">open the chromatin</button></div>
-    <figcaption><b>Figure 9.</b> Closed vs open. In closed chromatin, nucleosomes cover the gene. When they slide apart, a transcription factor (TF) can bind and the gene turns on. This is also what ATAC-seq measures: Tn5 can only get into the open stretch. Schematic.</figcaption>
-  </figure>
-
-  <!-- 9 -->
-  <h2 id="s9"><span class="n">09 · OPEN QUESTIONS</span>What is still unclear (and where a new student could start)</h2>
-  <p>Writing this made me realise how much of the "basics" is still being argued about. If you are starting a master's or PhD and looking for a question, these are the ones that kept coming up in my reading.</p>
-
-  <div class="qs">
-    <div class="q rv">
-      <h3>Do histone tails hold the nucleosome together, or help take it apart?</h3>
-      <p>Lorch &amp; Kornberg say the tails' positive charge adds instability;<sup class="c"><a href="#r9">9</a></sup> the 2026 nanopore preprint says the tails act as clamps that make unwinding harder.<sup class="c"><a href="#r16">16</a></sup> These used very different methods. Both may be true in different contexts, such as with or without a remodeller, or in a single nucleosome versus an array.</p>
-      <p class="go"><b>Start with:</b> refs 9, 13, 14 and 16 side by side · PDB 1AOI for the structure</p>
-    </div>
-    <div class="q rv">
-      <h3>Does chromatin really phase-separate inside living cells?</h3>
-      <p>Nucleosomes clearly form droplets in a test tube,<sup class="c"><a href="#r15">15</a>,<a href="#r36">36</a></sup> but an influential 2019 perspective argued that the evidence for phase separation inside cells is often phenomenological and cannot tell it apart from other mechanisms, and that its function in vivo is even less clear.<sup class="c"><a href="#r38">38</a></sup> Most of the new 2025–2026 condensate papers in this post are still in vitro or in simulation.</p>
-      <p class="go"><b>Start with:</b> ref 38 for how to test it properly, then refs 15 and 36</p>
-    </div>
-    <div class="q rv">
-      <h3>What does chromatin look like above the nucleosome, in real cells?</h3>
-      <p>Imaging inside human cells did not find the textbook 30-nm fibre: in 2017, ChromEMT saw disordered chains 5–24 nm wide,<sup class="c"><a href="#r39">39</a></sup> and the 2026 in-cell cryo-ET study saw irregular, partly stacked heterochromatin.<sup class="c"><a href="#r5">5</a></sup> How this structure differs between cell types, and between active and silent regions, is still open.</p>
-      <p class="go"><b>Start with:</b> refs 39 and 5 · look up cryo-electron tomography</p>
-    </div>
-    <div class="q rv">
-      <h3>Are histone marks a cause or a consequence?</h3>
-      <p>For most marks we know where they sit, not what they do. H3K4me3 was only shown in 2023 to have a direct role, and it was a different role (pause release) from the one most people assumed (initiation).<sup class="c"><a href="#r22">22</a></sup> The same question is open for many other marks, and even more so for the newer acylations.<sup class="c"><a href="#r18">18</a></sup></p>
-      <p class="go"><b>Start with:</b> ref 22 for how to design the experiment (acute removal, not slow knockouts)</p>
-    </div>
-    <div class="q rv">
-      <h3>How are marks inherited when the cell divides?</h3>
-      <p>We now have structures of FACT and Mcm2 holding parental histones at the fork,<sup class="c"><a href="#r35">35</a></sup> but how faithfully the marks are restored on both new DNA strands, and how this goes wrong in disease, is still being worked out.</p>
-      <p class="go"><b>Start with:</b> ref 35 · search "parental histone recycling"</p>
-    </div>
-    <div class="q rv">
-      <h3>For computational people: what do we do with single-cell, multi-mark data?</h3>
-      <p>Methods now measure six or more marks, or marks plus DNA methylation, in the same single cell.<sup class="c"><a href="#r26">26</a>–<a href="#r30">30</a></sup> The 2015 Roadmap paper had to impute and combine marks across bulk samples.<sup class="c"><a href="#r21">21</a></sup> How to model combinations of marks per cell, at sparse coverage, is a very open analysis problem.</p>
-      <p class="go"><b>Start with:</b> the Roadmap chromatin-state models (ChromHMM) · the public data in refs 26–29</p>
-    </div>
-  </div>
-
-  <h2 id="end" style="margin-top:3rem"><span class="n">WRAPPING UP</span>What I take away</h2>
-  <p>I started with a simple question: how does two metres of DNA fit into a six-micrometre nucleus? The first answer, histones, has been solid for fifty years. But the reason they stick, the role of their tails, and what the packed DNA looks like inside a real cell are all still being rewritten, some of it this year.</p>
-  <p>For my own work, the biggest change is how I look at a ChIP-seq track. A peak of H3K4me3 is not a label stuck on a gene. It is a chemical group on a floppy, charged tail that can grab DNA, neighbours and other proteins, and the cell keeps putting it on and taking it off.</p>
-  <p>In part 2 I want to go one level up: loops, TADs and how the genome is folded in 3D. If you spotted a mistake here, please tell me. I am re-learning, and I would rather be corrected than stay wrong.</p>
-
-  <!-- references -->
+  <aside class="nextup">
+    <span class="t">Next · Part 2</span>
+    <h3><a href="histone-marks.html">The tags on the tails</a></h3>
+    <p>The histone tails turned out to be the loose, charged part of the nucleosome. They are also where the cell puts most of its chemical tags. Part 2 is about those tags (H3K4me3, H3K27me3 and friends), how we measure them with ChIP-seq, CUT&amp;Tag and ATAC-seq, and how they connect to genes being on or off.</p>
+    <a href="histone-marks.html">Read Part 2 →</a>
+  </aside>
   <h2 id="refs"><span class="n">REFERENCES</span>Papers and sources</h2>
   <ol class="refs">
     <li id="r1">Nurk S, Koren S, Rhie A, et al. The complete sequence of a human genome. <i>Science</i> 376:44–53 (<span class="y">2022</span>). <a href="https://doi.org/10.1126/science.abj6987">doi:10.1126/science.abj6987</a></li>
@@ -647,35 +466,13 @@ footer a { color: var(--ink); }
     <li id="r15">Hammonds EF, Singh A, Suresh KK, Yang S, et al. Histone H3 tail charge patterns govern nucleosome condensate formation and dynamics. <i>Nucleic Acids Research</i> 54:gkag050 (<span class="y">2026</span>). <a href="https://doi.org/10.1093/nar/gkag050">doi:10.1093/nar/gkag050</a></li>
     <li id="r16">Histone N-terminal tails act as electrostatic clamps to mechanically stabilize nucleosomes. <i>Research Square</i> preprint, not peer reviewed (<span class="y">2026</span>). <a href="https://www.researchsquare.com/article/rs-9037611/v1">rs-9037611</a></li>
     <li id="r17">Native nucleosomes intrinsically encode genome organization principles. <i>Nature</i> (<span class="y">2025</span>). <a href="https://doi.org/10.1038/s41586-025-08971-7">doi:10.1038/s41586-025-08971-7</a></li>
-    <li id="r18">Yao W, Hu X, Wang X. Crossing epigenetic frontiers: the intersection of novel histone modifications and diseases. <i>Signal Transduction and Targeted Therapy</i> 9:232 (<span class="y">2024</span>). <a href="https://doi.org/10.1038/s41392-024-01918-w">doi:10.1038/s41392-024-01918-w</a></li>
-    <li id="r19">Zhao L, Qi H, et al. (review on lysine lactylation). <i>Theranostics</i> 15(5):1787–1821 (<span class="y">2025</span>). <a href="https://doi.org/10.7150/thno.105353">doi:10.7150/thno.105353</a></li>
-    <li id="r20">Roadmap Epigenomics Consortium. Chromatin state learning, core 15-state model (5 marks, 127 epigenomes). <a href="https://egg2.wustl.edu/roadmap/web_portal/chr_state_learning.html">Roadmap web portal</a></li>
-    <li id="r21">Roadmap Epigenomics Consortium, Kundaje A, Meuleman W, Ernst J, et al. Integrative analysis of 111 reference human epigenomes. <i>Nature</i> 518:317–330 (<span class="y">2015</span>). <a href="https://doi.org/10.1038/nature14248">doi:10.1038/nature14248</a></li>
-    <li id="r22">Wang H, Fan Z, Shliaha PV, Miele M, Hendrickson RC, Jiang X, Helin K. H3K4me3 regulates RNA polymerase II promoter-proximal pause-release. <i>Nature</i> 615:339–348 (<span class="y">2023</span>). <a href="https://doi.org/10.1038/s41586-023-05780-8">doi:10.1038/s41586-023-05780-8</a></li>
-    <li id="r23">Acetylation of H3K115 is associated with fragile nucleosomes at CpG island promoters and active regulatory sites. <i>eLife</i> 14:RP108802 (<span class="y">2026</span>). <a href="https://doi.org/10.7554/eLife.108802">doi:10.7554/eLife.108802</a></li>
-    <li id="r24">Kaya-Okur HS, Wu SJ, Codomo CA, Pledger ES, Bryson TD, Henikoff JG, Ahmad K, Henikoff S. CUT&amp;Tag for efficient epigenomic profiling of small samples and single cells. <i>Nature Communications</i> 10:1930 (<span class="y">2019</span>). <a href="https://doi.org/10.1038/s41467-019-09982-5">doi:10.1038/s41467-019-09982-5</a></li>
-    <li id="r25">Buenrostro JD, Giresi PG, Zaba LC, Chang HY, Greenleaf WJ. Transposition of native chromatin for fast and sensitive epigenomic profiling of open chromatin, DNA-binding proteins and nucleosome position. <i>Nature Methods</i> 10:1213–1218 (<span class="y">2013</span>). <a href="https://doi.org/10.1038/nmeth.2688">doi:10.1038/nmeth.2688</a></li>
-    <li id="r26">Genome-coverage single-cell histone modifications for embryo lineage tracing (TACIT). <i>Nature</i> (<span class="y">2025</span>). <a href="https://doi.org/10.1038/s41586-025-08656-1">doi:10.1038/s41586-025-08656-1</a></li>
-    <li id="r27">Liu M, He A. TACIT and CoTACIT for histone modification profiling in single cells and lineage tracing. <i>Nature Reviews Genetics</i>, Tools of the Trade (<span class="y">2025</span>). <a href="https://www.nature.com/articles/s41576-025-00844-z">nature.com</a></li>
-    <li id="r28">Geisenberger C, et al. Single-cell multi-omic detection of DNA methylation and histone modifications reconstructs the dynamics of epigenomic maintenance. <i>Nature Methods</i> 22:2042–2051 (<span class="y">2025</span>). <a href="https://doi.org/10.1038/s41592-025-02847-4">doi:10.1038/s41592-025-02847-4</a></li>
-    <li id="r29">Combinatorial profiling of multiple histone modifications and transcriptome in single cells using scMTR-seq. <i>Science Advances</i> (<span class="y">2025</span>). <a href="https://doi.org/10.1126/sciadv.adu3308">doi:10.1126/sciadv.adu3308</a></li>
-    <li id="r30">Mass spectrometry-based profiling of single-cell histone post-translational modifications to dissect chromatin heterogeneity. <i>Nature Communications</i> 16:11100 (<span class="y">2025</span>). <a href="https://doi.org/10.1038/s41467-025-66031-0">doi:10.1038/s41467-025-66031-0</a></li>
-    <li id="r31">Laskey RA, Honda BM, Mills AD, Finch JT. Nucleosomes are assembled by an acidic protein which binds histones and transfers them to DNA. <i>Nature</i> 275:416–420 (<span class="y">1978</span>). <a href="https://doi.org/10.1038/275416a0">doi:10.1038/275416a0</a></li>
-    <li id="r32">Ricketts MD, Marmorstein R. A molecular prospective for HIRA complex assembly and H3.3-specific histone chaperone function. <i>Journal of Molecular Biology</i> 429:1924–1933 (<span class="y">2017</span>). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5438300">PMC5438300</a></li>
-    <li id="r33">Choi J, Kim T, Cho E-J. HIRA vs. DAXX: the two axes shaping the histone H3.3 landscape. <i>Experimental &amp; Molecular Medicine</i> 56:251–263 (<span class="y">2024</span>). <a href="https://doi.org/10.1038/s12276-023-01145-3">doi:10.1038/s12276-023-01145-3</a></li>
-    <li id="r34">Structural basis of nucleosome disassembly and reassembly by RNAPII elongation complex with FACT. <i>Science</i> 377:eabp9466 (<span class="y">2022</span>). PDB <a href="https://pdbj.org/mine/summary/7xsx">7XSX</a>. See also Farnung L, Ochmann M, Engeholm M, Cramer P. <i>Nat Struct Mol Biol</i> 28:382–387 (2021), <a href="https://doi.org/10.1038/s41594-021-00578-6">doi:10.1038/s41594-021-00578-6</a></li>
-    <li id="r35">Li N, Gao Y, Zhang Y, … Gao N, Zhai Y. Parental histone transfer caught at the replication fork. <i>Nature</i> 627:890–897 (<span class="y">2024</span>). <a href="https://doi.org/10.1038/s41586-024-07152-2">doi:10.1038/s41586-024-07152-2</a></li>
-    <li id="r36">Gao J, et al. Roles of histone chaperone Nap1 and histone acetylation in regulating phase-separation of nucleosome arrays. <i>Nature Communications</i> 16:10672 (<span class="y">2025</span>). <a href="https://doi.org/10.1038/s41467-025-65701-3">doi:10.1038/s41467-025-65701-3</a></li>
-    <li id="r37">Lorch Y, LaPointe JW, Kornberg RD. Nucleosomes inhibit the initiation of transcription but allow chain elongation with the displacement of histones. <i>Cell</i> 49:203–210 (<span class="y">1987</span>). Via <a href="https://www.historyofmedicine.com/author/d/roger-david-kornberg">historyofmedicine.com</a></li>
-    <li id="r38">McSwiggen DT, Mir M, Darzacq X, Tjian R. Evaluating phase separation in live cells: diagnosis, caveats, and functional consequences. <i>Genes &amp; Development</i> 33:1619 (<span class="y">2019</span>). <a href="https://genesdev.cshlp.org/cgi/content/full/33/23-24/1619">genesdev.cshlp.org</a></li>
-    <li id="r39">Ou HD, Phan S, Deerinck TJ, Thor A, Ellisman MH, O'Shea CC. ChromEMT: visualizing 3D chromatin structure and compaction in interphase and mitotic cells. <i>Science</i> 357:eaag0025 (<span class="y">2017</span>). <a href="https://doi.org/10.1126/science.aag0025">doi:10.1126/science.aag0025</a></li>
   </ol>
-  <p class="note">All figures are my own drawings except Figure 3 (RCSB PDB). Bar lengths and genome tracks in Figures 5 and 6 are illustrations, not data.</p>
+  <p class="note">All figures are my own drawings except the crystal structure image (RCSB PDB). Bar lengths and genome tracks are illustrations, not data.</p>
 
   <footer>
     <p>Written by Aathma Merin Bejoy · bioinformatician in Berlin · <a href="index.html">aatsbioinfo.github.io</a> · <a href="blog.html">all posts</a></p>
     <p>Re-learning biology is a series where I go back to the basics with the original papers. Corrections are welcome.</p>
-    <a class="share" id="shareLi" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faatsbioinfo.github.io%2Fdna-packing.html" target="_blank" rel="noopener">Share on LinkedIn ↗</a>
+    <a class="share" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faatsbioinfo.github.io%2Fdna-packing.html" target="_blank" rel="noopener">Share on LinkedIn ↗</a>
   </footer>
 </article>
 </main>
@@ -712,7 +509,7 @@ footer a { color: var(--ink); }
 
   // fig 4 phosphate
   var ph = document.getElementById('phos'), phb = document.getElementById('phbtn');
-  phb.addEventListener('click', function () {
+  if (phb) phb.addEventListener('click', function () {
     var on = ph.classList.toggle('go');
     phb.setAttribute('aria-pressed', on); phb.textContent = on ? '↺ reset' : '▶ release H⁺';
   });
@@ -721,7 +518,7 @@ footer a { color: var(--ink); }
   function setBars(root) { root.querySelectorAll('i[data-w]').forEach(function (i) { i.style.width = i.dataset.w + '%'; }); }
   function clearBars(root) { root.querySelectorAll('i[data-w]').forEach(function (i) { i.style.width = 0; }); }
   var va = document.getElementById('va'), vb = document.getElementById('vb');
-  setTimeout(function () { setBars(va); }, 300);
+  if (va) setTimeout(function () { setBars(va); }, 300);
   document.querySelectorAll('[data-view]').forEach(function (b) {
     b.addEventListener('click', function () {
       document.querySelectorAll('[data-view]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
@@ -772,7 +569,9 @@ footer a { color: var(--ink); }
     atac: [['open', 'Tn5 enters only where DNA is open (no antibody).'], ['cuttag', 'It inserts sequencing adapters into open DNA.'], ['pull', 'Amplify the tagged fragments; 500–50,000 cells.'], ['seq', 'Sequence; peaks = accessible chromatin.']]
   };
   var steps = document.getElementById('steps'), timer = null;
+  if (!steps) steps = null;
   function runMethod(k) {
+    if (!steps) return;
     steps.innerHTML = M[k].map(function (s) { return '<div>' + ico[s[0]] + s[1] + '</div>'; }).join('');
     var d = steps.children, i = 0; clearInterval(timer);
     if (reduce) { [].forEach.call(d, function (x) { x.classList.add('on'); }); return; }
@@ -797,7 +596,7 @@ footer a { color: var(--ink); }
 
   // open/closed
   var oc = document.getElementById('oc'), ocb = document.getElementById('ocbtn'), ocl = document.getElementById('ocLab');
-  ocb.addEventListener('click', function () {
+  if (ocb) ocb.addEventListener('click', function () {
     var open = oc.classList.toggle('open');
     oc.querySelectorAll('.nucl').forEach(function (g) { g.style.transform = open ? 'translateX(' + g.dataset.x + 'px)' : 'none'; });
     ocl.textContent = open ? 'open · gene on' : 'closed · gene off';
